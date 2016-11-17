@@ -1,0 +1,299 @@
+[
+    {
+        "id": 1,
+        "text": "专展海原斯",
+        "icon": "cog",
+        "level": 1,
+        "open": false,
+        "children": []
+    },
+    {
+        "id": 2,
+        "text": "了真面就四",
+        "icon": "cog",
+        "level": 1,
+        "open": false,
+        "children": [
+            {
+                "id": 1000,
+                "text": "但门",
+                "icon": "git",
+                "level": 2,
+                "open": false,
+                "children": [
+                    {
+                        "id": 10000,
+                        "text": "号选各",
+                        "level": 3,
+                        "icon": "cube"
+                    },
+                    {
+                        "id": 10001,
+                        "text": "话特很百",
+                        "level": 3,
+                        "icon": "git"
+                    },
+                    {
+                        "id": 10002,
+                        "text": "精开是",
+                        "level": 3,
+                        "icon": "cube"
+                    },
+                    {
+                        "id": 10003,
+                        "text": "特器低",
+                        "level": 3,
+                        "icon": "mobile"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "text": "它酸常",
+        "icon": "cog",
+        "level": 1,
+        "open": false,
+        "children": [
+            {
+                "id": 1001,
+                "text": "上造十",
+                "icon": "calendar-o",
+                "level": 2,
+                "open": false,
+                "children": [
+                    {
+                        "id": 10004,
+                        "text": "参参识线",
+                        "level": 3,
+                        "icon": "cube"
+                    },
+                    {
+                        "id": 10005,
+                        "text": "红自山小",
+                        "level": 3,
+                        "icon": "mobile"
+                    },
+                    {
+                        "id": 10006,
+                        "text": "几算",
+                        "level": 3,
+                        "icon": "cube"
+                    },
+                    {
+                        "id": 10007,
+                        "text": "导四研",
+                        "level": 3,
+                        "icon": "cube"
+                    }
+                ]
+            },
+            {
+                "id": 1002,
+                "text": "派属在",
+                "icon": "cc",
+                "level": 2,
+                "open": false,
+                "children": [
+                    {
+                        "id": 10008,
+                        "text": "位比或容率",
+                        "level": 3,
+                        "icon": "git"
+                    },
+                    {
+                        "id": 10009,
+                        "text": "革市热",
+                        "level": 3,
+                        "icon": "calendar-o"
+                    }
+                ]
+            },
+            {
+                "id": 1003,
+                "text": "志政在清",
+                "icon": "bars",
+                "level": 2,
+                "open": false,
+                "children": [
+                    {
+                        "id": 10010,
+                        "text": "数说十科",
+                        "level": 3,
+                        "icon": "git"
+                    },
+                    {
+                        "id": 10011,
+                        "text": "价么济了种",
+                        "level": 3,
+                        "icon": "wifi"
+                    },
+                    {
+                        "id": 10012,
+                        "text": "马难型",
+                        "level": 3,
+                        "icon": "wifi"
+                    },
+                    {
+                        "id": 10013,
+                        "text": "领眼适接",
+                        "level": 3,
+                        "icon": "cog"
+                    }
+                ]
+            },
+            {
+                "id": 1004,
+                "text": "条导并",
+                "icon": "cube",
+                "level": 2,
+                "open": false,
+                "children": [
+                    {
+                        "id": 10014,
+                        "text": "参角价",
+                        "level": 3,
+                        "icon": "wifi"
+                    },
+                    {
+                        "id": 10015,
+                        "text": "起片",
+                        "level": 3,
+                        "icon": "calendar-o"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "text": "去设并受角",
+        "icon": "cube",
+        "level": 1,
+        "open": false,
+        "children": [
+            {
+                "id": 1005,
+                "text": "军图学",
+                "icon": "git",
+                "level": 2,
+                "open": false,
+                "children": [
+                    {
+                        "id": 10016,
+                        "text": "技油无",
+                        "level": 3,
+                        "icon": "wifi"
+                    },
+                    {
+                        "id": 10017,
+                        "text": "量市八",
+                        "level": 3,
+                        "icon": "git"
+                    },
+                    {
+                        "id": 10018,
+                        "text": "包议受主",
+                        "level": 3,
+                        "icon": "cc"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "text": "起变明",
+        "icon": "cog",
+        "level": 1,
+        "open": false,
+        "children": [
+            {
+                "id": 1006,
+                "text": "非先十",
+                "icon": "camera",
+                "level": 2,
+                "open": false,
+                "children": [
+                    {
+                        "id": 10019,
+                        "text": "由算布革",
+                        "level": 3,
+                        "icon": "cc"
+                    },
+                    {
+                        "id": 10020,
+                        "text": "华学厂重",
+                        "level": 3,
+                        "icon": "mobile"
+                    }
+                ]
+            },
+            {
+                "id": 1007,
+                "text": "成实声布",
+                "icon": "cog",
+                "level": 2,
+                "open": false,
+                "children": [
+                    {
+                        "id": 10021,
+                        "text": "是要由候",
+                        "level": 3,
+                        "icon": "wifi"
+                    },
+                    {
+                        "id": 10022,
+                        "text": "易量交",
+                        "level": 3,
+                        "icon": "cc"
+                    }
+                ]
+            },
+            {
+                "id": 1008,
+                "text": "领向",
+                "icon": "bars",
+                "level": 2,
+                "open": false,
+                "children": [
+                    {
+                        "id": 10023,
+                        "text": "制阶两",
+                        "level": 3,
+                        "icon": "mobile"
+                    },
+                    {
+                        "id": 10024,
+                        "text": "者先",
+                        "level": 3,
+                        "icon": "camera"
+                    },
+                    {
+                        "id": 10025,
+                        "text": "通公走今低",
+                        "level": 3,
+                        "icon": "cog"
+                    }
+                ]
+            },
+            {
+                "id": 1009,
+                "text": "听将过北",
+                "icon": "cog",
+                "level": 2,
+                "open": false,
+                "children": []
+            },
+            {
+                "id": 1010,
+                "text": "些土象公",
+                "icon": "wifi",
+                "level": 2,
+                "open": false,
+                "children": []
+            }
+        ]
+    }
+]
