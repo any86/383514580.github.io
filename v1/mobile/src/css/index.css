@@ -1,0 +1,361 @@
+@media screen and (min-width:410px) {
+	html {
+		font-size: 100px;
+	}
+
+}
+
+@media screen and (min-width:374px) {
+	html {
+		font-size: 91px;
+	}
+
+}
+
+@media screen and (min-width:319px) {
+	html {
+		font-size: 77px;
+	}
+
+}
+
+body {
+	background-color: #00BFFF;
+	width: 100%;
+}
+
+.g-bd {
+	width: 100%;
+	overflow: hidden;
+	background: rgba(0, 0, 0, 0.2);
+	position: relative;
+	z-index: 1986;
+	padding-bottom: 0.6rem;
+
+}
+
+/*我的卡片*/
+.g-bd .m-card {
+/*	background: url(../img/shadow.png);
+	background-size: 100%;*/
+}
+
+.g-bd .m-card h1 {
+	margin: 0.15rem auto;
+	display: block;
+	font-weight: 100;
+	color: rgba(0, 0, 0, 0.61);
+}
+
+.g-bd .m-card .name {
+	width: 0.68rem;
+	height: 0.37rem;
+	margin-top: 0.62rem;
+	font-size: 0.32rem;
+}
+
+.g-bd .m-card .work {
+	width: 1.29rem;
+	height: 0.3rem;
+	margin-top: 0.3rem;
+	font-size: 0.28rem;
+}
+
+.g-bd .m-card .avatar {
+	box-shadow: 1px 2px 3px rgba(0,0,0,0.3) inset;
+	width: 1.98rem;
+	height: 1.98rem;
+	border-radius: 100%;
+	margin: 0.3rem auto 0;
+	overflow: hidden;
+}
+
+.g-bd .m-card .avatar img{
+	
+
+}
+
+.g-bd .m-card .say {
+	width: 2.9rem;
+	height: 0.31rem;
+	margin-top: 0.6rem;
+	font-size: 0.24rem;
+}
+
+/*最新文章标题图*/
+.g-bd .m-title {
+	text-align: center;
+	width: 1.4rem;
+	height: 0.4rem;
+	line-height: 0.4rem;
+	margin: 0.15rem auto;
+	font-size: 0.16rem;
+	color: rgba(255, 255, 255, 0.7);
+	background: rgba(0, 0, 0, 0.3);
+	border-radius: 0.04rem;
+	letter-spacing: 0.02rem;
+	box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.g-bd .m-title:active {
+	box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3) inset;
+}
+
+/*列表*/
+.g-bd .m-list {
+	max-width: 640px;
+	margin: auto;
+}
+
+.g-bd .m-list {
+	display: block;
+}
+
+.g-bd .m-list>li {
+	padding: 0.3rem;
+	display: block;
+	margin-bottom: 0.15rem;
+}
+
+.g-bd .m-list>li a {
+	font-size: 0.14rem;
+	display: block;
+	color: #fff;
+	margin-top: 0.15rem;
+}
+
+.g-bd .m-list>li a.visited {
+	text-decoration: none;
+	outline: none;
+	border: none;
+}
+
+.g-bd .m-list>li a.title {
+	font-size: 0.2rem;
+	color: rgba(255, 255, 255, 0.8);
+	display: block;
+	letter-spacing: 0.01rem;
+}
+
+.g-bd .m-list>li a.desc {
+	font-size: 0.16rem;
+	letter-spacing: 0.01rem;
+	color: rgba(255, 255, 255, 0.8);
+	display: block;
+	line-height: 1.5;
+	letter-spacing: 0.01rem;
+}
+
+.g-bd .m-list>li div.time {
+	display: -moz-box;
+	display: -webkit-box;
+	display: box;
+}
+
+.g-bd .m-list>li div.time .line {
+	display: block;
+	border-bottom: 0.02rem dashed rgba(255, 255, 255, 0.8);
+	height: 0.24rem;
+	-moz-box-flex: 1;
+	-webkit-box-flex: 1;
+	box-flex: 1;
+}
+
+.g-bd .m-list>li div.time .text {
+	display: block;
+	font-size: 0.14em;
+	height: 0.2rem;
+	line-height: 0.2rem;
+	width: 200px;
+	text-align: center;
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.g-bd .m-count {
+	display: -moz-box;
+	display: -webkit-box;
+	display: box;
+	margin: 0.3rem auto 0;
+	width: 2rem;
+}
+
+.g-bd .m-count .line {
+	display: block;
+	-moz-box-flex: 1;
+	-webkit-box-flex: 1;
+	box-flex: 1;
+	height: 0.1rem;
+	line-height: 0.1rem;
+	border-bottom: 0.02rem solid rgba(255, 255, 255, 0.4);
+}
+
+.g-bd .m-count .text {
+	display: block;
+	color: #fff;
+	width: 1rem;
+	text-align: center;
+	height: 0.1rem;
+	line-height: 0.2rem;
+	font-size: 0.16rem;
+}
+
+
+
+#scrollUp {
+	font-size: 0.14em;
+	bottom: 0.2rem;
+	right: 0.2rem;
+	padding: 0.3em;
+	display: block;
+	border-radius: 0.04rem;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #fff;
+}
+
+.u-btn-night {
+	font-size: 0.16rem;
+	padding: 0.1rem;
+	display: block;
+	position: fixed;
+	top: 0.15rem;
+	right: 0.15rem;
+	border-radius: 0.04rem;
+	color: rgba(255, 255, 255, 255.8);
+	z-index: 9999;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.g-ball-stage {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 10;
+}
+
+.u-ball {
+	border-radius: 100%;
+	background-color: rgba(123, 90, 70, 0.2);
+	position: absolute;
+}
+
+.up-1000 {
+	animation: up 1s;
+	-moz-animation: up 1s;  /* Firefox */
+	-webkit-animation: up 1s; /* Safari 和 Chrome */
+	-o-animation: up 1s;  /* Opera */
+}
+
+@keyframes up {
+	from {
+		background: rgba(7, 7, 7, 0.7);
+	}
+
+	to {
+		background: rgba(0, 0, 0, 0.2);
+	}
+
+}
+
+@-moz-keyframes up
+
+/* Firefox */
+{
+	from {
+		background: rgba(7, 7, 7, 0.7);
+	}
+
+	to {
+		background: rgba(0, 0, 0, 0.2);
+	}
+
+}
+
+@-webkit-keyframes up
+
+/* Safari 和 Chrome */
+{
+	from {
+		background: rgba(7, 7, 7, 0.7);
+	}
+
+	to {
+		background: rgba(0, 0, 0, 0.2);
+	}
+
+}
+
+@-o-keyframes up
+
+/* Opera */
+{
+	from {
+		background: rgba(7, 7, 7, 0.7);
+	}
+
+	to {
+		background: rgba(0, 0, 0, 0.2);
+	}
+
+}
+
+.down-1000 {
+	animation: down 1s;
+	-moz-animation: down 1s;  /* Firefox */
+	-webkit-animation: down 1s; /* Safari 和 Chrome */
+	-o-animation: down 1s;  /* Opera */
+}
+
+@keyframes down {
+	from {
+		background: rgba(0, 0, 0, 0.2);
+	}
+
+	to {
+		background: rgba(7, 7, 7, 0.7);
+	}
+
+}
+
+@-moz-keyframes down
+
+/* Firefox */
+{
+	from {
+		background: rgba(0, 0, 0, 0.2);
+	}
+
+	to {
+		background: rgba(7, 7, 7, 0.7);
+	}
+
+}
+
+@-webkit-keyframes down
+
+/* Safari 和 Chrome */
+{
+	from {
+		background: rgba(0, 0, 0, 0.2);
+	}
+
+	to {
+		background: rgba(7, 7, 7, 0.7);
+	}
+
+}
+
+@-o-keyframes down
+
+/* Opera */
+{
+	from {
+		background: rgba(0, 0, 0, 0.2);
+	}
+
+	to {
+		background: rgba(7, 7, 7, 0.7);
+	}
+
+}

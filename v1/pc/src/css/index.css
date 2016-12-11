@@ -1,0 +1,40 @@
+html { overflow: hidden; }
+body { background-color: #00BFFF; }
+.container { position: relative; z-index: 1986; }
+.g-bd{display: none;}
+.g-bd ul { display: block; height: 466px; padding: 15px; }
+.g-bd ul li { margin-top: 15px; height: 498px; position: relative; }
+
+/* 我的卡片 */
+.g-bd ul li .m-card { height: 498px; -webkit-transition: all 1.5s; -ms-transition: all 1.5s; -moz-transition: all 1.5s; -o-transition: all 1.5s; transition: all 1.5s; border-radius: 10px; box-shadow: 1px 2px 3px rgba(124, 86, 65, 0.2); background: rgba(124, 86, 65, 0.1); display: block; padding: 15px; }
+.g-bd ul li .m-card:hover { box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.4); }
+.g-bd ul li .m-card h1 { margin: 15px auto; display: block; }
+.g-bd ul li .m-card .name { height: 30px; font-weight: 100; color: #004A63; margin-top: 30px; }
+.g-bd ul li .m-card .work { height: 30px; font-weight: 100; color: #004A63; margin-top: 30px; }
+.g-bd ul li .m-card .avatar {width: 198px; height: 198px; border-radius: 198px; margin: 30px auto 0; -webkit-transition: all 1.5s; -ms-transition: all 1.5s; -moz-transition: all 1.5s; -o-transition: all 1.5s; transition: all 1.5s; box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1) inset; }
+.g-bd ul li .m-card .say { height: 25px; font-weight: 100; color: #004A63; margin-top: 60px; font-size: 26px; }
+
+/* 我的文章 */
+.g-bd ul li .info { height: 498px;  transition: all 1.5s;-webkit-transition: all 1.5s; -ms-transition: all 1.5s; -moz-transition: all 1.5s; -o-transition: all 1.5s;  border-radius: 10px;box-shadow: 1px 2px 3px rgba(124, 86, 65, 0.1); background: rgba(124, 86, 65, 0.1); display: block; padding: 15px; overflow: hidden; height: 498px; }
+.g-bd ul li .info:hover { box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.4); }
+.g-bd ul li .info a { text-decoration: none; }
+.g-bd ul li .info p{color: rgba(255,255,255,0.8);}
+.g-bd ul li .info .title { height: 84px; margin-top: 100px; color: #fff; font-size: 24px; text-align: center; display: block; }
+.g-bd ul li .info .category { padding: 0 15px; margin-top: 15px; font-size: 16px; text-align: center; display: box; display: -webkit-box; display: -ms-box; display: -moz-box; }
+.g-bd ul li .info .category .text { color: #fff; letter-spacing: 2px; display: block; padding: 0 15px; }
+.g-bd ul li .info .category .line { height: 1px; background: #fff; box-flex: 1; -webkit-box-flex: 1; -ms-box-flex: 1; -o-box-flex: 1; -moz-box-flex: 1; display: block; margin-top: 10px; }
+.g-bd ul li .info .desc { height: 90px; margin: 60px auto; letter-spacing: 1px; line-height: 2; font-size: 15px; }
+.g-bd ul li .info .time { font-size: 15px; display: block; position: absolute; bottom: 15px; right: 30px; }
+.g-bd .m-count { margin: 30px auto; position: relative; width: 200px; }
+.g-bd .m-count .line { height: 1px; width: 75px; background: rgba(255, 255, 255, 0.8); position: absolute; top: 10px; }
+.g-bd .m-count p { font-size: 16px; color: #fff; }
+.u-page-up { width: 60px; height: 60px; display: block; background: url(../img/arrow_left.png); position: fixed; top: 40%; left: 15px; z-index: 999999; cursor: pointer; -webkit-transition: all 1.5s }
+.u-page-down { transform: rotate(180deg);-webkit-transform: rotate(180deg); -ms-transform: rotate(180deg); -moz-transform: rotate(180deg); -o-transform: rotate(180deg);  width: 60px; height: 60px; display: block; background: url(../img/arrow_right.png); position: fixed; top: 40%; right: 15px; z-index: 999999; cursor: pointer; -webkit-transition: all 1.5s }
+.u-page-up:hover, .u-page-down:hover { box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.4); border-radius: 100%; }
+.u-page-up:active, .u-page-down:active { opacity: 0.6; box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.4) inset; border-radius: 100%; }
+.u-btn-night { cursor: pointer; padding: 15px; text-align: center; display: block; position: fixed; top: 70px; right: 30px; border-radius: 100px; color: rgba(255, 255, 255, 255.8); z-index: 9999; background-color: rgba(0, 0, 0, 0.5); }
+.u-shadow { background: rgba(0, 0, 0, 0); height: 100%; width: 100%; position: fixed; top: 0; left: 0; }
+
+/*背景球*/
+.g-ball-stage { position: fixed; top: 0; left: 0; z-index: 10; width: 100%; }
+.u-ball { border-radius: 640px; background-color: rgba(123, 90, 70, 0.2); position: absolute; }
