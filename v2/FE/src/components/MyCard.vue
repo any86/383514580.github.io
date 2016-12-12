@@ -10,13 +10,7 @@
 
 <script>
 export default {
-  name: 'MyCard',
-  computed: {
-
-  },
-  methods: {
-
-  }
+  name: 'MyCard'
 }
 </script>
 
