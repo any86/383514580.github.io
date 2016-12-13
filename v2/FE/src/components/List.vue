@@ -16,7 +16,7 @@
                 </li>
             </transition-group>
             <!-- loader -->
-            <loader v-if="1 == $store.state.list_status"></loader>
+            <loader v-if="this.loading"></loader>
             <!-- info -->
             <p class="list-info" v-else>没有更多文章喽!</p>
             
@@ -27,10 +27,15 @@
 import Loader from './Loader'
 export default {
     name: 'list',
+    data(){
+        return {page: 1, each: 3, loading: true};
+    },
     created() {
-        // 初始化加载
-        this.$store.dispatch('getList', this.$store.state.page);
-        // 滚动加载
+        // 初始化列表数据
+        this.$store.dispatch('getList').then(() => {
+            alert(321)
+        });
+        // 滚动加载, 渲染
         var timer = null;
         window.onscroll = () => {
             // window.scrollY: 滚动条高度
@@ -39,25 +44,18 @@ export default {
             if (window.screen.availHeight + window.scrollY + 50 >= document.body.clientHeight) {
                 clearTimeout(timer);
                 timer = setTimeout(() => {
-                    this.$store.state.page++;
-                    this.$store.dispatch('getList', this.$store.state.page);
+
                 }, 200);
             }
             // 如果无数据, 那么解除scroll绑定
-            if(1 !== this.$store.state.list_status) {
-                window.onscroll = null;
-            }
+            // if(1 !== this.$store.state.list_status) {
+            //     window.onscroll = null;
+            // }
         }
     },
     computed: {
-        list_loader() {
-            return this.$store.state.list_loader;
-        },
         list() {
             return this.$store.state.list;
-        },
-        count() {
-            return this.$store.state.list.length;
         }
     },
     components: {Loader}

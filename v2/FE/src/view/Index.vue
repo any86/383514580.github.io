@@ -9,6 +9,7 @@
 </template>
 
 <script>
+
 import MyCard from '../components/MyCard'
 import List from '../components/List'
 import FloatBar from '../components/FloatBar'
