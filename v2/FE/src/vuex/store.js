@@ -16,13 +16,9 @@ export default new Vuex.Store({
     mutations: {
         setList(state, json) {
             state.list = json;
-            state.list_loader = false;
         },
         setListLoader(state, bool) {
             state.list_loader = bool;
-        },
-        setListStatus(state, status) {
-            state.list_status = status;
         },
         getDetail(state, data) {
             data.desc = data.desc.replace(/<pre><code>[\S|\s]*<\/code><\/pre>/g, function(str) {
