@@ -41,11 +41,11 @@ export default new Vuex.Store({
             // context可能是store也可能是module
             // context.commit('setListLoader', true);
             return new Promise((resolve, reject) => {
-                superagent.get('/mock/list')
+                superagent.get('/static/list.json')
                     .set('Accept', 'application/json')
                     .query({ page: 1, limit: 20 })
                     .end(function(err, res) {
-                        context.commit('setList', res.body.data.list);
+                        context.commit('setList', res.body);
                         resolve();
                     });                
             })

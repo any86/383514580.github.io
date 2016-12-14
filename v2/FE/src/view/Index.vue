@@ -1,7 +1,7 @@
 <template>
     <div class="index-view">
         <div class="foreground">
-            <!-- <my-card></my-card> -->
+            <my-card></my-card>
             <list></list>
         </div>
         <float-bar></float-bar>

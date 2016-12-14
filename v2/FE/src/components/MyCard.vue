@@ -4,7 +4,7 @@
         <div class="avatar">
             <img src="../assets/avatar.png">
         </div>
-        <h1 class="say">hi! 程序能干的事, 别用人力.</h1>
+        <h1 class="say">hi! 软件能干的事, 你别干.</h1>
     </div>
 </template>
 

@@ -5,13 +5,12 @@ marked.setOptions({
     }
 });
 
-var md = '@time';
-var tokens = marked(md);
-console.log(tokens)
+var fs = require('fs')
+var md = '```js\n console.log("hello"); \n console.log("second row")```';
+var md = fs.readFileSync('./md/1/1.desc.md', 'utf-8');
+console.log(marked(md));
 
-
-// var md = '```js\n console.log("hello"); \n console.log("second row")```';
 module.exports = function(md){
-	return marked(md)
+	return marked(md);
 }
 
