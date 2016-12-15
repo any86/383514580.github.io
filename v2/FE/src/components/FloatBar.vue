@@ -16,7 +16,7 @@ export default {
       function scrollTop(){
         var scroll_top = document.documentElement.style.scrollTop || document.body.scrollTop;
         if(0 < scroll_top) {
-          scroll_top-= document.body.clientHeight / 10;
+          scroll_top-= document.body.clientHeight / 1000 * 17;
           window.scrollTo(0, scroll_top);
           window.requestAnimationFrame(scrollTop);
         }
