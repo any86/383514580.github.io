@@ -3,9 +3,9 @@
         <!--         <div class="list-count">
             <p class="text">共{{count}}篇</p>
         </div>     -->
-        <div class="scroll-container">
+        <div class="scroll-warp">
             <!-- list -->
-            <transition-group class="list-row" name="list" tag="ul">
+            <transition-group class="list-row" name="list" tag="ul" id="ul">
                 <li v-if="(list_view_length > i)" v-for="(row, i) in list_data" :key="row.id" class="list-item">
                     <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
                         {{row.title}}
@@ -55,6 +55,22 @@ export default {
             }
         }
     },
+    mounted(){
+        var start_y = 0;
+        var translate_y = 0;
+
+        document.getElementById('ul').addEventListener('touchstart', (e)=>{
+            start_y = e.touches[0].clientY;
+        }, false);
+
+        document.getElementById('ul').addEventListener('touchmove', (e)=>{
+                var distance_y = e.touches[0].clientY - start_y;
+                translate_y = distance_y;
+                console.log(distance_y);
+                document.getElementById('ul').style.transform = 'translate3d(0, ' + translate_y + 'px,' +'0)';
+
+        }, false);
+    },
     computed: {
         list_view_length(){
             // 已经显示的列表长度
@@ -71,8 +87,8 @@ export default {
 $font_color: #444;
 
 .com-list { 
-    .scroll-container { 
-        .list-row { max-width: 720px; margin: 0.15rem auto; display: block;
+    .scroll-warp { 
+        .list-row {transition:all .3s; max-width: 720px; margin: 0.15rem auto; display: block;
             li { padding: 0.15rem; display: block; overflow: hidden; margin-top: 0.45rem;
                 p, a { font-size: 0.14rem; }
                 a:visited { text-decoration: none; outline: none; border: none; }
