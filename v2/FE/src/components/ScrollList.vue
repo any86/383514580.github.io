@@ -1,11 +1,12 @@
 <template>
-    <div class="com-list">
-        <!--         <div class="list-count">
-            <p class="text">共{{count}}篇</p>
-        </div>     -->
-        <div class="warp">
+    <div class="com-scroll-list">
+        <div class="body" :style="{transform: 'translate3d(0, ' + translate_y + 'px,' +'0)'}">
+
+            <!-- loader -->
+            <loader style="margin:-100px 0 0 0 ;" v-if="$store.state.list_loader"></loader>
+
             <!-- list -->
-            <transition-group class="scroll" name="list" tag="ul" id="ul" :style="{transform: 'translate3d(0, ' + translate_y + 'px,' +'0)'}">
+            <transition-group class="list" name="list" tag="ul" >
                 <li v-if="(list_view_length > i)" v-for="(row, i) in list_data" :key="row.id" class="list-item">
                     <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
                         {{row.title}}
@@ -15,8 +16,10 @@
                     <router-link class="btn-view" :to="{ name: 'detail', params: { id: row.id }}" tag="a">查看全部</router-link>
                 </li>
             </transition-group>
+
             <!-- loader -->
             <loader v-if="$store.state.list_loader"></loader>
+
             <!-- info -->
             <p class="list-info" v-else>没有更多文章喽!</p>
             
@@ -26,7 +29,7 @@
 <script>
 import Loader from './Loader'
 export default {
-    name: 'list',
+    name: 'scrollList',
     data(){
         return {
             page: 1, 
@@ -44,6 +47,7 @@ export default {
             this.list_data = this.$store.state.list;
             this.list_data_length = this.$store.state.list.length;
         });
+
         // 滚动加载, 渲染
         var timer = null;
         window.onscroll = () => {
@@ -64,19 +68,20 @@ export default {
         }
     },
     mounted(){
+        
+        var node_body = this.$el.childNodes[0];
 
-        document.getElementById('ul').addEventListener('touchstart', (e)=>{
+        node_body.addEventListener('touchstart', (e)=>{
             this.start_y = e.touches[0].clientY;
         }, false);
 
-        document.getElementById('ul').addEventListener('touchmove', (e)=>{
+        node_body.addEventListener('touchmove', (e)=>{
             this.translate_y = (e.touches[0].clientY - this.start_y) / 2;
-            console.log(this.translate_y)
             e.preventDefault();
             e.stopPropagation();
         }, false);
 
-        document.getElementById('ul').addEventListener('touchend', (e)=>{
+        node_body.addEventListener('touchend', (e)=>{
             this.translate_y = 0;
         }, false);
     },
@@ -95,10 +100,10 @@ export default {
 .list-enter, .list-leave-active { opacity: 0; transform: translateY(-30px); }
 $font_color: #444;
 
-.com-list { 
-    .warp { overflow: scroll;
-        .scroll {/*transition:all .2s;*/ max-width: 720px; margin: 0.15rem auto; display: block;overflow: hidden;
-            li { padding: 0.15rem; display: block; overflow: hidden; margin-top: 0.45rem;
+.com-scroll-list { overflow: scroll;
+    >.body { 
+        >.list { max-width: 720px; margin: 0.15rem auto; display: block;overflow: hidden;
+            li { padding:0.3rem 0.15rem; display: block; overflow: hidden;
                 p, a { font-size: 0.14rem; }
                 a:visited { text-decoration: none; outline: none; border: none; }
                 .title { font-size: 0.18rem; color: $font_color; display: block; letter-spacing: 1px; font-weight: 100; cursor: pointer; }
@@ -107,10 +112,7 @@ $font_color: #444;
                 .btn-view { padding: 0.05rem; margin-top: 0.3rem; width: 0.7rem; background: #999; color: #fff; clear: both; cursor: pointer; display: block; text-align: center; border-radius: 4px; box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1); }
             }
         }
-
-        .list-count { p.text { font-size: 0.16rem; text-align: center; padding-top: 0.15rem; }
-        }
-        .list-info{text-align: center;font-size: 0.14rem;color: #aaa;margin: 0.3rem auto;}
+        >.list-info{text-align: center;font-size: 0.14rem;color: #aaa;margin: 0.3rem auto;}
     }
 }
 </style>

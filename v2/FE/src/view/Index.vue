@@ -1,8 +1,8 @@
 <template>
     <div class="index-view">
         <div class="foreground">
-            <!-- <my-card></my-card> -->
-            <list></list>
+            <my-card></my-card>
+            <scroll-list></scroll-list>
         </div>
         <float-bar></float-bar>
     </div>
@@ -11,17 +11,17 @@
 <script>
 
 import MyCard from '../components/MyCard'
-import List from '../components/List'
+import ScrollList from '../components/ScrollList'
 import FloatBar from '../components/FloatBar'
 
 export default {
   name: 'Index',
-  components: {MyCard, List, FloatBar}
+  components: {MyCard, ScrollList, FloatBar}
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style lang=scss>
 .foreground{
     width: 100%;
     overflow: hidden;
