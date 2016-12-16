@@ -264,7 +264,9 @@
       },
 
       handleTouchStart(event) {
+        //  touch点距屏幕顶点的Y距离
         this.startY = event.touches[0].clientY;
+        //  warp滚动条高度
         this.startScrollTop = this.getScrollTop(this.scrollEventTarget);
         this.bottomReached = false;
         if (this.topStatus !== 'loading') {
@@ -281,6 +283,7 @@
         if (this.startY < this.$el.getBoundingClientRect().top && this.startY > this.$el.getBoundingClientRect().bottom) {
           return;
         }
+        // touch点距离浏览器窗口顶部的距离
         this.currentY = event.touches[0].clientY;
         let distance = (this.currentY - this.startY) / this.distanceIndex;
         this.direction = distance > 0 ? 'down' : 'up';
