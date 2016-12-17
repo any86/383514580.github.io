@@ -41,10 +41,6 @@ export default {
 
     data() {
         return {
-            page: 1,
-            each: 3,
-            page_total: 0,
-            loading: true,
             list_data: [],
             translate_y: 0,
             start_y: 0,
@@ -97,27 +93,46 @@ export default {
         // 初始化列表数据
         this.$store.dispatch('getList').then(() => {
             this.list_data = this.$store.state.list;
-            this.page_total = Math.ceil(this.list_data.length / this.each);
+            this.$store.commit('setPageTotal', Math.ceil(this.list_data.length / this.$store.state.page_each));
         });
 
         // 滚动加载, 渲染
         var timer = null;
-        window.onscroll = () => {
+        var _$store = this.$store;
+        var _this = this;
+
+        function isListPosTop(){
+            // 计算list组件距离浏览器顶部距离
+            // console.log(this.$el.getBoundingClientRect().top)
+            if(0 >= _this.$el.getBoundingClientRect().top){
+                _$store.commit('isListPosTop', true);
+            } else {
+                 _$store.commit('isListPosTop', false);
+            }
+        }
+
+        window.addEventListener('scroll', getList, false);
+        window.addEventListener('scroll', isListPosTop, false);
+
+
+        function getList(){
             // window.scrollY: 滚动条高度
             // window.screen.availHeight: 可视区高度
             // document.body.clientHeight: 文档高度
             if (window.screen.availHeight + window.scrollY + 50 >= document.body.clientHeight) {
                 clearTimeout(timer);
                 timer = setTimeout(() => {
-                    if (this.page < this.page_total){
-                        this.page++;
+                    if (_$store.state.page < _$store.state.page_total){
+                        _$store.state.page++;
+                        _$store.commit('setPage', _$store.state.page);
                     }
                 }, 200);
             }
+
             // 如果无数据, 那么解除scroll绑定
-            if (this.page >= this.page_total){
-                window.onscroll = null;
-                this.$store.commit('setListLoader', false);
+            if (_$store.state.page >= _$store.state.page_total){
+                window.removeEventListener('scroll', getList);
+                _$store.commit('setListLoader', false);
             }
         }
     },
@@ -131,7 +146,7 @@ export default {
     computed: {
         list_already_length() {
             // 已经显示的列表长度
-            return this.page * this.each;
+            return this.$store.state.page * this.$store.state.page_each;
         }
     },
 
