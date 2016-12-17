@@ -1,26 +1,22 @@
 <template>
     <div class="com-scroll-list">
         <div class="body" :class="{bounce: !is_pull_down}" :style="{transform: 'translate3d(0, ' + translate_y + 'px,' +'0)'}">
-            
             <template>
                 <!-- loader -->
                 <!-- <loader style="margin:-100px 0 0 0;" v-if="$store.state.list_loader"></loader> -->
-
                 <!-- info -->
                 <!-- <p v-else class="info">没有更多文章喽!</p> -->
-
                 <!-- is_loading -->
                 <div class="arrow" v-show="!is_loading">
                     <i class="icon" :class="{rotate: is_pull_down}"></i>
                     <p class="text">松开加载</p>
+
                 </div>
                 <loader :opts="{show: is_loading}"></loader>
             </template>
-            
-
             <!-- list -->
             <transition-group class="list" name="list" tag="ul">
-                <li v-if="(list_view_length > i)" v-for="(row, i) in list_data" :key="row.id" class="list-item">
+                <li v-if="(list_already_length > i)" v-for="(row, i) in list_data" :key="i" class="list-item">
                     <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
                         {{row.title}}
                     </router-link>
@@ -29,16 +25,13 @@
                     <router-link class="btn-view" :to="{ name: 'detail', params: { id: row.id }}" tag="a">查看全部</router-link>
                 </li>
             </transition-group>
-            
             <template>
                 <!-- loader -->
                 <loader :opts="{show: $store.state.list_loader}"></loader>
-                
                 <!-- info -->
                 <p v-show="!$store.state.list_loader" class="info">没有更多文章喽!</p>
             </template>
         </div>
-
     </div>
 </template>
 <script>
@@ -50,6 +43,7 @@ export default {
         return {
             page: 1,
             each: 3,
+            page_total: 0,
             loading: true,
             list_data: [],
             translate_y: 0,
@@ -61,36 +55,39 @@ export default {
     },
 
     mounted() {
-
-
-
         var node_body = this.$el.childNodes[0];
 
+        // touchstart
         node_body.addEventListener('touchstart', (e) => {
             this.is_pull_down = true;
             this.start_y = e.touches[0].clientY;
             this.start_scroll_top = this._getScrollTop();
         }, false);
 
+        // touchmove
         node_body.addEventListener('touchmove', (e) => {
             // 移动距离 = 当前touch点的Y - touch起点Y - 初touch时候的滚动条高度
             var move_distance = e.touches[0].clientY - this.start_y - this.start_scroll_top;
-            if(0 < move_distance && 0 == this._getScrollTop()){
+            if (0 < move_distance && 0 == this._getScrollTop()) {
                 this.translate_y = move_distance / 2;
                 e.preventDefault();
                 e.stopPropagation();
             }
         }, false);
 
+        // touchend
         node_body.addEventListener('touchend', (e) => {
-            if(0 < this.translate_y) {
+            if (0 < this.translate_y) {
                 this.is_pull_down = false;
                 this.translate_y = 10;
                 //触发数据拉取等操作
                 this.is_loading = true;
-                setTimeout(()=>{
+                setTimeout(() => {
                     this.is_loading = false;
                     this.translate_y = 0;
+
+                    this.list_data.splice(0, 0, {"title":"本站代码","time":"2013-01-01 12:32:21","category":"javascript","id":"0","desc":"隐藏"})
+
                 }, 1000);
             }
         }, false);
@@ -100,6 +97,7 @@ export default {
         // 初始化列表数据
         this.$store.dispatch('getList').then(() => {
             this.list_data = this.$store.state.list;
+            this.page_total = Math.ceil(this.list_data.length / this.each);
         });
 
         // 滚动加载, 渲染
@@ -111,11 +109,13 @@ export default {
             if (window.screen.availHeight + window.scrollY + 50 >= document.body.clientHeight) {
                 clearTimeout(timer);
                 timer = setTimeout(() => {
-                    this.page++;
+                    if (this.page < this.page_total){
+                        this.page++;
+                    }
                 }, 200);
             }
             // 如果无数据, 那么解除scroll绑定
-            if (this.list_view_length >= this.list_data_length) {
+            if (this.page >= this.page_total){
                 window.onscroll = null;
                 this.$store.commit('setListLoader', false);
             }
@@ -123,13 +123,13 @@ export default {
     },
 
     methods: {
-        _getScrollTop(){
+        _getScrollTop() {
             return window.pageYOffset;
         }
     },
 
     computed: {
-        list_view_length() {
+        list_already_length() {
             // 已经显示的列表长度
             return this.page * this.each;
         }
@@ -156,27 +156,40 @@ export default {
     transform: translateY(-30px);
 }
 
-.bounce{transition:all .2s ease-in; }
-.rotate{transform:rotate(180deg);}
-/*In · Cubic*/
+.bounce {
+    transition: all .2s ease-in;
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
+
+
 $font_color: #444;
 .com-scroll-list {
     overflow: hidden;
     >.body {
-        >.arrow{height: 50px;margin-top: -50px;overflow: hidden;
-
-            >.icon{
-                transition:all .3s .3s; 
+        >.arrow {
+            height: 50px;
+            margin-top: -50px;
+            overflow: hidden;
+            >.icon {
+                transition: all .3s .3s;
                 border-left: 0.1rem solid transparent;
                 border-right: 0.1rem solid transparent;
-                border-bottom:  0.15rem solid #ccc;
-                width: 0;height: 0;
-                display: block;margin: auto;                
+                border-top: 0.15rem solid #ccc;
+                width: 0;
+                height: 0;
+                display: block;
+                margin: auto;
             }
-
-            >.text{font-size: 0.14rem;color: #ccc;text-align: center;margin-top: 0.1rem;}
+            >.text {
+                font-size: 0.14rem;
+                color: #ccc;
+                text-align: center;
+                margin-top: 0.1rem;
+            }
         }
-
         >.list {
             max-width: 720px;
             margin: 0.15rem auto;
@@ -232,15 +245,12 @@ $font_color: #444;
                 }
             }
         }
-
         >.info {
             text-align: center;
             font-size: 0.14rem;
             color: #aaa;
             margin: 0.3rem auto;
         }
-
-
     }
 }
 </style>
