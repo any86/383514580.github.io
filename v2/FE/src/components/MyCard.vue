@@ -1,10 +1,10 @@
 <template>
     <div class="com-card">
-        <h1 class="name">宁宁</h1>
+<!--         <h1 class="name">宁宁</h1>
         <div class="avatar">
             <img src="../assets/avatar.png">
         </div>
-        <h1 class="say">hi! 软件能干的事, 你别干.</h1>
+        <h1 class="say">hi! 软件能干的事, 你别干.</h1> -->
     </div>
 </template>
 

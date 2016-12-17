@@ -1,17 +1,17 @@
 <template>
-    <div class="loader">
+    <div class="com-loader" v-show="opts.show">
         <img src="../assets/three-dots.svg">
         <p align="center">努力加载...</p>
     </div>
 </template>
 <script>
 export default {
-    name: 'loader'
+    name: 'loader',
+    props: ['opts']
 }
 </script>
 <style scoped lang=scss>
-.loader {
-    margin: 0.6rem auto;
+.com-loader {
     img {
         display: block;
         width: 0.8rem;
