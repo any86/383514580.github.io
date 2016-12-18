@@ -18,7 +18,10 @@ import FloatBar from '../components/FloatBar'
 
 export default {
   name: 'Index',
-  components: {HeaderBar, MyCard, ScrollList, FloatBar}
+  components: {HeaderBar, MyCard, ScrollList, FloatBar},
+  activated(){
+    window.scrollTo(0, this.$store.state.index_pos_y);
+  }
 }
 </script>
 

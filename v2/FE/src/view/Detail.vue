@@ -1,15 +1,15 @@
 <template>
     <div class="detail-view">
-        <loader v-show="$store.state.detail_loader"></loader>  
-        <header-bar v-show="!$store.state.detail_loader"></header-bar> 
+        <loader :opts="{show: $store.state.detail_loader}"></loader>
+        <!-- <header-bar v-show="!$store.state.detail_loader"></header-bar>  -->
         <section v-show="!$store.state.detail_loader">
             <header>
                 <p class="email">Email: <a href="mailto:383514580@qq.com">383514580@qq.com</a></p>
-                <h1 class="title">{{detail.title}}</h1>
-                <p class="time">发布: {{detail.create_time}}</p>
-                <!-- <router-link class="btn-return" :to="{ name: 'index'}" tag="a">返回</router-link> -->
+                <!-- <h1 class="title">{{detail.title}}</h1> -->
+                <!-- <p class="time">发布: {{detail.create_time}}</p> -->
+                <router-link class="btn-return" :to="{ name: 'index'}" tag="a">返回</router-link>
             </header>
-            <article v-html="detail.desc"></article>            
+            <article v-html="detail"></article>            
         </section>
     </div>
 </template>
@@ -22,8 +22,14 @@ export default {
     created() {
         // 初始化detail页的loader
         this.$store.commit('setDetailLoader', true);
-        this.$store.dispatch('getDetail', this.$route.params.id);
-        window.onscroll = null;
+
+        // 获取数据
+        this.$store.dispatch('getDetail', this.$route.params.id).then(() => {
+            this.list_data = this.$store.state.list;
+            this.$store.commit('setPageTotal', Math.ceil(this.list_data.length / this.$store.state.page_each));
+        });
+
+        // window.onscroll = null;
     },
     computed: {
         detail() {

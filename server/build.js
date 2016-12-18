@@ -2,7 +2,7 @@ var fs = require('fs');
 var DIR_PATH = './md/';
 var dirs = fs.readdirSync(DIR_PATH);
 var md2html = require('./md2html.js');
-var DESC_DIR = './db/';
+var DESC_DIR = '../v2/FE/static/db/';
 
 var json_list = [];
 dirs.forEach(dir_name=>{

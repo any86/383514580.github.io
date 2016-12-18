@@ -11,12 +11,14 @@ const routes = [
 ];
 // 初始化路由
 export default new VueRouter({
-    routes
-    /*    scrollBehavior(to, from, savedPosition) {
-            if (savedPosition) {
-                return savedPosition
-            } else {
-                return { x: 0, y: 0 }
-            }
-        }*/
+    // mode: 'history',
+    routes,
+    // scrollBehavior(to, from, savedPosition) {
+    //     console.log(savedPosition)
+    //     if (savedPosition) {
+    //         return savedPosition
+    //     } else {
+    //         return { x: 0, y: 0 }
+    //     }
+    // }
 })

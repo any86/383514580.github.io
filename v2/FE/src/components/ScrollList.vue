@@ -22,7 +22,7 @@
                     </router-link>
                     <p class="desc" v-html="'[' + row.category + ']' + row.desc"></p>
                     <p class="time">{{row.create_time}}</p>
-                    <router-link class="btn-view" :to="{ name: 'detail', params: { id: row.id }}" tag="a">查看全部</router-link>
+                    <a @click="goDetail(row.id)" class="btn-view">查看全部</a>
                 </li>
             </transition-group>
             <template>
@@ -38,7 +38,6 @@
 import Loader from './Loader'
 export default {
     name: 'scrollList',
-
     data() {
         return {
             list_data: [],
@@ -140,6 +139,13 @@ export default {
     methods: {
         _getScrollTop() {
             return window.pageYOffset;
+        },
+
+        goDetail(id){
+            // 记录当前滚动条位置
+            this.$store.commit('setIndexPosY', window.scrollY);
+            // goto
+            this.$router.push({ name: 'detail',  params: { id: id }})
         }
     },
 
