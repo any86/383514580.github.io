@@ -1,9 +1,9 @@
 <template>
-	<keep-alive>
 		<transition name="bounce" mode="out-in">
-    		<router-view></router-view>
-    	</transition>
-    </keep-alive>
+        <keep-alive>
+  		    <router-view></router-view>
+        </keep-alive>
+  	</transition>
 </template>
 
 <script>

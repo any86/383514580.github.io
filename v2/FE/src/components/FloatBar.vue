@@ -46,7 +46,7 @@ $btn_width: 0.5rem;
         color: #fff;
         cursor: pointer;
         box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
-        transition: all .3s;
+        transition: all 1s;
         &:active {
             background: rgba(0, 0, 0, 0.5);
             box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3) inset;

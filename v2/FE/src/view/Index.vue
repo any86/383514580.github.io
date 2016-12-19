@@ -2,6 +2,7 @@
     <div class="index-view">
         <div class="foreground">
             <my-card></my-card>
+            <header-bar></header-bar>
             <scroll-list></scroll-list>
         </div>
         <float-bar></float-bar>
@@ -10,13 +11,17 @@
 
 <script>
 
+import HeaderBar from '../components/HeaderBar'
 import MyCard from '../components/MyCard'
 import ScrollList from '../components/ScrollList'
 import FloatBar from '../components/FloatBar'
 
 export default {
   name: 'Index',
-  components: {MyCard, ScrollList, FloatBar}
+  components: {HeaderBar, MyCard, ScrollList, FloatBar},
+  activated(){
+    window.scrollTo(0, this.$store.state.index_pos_y);
+  }
 }
 </script>
 
