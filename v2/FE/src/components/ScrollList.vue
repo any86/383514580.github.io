@@ -230,11 +230,11 @@ $font_color: #444;
                     border: none;
                 }
                 .title {
-                    font-size: 0.18rem;
-                    color: $font_color;
+                    font-size: 0.2rem;
+                    color: #333;
                     display: block;
                     letter-spacing: 1px;
-                    font-weight: 100;
+                    font-weight: 600;
                     cursor: pointer;
                 }
                 .desc {

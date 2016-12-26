@@ -1,7 +1,6 @@
 <template>
     <div class="index-view">
         <div class="foreground">
-            <star></star> 
             <my-card></my-card>
             <header-bar></header-bar>
             <scroll-list></scroll-list>
