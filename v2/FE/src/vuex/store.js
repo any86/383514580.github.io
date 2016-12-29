@@ -61,7 +61,8 @@ export default new Vuex.Store({
             // context可能是store也可能是module
             // context.commit('setListLoader', true);
             return new Promise((resolve, reject) => {
-                superagent.get('/static/db/list.json')
+                superagent.get('./static/db/list.json')
+                    .withCredentials()
                     .set('Accept', 'application/json')
                     // .query({ page: 1, limit: 20 })
                     .end(function(err, res) {
@@ -76,7 +77,8 @@ export default new Vuex.Store({
          */
         getDetail(context, id) {
             return new Promise((resolve, reject) => {
-                superagent.get('/static/db/detail/' + id + '.tpl')
+                superagent.get('./static/db/detail/' + id + '.tpl')
+                    .withCredentials()
                     .end(function(err, res) {
                         context.commit('setDetailLoader', false);
                         context.commit('setDetail', res.text);

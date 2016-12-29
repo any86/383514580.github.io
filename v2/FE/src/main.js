@@ -3,19 +3,24 @@ import App from './App'
 import store from './vuex/store'
 import router from './router'
 
-// touch
-/*import Hammer from '../static/hammer.min.js'
-var myElement = document.getElementById('touch');
-var mc = new Hammer(myElement);
-mc.on("panleft panright tap press", function(ev) {
-    console.log(ev.distance, ev);
-});*/
+import VueCordova from 'vue-cordova'
+Vue.use(VueCordova);
+
 
 /* eslint-disable no-new */
 new Vue({
     store,
+    data() {
+        return {
+            cordova: Vue.cordova
+        }
+    },
     el: '#app',
     template: '<App/>',
     router,
     components: { App }
-})
+});
+
+Vue.cordova.on('deviceready', () => {
+    alert('可以!');
+});

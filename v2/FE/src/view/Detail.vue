@@ -19,7 +19,7 @@ import HeaderBar from '../components/HeaderBar'
 
 export default {
     name: 'Detail',
-    created() {
+    activated() {
         // 初始化detail页的loader
         this.$store.commit('setDetailLoader', true);
 
