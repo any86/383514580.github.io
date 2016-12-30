@@ -20,7 +20,7 @@ export default new Vuex.Store({
     },
     mutations: {
         // 存储列表页滚动条高度, 方便其他页面返回继续当前位置
-        setIndexPosY(state, y){
+        setIndexPosY(state, y) {
             state.index_pos_y = y;
         },
 
@@ -61,13 +61,16 @@ export default new Vuex.Store({
             // context可能是store也可能是module
             // context.commit('setListLoader', true);
             return new Promise((resolve, reject) => {
-                superagent.get('./static/db/list.json')
-                    .withCredentials()
+                superagent.get('https://383514580.github.io/static/db/list.json')
                     .set('Accept', 'application/json')
-                    // .query({ page: 1, limit: 20 })
                     .end(function(err, res) {
-                        context.commit('setList', res.body);
-                        resolve();
+                        if (err) {
+                            alert(err);
+                        } else {
+                            context.commit('setList', res.body);
+                            resolve();
+                        }
+
                     });
             });
 
@@ -77,12 +80,15 @@ export default new Vuex.Store({
          */
         getDetail(context, id) {
             return new Promise((resolve, reject) => {
-                superagent.get('./static/db/detail/' + id + '.tpl')
-                    .withCredentials()
+                superagent.get('https://383514580.github.io/static/db/detail/' + id + '.tpl')
                     .end(function(err, res) {
-                        context.commit('setDetailLoader', false);
-                        context.commit('setDetail', res.text);
-                        resolve();
+                        if (err) {
+                            alert(err);
+                        } else {
+                            context.commit('setDetailLoader', false);
+                            context.commit('setDetail', res.text);
+                            resolve();
+                        }
                     });
             });
         }
