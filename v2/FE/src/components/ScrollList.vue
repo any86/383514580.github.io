@@ -212,6 +212,7 @@ $font_color: #444;
             }
         }
         >.list {
+            will-change: all;
             max-width: 720px;
             margin: 0.15rem auto;
             display: block;
