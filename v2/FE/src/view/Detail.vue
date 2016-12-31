@@ -1,25 +1,25 @@
 <template>
     <div class="detail-view">
+        <float-bar></float-bar>
         <loader :opts="{show: $store.state.detail_loader}"></loader>
         <!-- <header-bar v-show="!$store.state.detail_loader"></header-bar>  -->
         <section v-show="!$store.state.detail_loader">
             <header>
-                <p class="email">Email: <a href="mailto:383514580@qq.com">383514580@qq.com</a></p>
-                <!-- <h1 class="title">{{detail.title}}</h1> -->
-                <!-- <p class="time">发布: {{detail.create_time}}</p> -->
                 <router-link class="btn-return" :to="{ name: 'index'}" tag="a">返回</router-link>
+                <p class="email">Email: <a href="mailto:383514580@qq.com">383514580@qq.com</a></p>
             </header>
-            <article v-html="detail"></article>            
+            <article class="article" v-html="detail"></article>            
         </section>
     </div>
 </template>
 <script>
 import Loader from '../components/Loader'
 import HeaderBar from '../components/HeaderBar'
+import FloatBar from '../components/FloatBar'
 
 export default {
     name: 'Detail',
-    created() {
+    activated() {
         // 初始化detail页的loader
         this.$store.commit('setDetailLoader', true);
 
@@ -37,21 +37,34 @@ export default {
         }
     },
     components: {
-        Loader, HeaderBar
+        Loader, HeaderBar, FloatBar
     }
 }
 </script>
-<style scoped lang=scss>
+<style lang=scss>
 .detail-view {
-
-    /*头部*/
     header { overflow: hidden; font-size: 0.14rem; color: #444; max-width: 720px; padding: 0.15rem; margin: 0.15rem auto 0;
-        .email a { color: #444; text-decoration: underline; }
-        .title { font-size: 0.28rem; letter-spacing: 2px; margin: 0.15rem 0;font-weight: 100;}
-        .btn-return { float: right; padding: 0.05rem 0.15rem; background: #ccc; color: #fff; border-radius: 4px; }
+        >.btn-return { float: left; padding: 0.05rem 0.15rem; background: #ccc; color: #fff; border-radius: 4px; letter-spacing: 2px;}
+        >.email{float: right;
+             a {color: #444; text-decoration: underline; }
+        }
+
     }
 
-    /*正文*/
-    article { color: #444; max-width: 720px; padding: 0.15rem; margin: auto;line-height: 30px; letter-spacing: 2px; font-size: 0.15rem;}
+    article{max-width: 720px; padding: 0.15rem; margin: auto; letter-spacing: 2px;line-height: 1.5;font-size: 0.15rem;
+        
+        em{font-style: normal;font-weight: 600;text-decoration: underline;}
+        p{margin-top: 0.15rem;}
+
+        h1{font-size: 0.24rem;margin-bottom: 0.15rem;
+            +p{font-size: 0.12rem;font-weight: 100;color: #555;}
+        }
+        
+        h2{margin:0.3rem 0 0.05rem 0;}
+        h3{margin:0.15rem 0 0.05rem 0;}
+        
+        pre{padding: 0.1rem;border:1px dashed #ccc;}
+
+    }
 }
 </style>

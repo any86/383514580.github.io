@@ -98,7 +98,7 @@ export default {
     }
     >.info{position: relative;z-index: 1986;
         .name{ @include textCenter(0.24rem);margin-top: 0.15rem;letter-spacing: 2px;}
-        .avatar{width: 1.2rem; height: 1.2rem;margin: 0.15rem auto;
+        .avatar{width: 1.2rem; height: 1.2rem;margin: 0.15rem auto;border-radius: 100%;
             img{display: block;width: 100%;}
         }
         .say{ @include textCenter(0.18rem);margin: 0.3rem auto 0.15rem; letter-spacing: 2px;}
