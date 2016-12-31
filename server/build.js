@@ -1,38 +1,55 @@
 var fs = require('fs');
-var DIR_PATH = './md/';
-var dirs = fs.readdirSync(DIR_PATH);
+var crypto = require('crypto');
 var md2html = require('./md2html.js');
-var DESC_DIR = '../v2/FE/static/db/';
+var DIR_PATH = 'my_doc/';
+var DESC_DIR = './db/';
+var files_name = fs.readdirSync(DIR_PATH);
+console.log(files_name);
+var list = [];
 
-var json_list = [];
-dirs.forEach(dir_name=>{
-	var dir = DIR_PATH + dir_name + '/';
+files_name.forEach(file_name=> {
+	if(-1 < file_name.search(/.*\.md/)) {
+		// 打开md文件
+		var md = fs.readFileSync(DIR_PATH + file_name, 'utf8');
 
-	// 列表desc
-	var desc_md = fs.readFileSync(dir + dir_name + '.desc.md', 'utf8');
-	var desc_html = md2html(desc_md);
-	// console.log(desc_html.replace(/\n\r/g, ''));
+		// \s 非空格符
+		// (.+) 非换行至少1次
+		// [^.] 非非换行符 = 换行符
+		// \*\*\[(.+)\]\*\* '**'中间内容
+		var match = md.match(/#\s*(.+)[^.]*\*\*\[(.+)\]\*\*\s*\*\*\[(.+)\]\*\*/);
+		var id = crypto.createHash('md5').update(md).digest('hex');
+		// 构造列表项对象
+		var obj = {
+			id: id,
+			title: match[1],
+			// category: match[2].split('/'),
+			category: match[2],
+			time: match[3]
+		}
 
-	// 列表json中一行
-	var json_str = fs.readFileSync(dir + dir_name + '.json', 'utf8');
-	var json_obj = JSON.parse(json_str);
-	json_obj.id = dir_name;
-	json_obj.desc = desc_html;
-	json_list.push(json_obj);
+		// 匹配第一段为列表描述
+		// var match = md.match(/(##[^#\r\n]*)/); // 带##标题
+		var match = md.match(/##.*[\r\n]*([^#]*)/);
+		// console.log(match)
 
-	// 详情模版
-	var md = fs.readFileSync(dir + dir_name + '.md', 'utf8');
-	var html = md2html(md);
+		obj.desc = md2html(match[1]);
 
-	if(!fs.existsSync(DESC_DIR + 'detail/')) {
-		fs.mkdirSync(DESC_DIR + 'detail/');
+		// 填充列表数据
+		list.push(obj);
+
+
+		// ================================ 详情模版 ================================
+		var md = fs.readFileSync(DIR_PATH + file_name, 'utf8');
+		var html = md2html(md);
+
+		if(!fs.existsSync(DESC_DIR + 'detail/')) {
+			fs.mkdirSync(DESC_DIR + 'detail/');
+		}
+
+		fs.writeFileSync(DESC_DIR + 'detail/' + id+'.tpl', html);		
+
 	}
-	
-	fs.writeFileSync(DESC_DIR + 'detail/' + dir_name+'.tpl', html);
 });
 
 // 列表json
-fs.writeFileSync(DESC_DIR + 'list.json', JSON.stringify(json_list));
-console.log(json_list);
-
-
+fs.writeFileSync(DESC_DIR + 'list.json', JSON.stringify(list, null, 4));
