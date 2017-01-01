@@ -1,5 +1,5 @@
 <h1 id="-">事件捕获和事件冒泡</h1>
-<p><strong>[js/css]</strong> <strong>[2016-12-24 12:12:21]</strong></p>
+<p><strong>[js/css]</strong>   <strong>[2016-12-24 12:12:21]</strong></p>
 <h2 id="-">什么是事件?</h2>
 <p>click mouseout 等等</p>
 <h2 id="-">什么是事件传播?</h2>
