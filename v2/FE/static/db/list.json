@@ -196,11 +196,11 @@
         "desc": "<p>click mouseout 等等</p>\n"
     },
     {
-        "id": "13946e6fde85fc9aaf6e094675ec5bb1",
+        "id": "f03c40091d3939d48a976bd4d26dce0e",
         "title": "写个vue的指令",
         "category": "js/css",
         "time": "2016-12-24 12:12:21",
-        "desc": "<pre><code class=\"lang-javascript\">Vue.directive(<span class=\"hljs-string\">'demo'</span>, {\n    bind: <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span></span>{\n        <span class=\"hljs-comment\">// 初始化指令时触发, 运行一次</span>\n    },\n\n     update: <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span></span>{\n         <span class=\"hljs-comment\">// </span>\n     }\n})\n</code></pre>\n"
+        "desc": "<p>指令就是封装dom操作的函数, 只是调用方式和原声的函数不同.</p>\n"
     },
     {
         "id": "d2a3f09efe36f47a696471a7639a644e",
@@ -266,8 +266,8 @@
         "desc": "<p>document.body.clientWidth ==&gt; BODY对象宽度  </p>\n<p>document.body.clientHeight ==&gt; BODY对象高度  </p>\n<p>document.documentElement.clientWidth ==&gt; 可见区域宽度    </p>\n<p>document.documentElement.clientHeight ==&gt; 可见区域高度   </p>\n"
     },
     {
-        "id": "cc91efa72c0264c260752deb1a9cc359",
-        "title": "webpack入门",
+        "id": "a54f3dcde65923a077a83a526f777c56",
+        "title": "scoket.io",
         "category": "js/css",
         "time": "2016-12-24 12:12:21",
         "desc": "<ol>\n<li>无论是多页面开发还是单页开发;   </li>\n<li>也不管是基于jq还是基于vue/react等开发;   </li>\n<li>所有的前端页面都可以使用webpack开发;</li>\n</ol>\n"
