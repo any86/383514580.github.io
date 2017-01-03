@@ -210,6 +210,13 @@
         "desc": "<pre><code class=\"lang-javascript\"><span class=\"hljs-keyword\">var</span> num = <span class=\"hljs-number\">0</span>;\n<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> <span class=\"hljs-title\">add</span>(<span class=\"hljs-params\"></span>)</span>{\n    <span class=\"hljs-keyword\">var</span> num = <span class=\"hljs-number\">0</span>;\n    <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> <span class=\"hljs-title\">add2</span>(<span class=\"hljs-params\"></span>)</span>{\n        num++;\n    }\n    <span class=\"hljs-built_in\">console</span>.log(num); <span class=\"hljs-comment\">// 1</span>\n}\n<span class=\"hljs-built_in\">console</span>.log(num); <span class=\"hljs-comment\">// 0;</span>\n</code></pre>\n"
     },
     {
+        "id": "44fda88a6aee5f5689ccef516d3274ac",
+        "title": "判断是否为空",
+        "category": "js/css",
+        "time": "2016-12-24 12:12:21",
+        "desc": "<pre><code class=\"lang-javascript```\">  <span class=\"hljs-keyword\">var</span> isEmpty = <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span></span>(obj) {\n    <span class=\"hljs-keyword\">if</span> (obj == <span class=\"hljs-literal\">null</span>) <span class=\"hljs-keyword\">return</span> <span class=\"hljs-literal\">true</span>;\n    <span class=\"hljs-keyword\">if</span> (<span class=\"hljs-literal\">_</span>.isArray(obj) || <span class=\"hljs-literal\">_</span>.isString(obj)) <span class=\"hljs-keyword\">return</span> obj.length === <span class=\"hljs-number\">0</span>;\n    <span class=\"hljs-keyword\">for</span> (<span class=\"hljs-keyword\">var</span> key <span class=\"hljs-keyword\">in</span> obj) <span class=\"hljs-keyword\">if</span> (obj.hasOwnProperty(key)) <span class=\"hljs-keyword\">return</span> <span class=\"hljs-literal\">false</span>;\n    <span class=\"hljs-keyword\">return</span> <span class=\"hljs-literal\">true</span>;\n  };\n</code></pre>\n<p>代码来自underscre.js</p>\n"
+    },
+    {
         "id": "1ab6b48e610047b514fba5528eebad0e",
         "title": "内存回收",
         "category": "js/css",
@@ -224,7 +231,7 @@
         "desc": "<p>yarn</p>\n<pre><code class=\"lang-Javascript\">yarn config <span class=\"hljs-keyword\">set</span> registry <span class=\"hljs-comment\">https:</span>//<span class=\"hljs-comment\">registry.npm.taobao.org</span>\n</code></pre>\n<p>npm</p>\n<pre><code class=\"lang-Javascript\">npm config <span class=\"hljs-keyword\">set</span> registry <span class=\"hljs-comment\">https:</span>//<span class=\"hljs-comment\">registry.npm.taobao.org</span>\n</code></pre>\n"
     },
     {
-        "id": "1d2c63b8e2e9f27154448a32db084f9b",
+        "id": "39107718f6d86ea2dc3ce6cd63409d6d",
         "title": "小于IE8实现背景透明,文字不透明",
         "category": "css",
         "time": "2015-11-24 12:12:21",
@@ -238,18 +245,11 @@
         "desc": "<p>原型就像是爸爸的工具箱, 想用什么不用自己买, 直接拿来用, 省钱(js中就是省内存), 嘿嘿.</p>\n<pre><code class=\"lang-javascript```\"><span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> <span class=\"hljs-title\">ParentBox</span><span class=\"hljs-params\">()</span></span>{\n    <span class=\"hljs-comment\">// 爸爸函数</span>\n    <span class=\"hljs-keyword\">this</span>.using = <span class=\"hljs-string\">''</span>;\n}\n<span class=\"hljs-comment\">// 锤子</span>\nParentBox.prototype.hammer = <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span></span>{\n    <span class=\"hljs-keyword\">this</span>.using = <span class=\"hljs-string\">'hammer'</span>;\n}\n<span class=\"hljs-comment\">// 笔</span>\nParentBox.prototype.pen = <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span></span>{\n    <span class=\"hljs-keyword\">this</span>.using = <span class=\"hljs-string\">'pen'</span>;\n}\n</code></pre>\n"
     },
     {
-        "id": "d348a8ce6effdc5556edc1cd74c68151",
-        "title": "webpack入门",
+        "id": "a61cc0d96ad620d4b3102c6be328b75a",
+        "title": "手机页面的适配应该怎么做?",
         "category": "js/css",
         "time": "2016-12-24 12:12:21",
-        "desc": "<ol>\n<li>无论是多页面开发还是单页开发;   </li>\n<li>也不管是基于jq还是基于vue/react等开发;   </li>\n<li>所有的前端页面都可以使用webpack开发;</li>\n</ol>\n"
-    },
-    {
-        "id": "d348a8ce6effdc5556edc1cd74c68151",
-        "title": "webpack入门",
-        "category": "js/css",
-        "time": "2016-12-24 12:12:21",
-        "desc": "<ol>\n<li>无论是多页面开发还是单页开发;   </li>\n<li>也不管是基于jq还是基于vue/react等开发;   </li>\n<li>所有的前端页面都可以使用webpack开发;</li>\n</ol>\n"
+        "desc": "<p>手机设备的分辨率不统一,要做到没个设备上的效果和设计图比例一致,就需要进行适配.</p>\n"
     },
     {
         "id": "d348a8ce6effdc5556edc1cd74c68151",
