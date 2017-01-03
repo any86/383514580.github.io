@@ -1,5 +1,5 @@
-<h1 id="jq-">jq开发规范</h1>
-<p><strong>[js/css]</strong> <strong>[2016-11-23 11:12:21]</strong></p>
+<h1 id="scoket-io">scoket.io</h1>
+<p><strong>[js/css]</strong>   <strong>[2016-12-24 12:12:21]</strong></p>
 <h2 id="webpack-">webpack适合什么项目</h2>
 <ol>
 <li>无论是多页面开发还是单页开发;   </li>

@@ -1,5 +1,5 @@
 <h1 id="vuex-">vuex的简单使用</h1>
-<p><strong>[js/css]</strong> <strong>[ 2016-12-20 11:12:21]</strong></p>
+<p><strong>[js/css]</strong>   <strong>[2016-12-24 12:12:21]</strong></p>
 <p>##本文适合读者
 可以使用vue-cli开发项目, 本文的例子都是基于他来写的, 但是如果只是了解概念那就无所谓了, 后续有时间我会写一个不依赖vue-cli的小例子.</p>
 <p>##vuex用来干什么的?
