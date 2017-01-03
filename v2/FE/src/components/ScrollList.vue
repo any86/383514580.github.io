@@ -17,11 +17,12 @@
             <!-- list -->
             <transition-group class="list" name="list" tag="ul">
                 <li v-if="(list_already_length > i)" v-for="(row, i) in list_data" :key="i" class="list-item">
+                    <!-- <span class="category">{{row.category}}</span> -->
                     <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
                         {{row.title}}
                     </router-link>
-                    <p class="desc" v-html="'[' + row.category + ']' + row.desc"></p>
                     <p class="time">{{row.create_time}}</p>
+                    <p class="desc" v-html="row.desc"></p>
                     <a @click="goDetail(row.id)" class="btn-view">查看全部</a>
                 </li>
             </transition-group>
@@ -230,10 +231,16 @@ $font_color: #444;
                     outline: none;
                     border: none;
                 }
+                .category{
+                    display: inline-block;
+                    padding: 0.05rem;
+                    font-size: 0.2rem;
+                    border-bottom: 1px solid #ccc;
+                }
                 .title {
                     font-size: 0.2rem;
                     color: #333;
-                    display: block;
+                    display: inline-block;
                     letter-spacing: 1px;
                     font-weight: 600;
                     cursor: pointer;
@@ -250,8 +257,10 @@ $font_color: #444;
                     display: block;
                     color: $font_color;
                     letter-spacing: 1px;
-                    float: right;
+                    height: 0.3rem;line-height: 0.3rem;
                 }
+                
+                
                 .btn-view {
                     padding: 0.05rem;
                     margin-top: 0.3rem;
