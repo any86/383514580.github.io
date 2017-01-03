@@ -2,7 +2,7 @@
 **[nodejs]**   **[2016-12-24 12:12:21]**
 
 ## 代码
-```Javascript
+```javascript
 function rmdirSync2(dir) {
     files = fs.readdirSync(dir);
     files.forEach(file=>{
