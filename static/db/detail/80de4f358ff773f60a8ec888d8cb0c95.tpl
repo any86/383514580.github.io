@@ -5,6 +5,9 @@
 <h2 id="-rem">尺寸单位rem</h2>
 <p>rem是一种相对单位, 在html中设置了font-size, 那么后续如果使用rem表示尺寸, 这个尺寸就是html中的font-szie大小的倍数. </p>
 <h2 id="-">准备</h2>
+<p>现在html中加这么一行, 简单的说就是禁止用户进行页面的缩放, 同时忽略像素密度比, 设置浏览器的窗口宽度就是屏幕分辨率/像素密度比</p>
+<pre><code class="lang-html```"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">viewport</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width"</span>&gt;</span>
+</code></pre>
 <p>基于rem的特点我们就很好做各个分辨率的适配了, 只要我们在不同分辨率下设置不同的html的font-size属性就实现响应设计.</p>
 <pre><code class="lang-css```"><span class="hljs-selector-tag">html</span> { <span class="hljs-attribute">font-size</span>: <span class="hljs-number">100px</span>;}
 @<span class="hljs-keyword">media</span> screen and (max-width:<span class="hljs-number">769px</span>) {
