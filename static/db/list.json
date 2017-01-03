@@ -196,32 +196,25 @@
         "desc": "<p>click mouseout 等等</p>\n"
     },
     {
-        "id": "13bc496d7a43c5e79f905ac8d665e412",
+        "id": "5a395ad28564563cdab1f8faf876dd97",
         "title": "写个自定义vue的指令",
         "category": "js/css",
         "time": "2016-03-01 12:12:21",
         "desc": "<p>指令就是封装dom操作的函数, 只是调用方式和原生的函数的不同. </p>\n"
     },
     {
-        "id": "83df2ec50fcbc1f20ec76a13178b452e",
-        "title": "函数的作用域 2016-12-24",
+        "id": "071c71a8f96b513e85f3753aedbc24ee",
+        "title": "函数的作用域 ",
         "category": "js/css",
-        "time": "2016-12-24 12:12:21",
+        "time": "2016-05-24 12:12:21",
         "desc": "<pre><code class=\"lang-javascript\"><span class=\"hljs-keyword\">var</span> num = <span class=\"hljs-number\">0</span>;\n<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> <span class=\"hljs-title\">add</span>(<span class=\"hljs-params\"></span>)</span>{\n    <span class=\"hljs-keyword\">var</span> num = <span class=\"hljs-number\">0</span>;\n    <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> <span class=\"hljs-title\">add2</span>(<span class=\"hljs-params\"></span>)</span>{\n        num++;\n    }\n    <span class=\"hljs-built_in\">console</span>.log(num); <span class=\"hljs-comment\">// 1</span>\n}\n<span class=\"hljs-built_in\">console</span>.log(num); <span class=\"hljs-comment\">// 0;</span>\n</code></pre>\n"
     },
     {
-        "id": "d348a8ce6effdc5556edc1cd74c68151",
-        "title": "webpack入门",
+        "id": "1ab6b48e610047b514fba5528eebad0e",
+        "title": "内存回收",
         "category": "js/css",
         "time": "2016-12-24 12:12:21",
-        "desc": "<ol>\n<li>无论是多页面开发还是单页开发;   </li>\n<li>也不管是基于jq还是基于vue/react等开发;   </li>\n<li>所有的前端页面都可以使用webpack开发;</li>\n</ol>\n"
-    },
-    {
-        "id": "d348a8ce6effdc5556edc1cd74c68151",
-        "title": "webpack入门",
-        "category": "js/css",
-        "time": "2016-12-24 12:12:21",
-        "desc": "<ol>\n<li>无论是多页面开发还是单页开发;   </li>\n<li>也不管是基于jq还是基于vue/react等开发;   </li>\n<li>所有的前端页面都可以使用webpack开发;</li>\n</ol>\n"
+        "desc": "<pre><code class=\"lang-javascript```\"><span class=\"hljs-comment\">// IE中, 不建议用</span>\n<span class=\"hljs-built_in\">window</span>.CollectGarbage();\n</code></pre>\n<p>别高兴的太早,实际上大部分浏览器的回收机制都是自动的,你还真没办法这样手动回收, 请继续往下看.</p>\n"
     },
     {
         "id": "877c63e3795a52e457eee62f2082ae87",
@@ -231,11 +224,18 @@
         "desc": "<p>yarn</p>\n<pre><code class=\"lang-Javascript\">yarn config <span class=\"hljs-keyword\">set</span> registry <span class=\"hljs-comment\">https:</span>//<span class=\"hljs-comment\">registry.npm.taobao.org</span>\n</code></pre>\n<p>npm</p>\n<pre><code class=\"lang-Javascript\">npm config <span class=\"hljs-keyword\">set</span> registry <span class=\"hljs-comment\">https:</span>//<span class=\"hljs-comment\">registry.npm.taobao.org</span>\n</code></pre>\n"
     },
     {
-        "id": "d348a8ce6effdc5556edc1cd74c68151",
-        "title": "webpack入门",
+        "id": "1d2c63b8e2e9f27154448a32db084f9b",
+        "title": "小于IE8实现背景透明,文字不透明",
+        "category": "css",
+        "time": "2015-11-24 12:12:21",
+        "desc": "<p><code>css</code>\ndiv{filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr=</p>\n"
+    },
+    {
+        "id": "d6d12defd20f508c7fb138b75df4efd3",
+        "title": "快速明白js原型",
         "category": "js/css",
         "time": "2016-12-24 12:12:21",
-        "desc": "<ol>\n<li>无论是多页面开发还是单页开发;   </li>\n<li>也不管是基于jq还是基于vue/react等开发;   </li>\n<li>所有的前端页面都可以使用webpack开发;</li>\n</ol>\n"
+        "desc": "<p>原型就像是爸爸的工具箱, 想用什么不用自己买, 直接拿来用, 省钱(js中就是省内存), 嘿嘿.</p>\n<pre><code class=\"lang-javascript```\"><span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> <span class=\"hljs-title\">ParentBox</span><span class=\"hljs-params\">()</span></span>{\n    <span class=\"hljs-comment\">// 爸爸函数</span>\n    <span class=\"hljs-keyword\">this</span>.using = <span class=\"hljs-string\">''</span>;\n}\n<span class=\"hljs-comment\">// 锤子</span>\nParentBox.prototype.hammer = <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span></span>{\n    <span class=\"hljs-keyword\">this</span>.using = <span class=\"hljs-string\">'hammer'</span>;\n}\n<span class=\"hljs-comment\">// 笔</span>\nParentBox.prototype.pen = <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span></span>{\n    <span class=\"hljs-keyword\">this</span>.using = <span class=\"hljs-string\">'pen'</span>;\n}\n</code></pre>\n"
     },
     {
         "id": "d348a8ce6effdc5556edc1cd74c68151",

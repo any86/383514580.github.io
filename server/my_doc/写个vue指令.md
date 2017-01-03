@@ -41,4 +41,4 @@ Vue.directive('xxx', {
 ```
 
 ## 官方demo
-[打开demo](http://v1-cn.vuejs.org/examples/select2.html "demo")
+[打开](http://v1-cn.vuejs.org/examples/select2.html "demo")
