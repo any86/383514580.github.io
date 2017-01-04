@@ -4689,6 +4689,10 @@ vary@~1.1.0:
   version "1.1.0"
   resolved "http://r.cnpmjs.org/vary/download/vary-1.1.0.tgz#e1e5affbbd16ae768dd2674394b9ad3022653140"
 
+velocity-animate@^1.4.0:
+  version "1.4.0"
+  resolved "http://r.cnpmjs.org/velocity-animate/download/velocity-animate-1.4.0.tgz#b220a79cecfcdceeaf66c44e09ee9532bf5fcea5"
+
 vendors@^1.0.0:
   version "1.0.1"
   resolved "http://r.cnpmjs.org/vendors/download/vendors-1.0.1.tgz#37ad73c8ee417fb3d580e785312307d274847f22"

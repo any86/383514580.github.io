@@ -10,8 +10,14 @@
                 <loader :opts="{show: is_loading}"></loader>
             </template>
             <!-- list -->
-            <transition-group class="list" name="list" tag="ul"  @before-enter="beforeEnter">
-                <li v-if="(list_already_length > i)" v-for="(row, i) in list_data" :key="i" class="list-item">
+            <!-- <transition-group class="list" name="list" tag="ul"  @before-enter="beforeEnter"> -->
+            <transition-group :css="false" name="staggered-list" class="list" tag="ul"  @before-enter="beforeEnter" @enter="enter">
+                <li 
+                    v-if="(list_already_length > i)" 
+                    v-for="(row, i) in list_data" 
+                    :key="i" 
+                    :data-index="i"
+                    class="list-item">
                     <span class="category">[ {{row.category}} ]</span>
                     <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
                         {{row.title}}
@@ -32,6 +38,8 @@
 </template>
 <script>
 import Loader from './Loader'
+import Velocity from 'velocity-animate'
+
 export default {
     name: 'scrollList',
     data() {
@@ -134,11 +142,20 @@ export default {
 
     methods: {
         beforeEnter(el){
-            console.log(el)
+            el.style.webkitTransform = 'translateY(100px)';
+            el.style.opacity = 0;
         },
+
         enter(el, done){
-            console.log(el, done)
+            setTimeout(function(){
+                Velocity(el,
+                  { translateY: 0, opacity: 1},
+                  { complete: done },
+                  { duration: 1000 }
+                )
+            }, el.dataset.index * 150)
         },
+
         _getScrollTop() {
             return window.pageYOffset;
         },
@@ -165,6 +182,7 @@ export default {
 </script>
 <style scoped lang=scss>
 .list-item {
+    transition: all 1s;
     display: inline-block;
 }
 

@@ -1,7 +1,7 @@
 <template>
     <div class="index-view">
         <div class="foreground">
-            <my-card></my-card>
+            <!-- <my-card></my-card> -->
             <header-bar>
               <img class="avator" src="../assets/avatar.png">
               <div class="search">
