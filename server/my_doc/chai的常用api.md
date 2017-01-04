@@ -1,9 +1,8 @@
-# chai
+# chai的3种断言风格
 **[js/css]**   **[2016-12-24 12:12:21]**
 
 
-###3种断言风格
-
+##should
 >should
 ```javascript
 chai.should();
@@ -14,9 +13,7 @@ tea.should.have.property('flavors')
   .with.length(3);
 ```
 
-
-
-
+##expect
 ```javascript
 var expect = require('chai').expect;
 // 相等或不相等

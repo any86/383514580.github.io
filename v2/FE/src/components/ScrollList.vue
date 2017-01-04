@@ -2,11 +2,6 @@
     <div class="com-scroll-list">
         <div class="body" :class="{bounce: !is_pull_down}" :style="{transform: 'translate3d(0, ' + translate_y + 'px,' +'0)'}">
             <template>
-                <!-- loader -->
-                <!-- <loader style="margin:-100px 0 0 0;" v-if="$store.state.list_loader"></loader> -->
-                <!-- info -->
-                <!-- <p v-else class="info">没有更多文章喽!</p> -->
-                <!-- is_loading -->
                 <div class="arrow" v-show="!is_loading">
                     <i class="icon" :class="{rotate: is_pull_down}"></i>
                     <p class="text">松开加载</p>
@@ -15,9 +10,9 @@
                 <loader :opts="{show: is_loading}"></loader>
             </template>
             <!-- list -->
-            <transition-group class="list" name="list" tag="ul">
+            <transition-group class="list" name="list" tag="ul"  @before-enter="beforeEnter">
                 <li v-if="(list_already_length > i)" v-for="(row, i) in list_data" :key="i" class="list-item">
-                    <!-- <span class="category">{{row.category}}</span> -->
+                    <span class="category">[ {{row.category}} ]</span>
                     <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
                         {{row.title}}
                     </router-link>
@@ -138,6 +133,12 @@ export default {
     },
 
     methods: {
+        beforeEnter(el){
+            console.log(el)
+        },
+        enter(el, done){
+            console.log(el, done)
+        },
         _getScrollTop() {
             return window.pageYOffset;
         },
@@ -233,9 +234,9 @@ $font_color: #444;
                 }
                 .category{
                     display: inline-block;
-                    padding: 0.05rem;
+                    padding: 0.05rem 0;
+                    letter-spacing: 1px;
                     font-size: 0.2rem;
-                    border-bottom: 1px solid #ccc;
                 }
                 .title {
                     font-size: 0.2rem;

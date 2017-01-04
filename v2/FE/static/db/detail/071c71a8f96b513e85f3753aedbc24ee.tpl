@@ -1,5 +1,5 @@
-<h1 id="-2016-12-24">函数的作用域 2016-12-24</h1>
-<p><strong>[js/css]</strong>   <strong>[2016-12-24 12:12:21]</strong></p>
+<h1 id="-">函数的作用域</h1>
+<p><strong>[js/css]</strong>   <strong>[2016-05-24 12:12:21]</strong></p>
 <h2 id="-">代码</h2>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> num = <span class="hljs-number">0</span>;
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add</span>(<span class="hljs-params"></span>)</span>{

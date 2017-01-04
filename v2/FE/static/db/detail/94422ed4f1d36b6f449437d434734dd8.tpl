@@ -1,6 +1,6 @@
-<h1 id="chai">chai</h1>
+<h1 id="chai-3-">chai的3种断言风格</h1>
 <p><strong>[js/css]</strong>   <strong>[2016-12-24 12:12:21]</strong></p>
-<p>###3种断言风格</p>
+<p>##should</p>
 <blockquote>
 <p>should</p>
 <pre><code class="lang-javascript"><span class="hljs-selector-tag">chai</span><span class="hljs-selector-class">.should</span>();
@@ -11,6 +11,7 @@
   <span class="hljs-selector-class">.with</span><span class="hljs-selector-class">.length</span>(<span class="hljs-number">3</span>);
 </code></pre>
 </blockquote>
+<p>##expect</p>
 <pre><code class="lang-javascript">var expect = require(<span class="hljs-string">'chai'</span>).expect;
 // 相等或不相等
 expect(<span class="hljs-number">4</span> + <span class="hljs-number">5</span>).<span class="hljs-keyword">to</span>.be.equal(<span class="hljs-number">9</span>);
