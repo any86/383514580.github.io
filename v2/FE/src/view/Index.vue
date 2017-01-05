@@ -1,7 +1,7 @@
 <template>
     <div class="index-view">
         <div class="foreground">
-            <!-- <my-card></my-card> -->
+            <my-card></my-card>
             <header-bar>
               <img class="avator" src="../assets/avatar.png">
               <div class="search">
@@ -34,14 +34,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang=scss>
 .index-view{
-  height: 100%;position: relative;
   >.foreground{
       height: 100%;position: relative;
       width: 100%;
       overflow: hidden;
       position: relative;
       z-index: 1986;}
-    
       $h: .3rem;
       $color: rgba(204,204,204,.38);
       .avator{float: left;height: $h;width: $h;display: block; float: left;margin-left: $h;}

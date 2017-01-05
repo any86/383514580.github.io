@@ -1,41 +1,21 @@
 <template>
-    <div class="com-scroll-list" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
-        <div class="body" :class="{bounce: !is_pull_down}" :style="{transform: 'translate3d(0, ' + translate_y + 'px,' +'0)'}">
-            <template>
-                <div class="arrow" v-show="!is_loading">
-                    <i class="icon" :class="{rotate: is_pull_down}"></i>
-                    <p class="text">松开加载</p>
-                </div>
-                <loader :opts="{show: is_loading}"></loader>
-            </template>
-            <!-- list -->
-            <!-- <transition-group class="list" name="list" tag="ul"  @before-enter="beforeEnter"> -->
-            <transition-group :css="false" name="staggered-list" class="list" tag="ul" @before-enter="beforeEnter" @enter="enter">
-                <li v-if="(list_already_length > i)" v-for="(row, i) in list_data" :key="i" :data-index="i" class="list-item">
-                    <span class="category">[ {{row.category}} ]</span>
-                    <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
-                        {{row.title}}
-                    </router-link>
-                    <p class="time">{{row.create_time}}</p>
-                    <p class="desc" v-html="row.desc"></p>
-                    <a @click="goDetail(row.id)" class="btn-view">查看全部</a>
-                </li>
-            </transition-group>
-            <template>
-                <!-- loader -->
-                <loader :opts="{show: $store.state.list_loader}"></loader>
-                <!-- info -->
-                <p v-show="!$store.state.list_loader" class="info">没有更多文章喽!</p>
-            </template>
-        </div>
-    </div>
+    <transition-group :css="false" name="staggered-list" class="list" tag="ul" @before-enter="beforeEnter" @enter="enter">
+        <li v-if="(list_already_length > i)" v-for="(row, i) in list_data" :key="i" :data-index="i" class="list-item">
+            <span class="category">[ {{row.category}} ]</span>
+            <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
+                {{row.title}}
+            </router-link>
+            <p class="time">{{row.create_time}}</p>
+            <p class="desc" v-html="row.desc"></p>
+            <a @click="goDetail(row.id)" class="btn-view">查看全部</a>
+        </li>
+    </transition-group>
 </template>
 <script>
-import Loader from './Loader'
 import Velocity from 'velocity-animate'
 
 export default {
-    name: 'scrollList',
+    name: 'List',
     data() {
         return {
             list_data: [],
@@ -47,9 +27,10 @@ export default {
         };
     },
 
+    mounted() {
+    },
+
     created() {
-        // 处理数据, dom还没有挂载到el指定的标签内
-        // mounted: dom被挂载到指定el上
         // 初始化列表数据
         this.$store.dispatch('getList').then(() => {
             this.list_data = this.$store.state.list;
@@ -61,10 +42,10 @@ export default {
         var _$store = this.$store;
         var _this = this;
 
-        function isListPosTop() {
+        function isListPosTop(){
             // 计算list组件距离浏览器顶部距离
             // console.log(this.$el.getBoundingClientRect().top)
-            if (0 >= _this.$el.getBoundingClientRect().top) {
+            if(0 >= _this.$el.getBoundingClientRect().top){
                 _$store.commit('isListPosTop', true);
             } else {
                 _$store.commit('isListPosTop', false);
@@ -75,16 +56,14 @@ export default {
         window.addEventListener('scroll', isListPosTop, false);
 
 
-        function getList() {
+        function getList(){
             // window.scrollY: 滚动条高度
             // window.screen.availHeight: 可视区高度
-            // *window.innerHeight 浏览器窗口高度
-            // *document.body.scrollTop 滚动条滚动的距离
             // document.body.clientHeight: 文档高度
             if (window.screen.availHeight + window.scrollY + 50 >= document.body.clientHeight) {
                 clearTimeout(timer);
                 timer = setTimeout(() => {
-                    if (_$store.state.page < _$store.state.page_total) {
+                    if (_$store.state.page < _$store.state.page_total){
                         _$store.state.page++;
                         _$store.commit('setPage', _$store.state.page);
                     }
@@ -92,7 +71,7 @@ export default {
             }
 
             // 如果无数据, 那么解除scroll绑定
-            if (_$store.state.page >= _$store.state.page_total) {
+            if (_$store.state.page >= _$store.state.page_total){
                 window.removeEventListener('scroll', getList);
                 _$store.commit('setListLoader', false);
             }
@@ -100,60 +79,20 @@ export default {
     },
 
     methods: {
-        touchStart(e) {
-            this.is_pull_down = true;
-            this.start_y = e.touches[0].clientY;
-            this.start_scroll_top = this._getScrollTop();
-        },
-
-        touchMove(e) {
-            // 移动距离 = 当前touch点的Y - touch起点Y - 初touch时候的滚动条高度
-            var move_distance = e.touches[0].clientY - this.start_y - this.start_scroll_top;
-            if (0 < move_distance && 0 == this._getScrollTop()) {
-                this.translate_y = move_distance / 2;
-                e.preventDefault();
-                e.stopPropagation();
-            }
-        },
-
-        touchEnd(e) {
-            if (0 < this.translate_y) {
-                this.is_pull_down = false;
-                this.translate_y = 10;
-                //触发数据拉取等操作
-                this.is_loading = true;
-                setTimeout(() => {
-                    this.is_loading = false;
-                    this.translate_y = 0;
-
-                    this.list_data.splice(0, 0, {
-                        "title": "本站代码",
-                        "time": "2013-01-01 12:32:21",
-                        "category": "javascript",
-                        "id": "0",
-                        "desc": "隐藏"
-                    })
-
-                }, 1000);
-            }
-        },
-
-        beforeEnter(el) {
+        beforeEnter(el){
             el.style.webkitTransform = 'translateY(100px)';
             el.style.opacity = 0;
         },
 
-        enter(el, done) {
+        enter(el, done){
             var index = el.dataset.index % this.$store.state.page_each;
-            setTimeout(function() {
-                Velocity(el, {
-                    translateY: 0,
-                    opacity: 1
-                }, {
-                    complete: done
-                }, {
-                    duration: 1000
-                })
+            console.log(index)
+            setTimeout(function(){
+                Velocity(el,
+                  { translateY: 0, opacity: 1},
+                  { complete: done },
+                  { duration: 1000 }
+                )
             }, index * 300)
         },
 
@@ -161,16 +100,11 @@ export default {
             return window.pageYOffset;
         },
 
-        goDetail(id) {
+        goDetail(id){
             // 记录当前滚动条位置
             this.$store.commit('setIndexPosY', window.scrollY);
             // goto
-            this.$router.push({
-                name: 'detail',
-                params: {
-                    id: id
-                }
-            })
+            this.$router.push({ name: 'detail',  params: { id: id }})
         }
     },
 
@@ -210,6 +144,7 @@ export default {
 .rotate {
     transform: rotate(180deg);
 }
+
 
 $font_color: #444;
 .com-scroll-list {
@@ -255,7 +190,7 @@ $font_color: #444;
                     outline: none;
                     border: none;
                 }
-                .category {
+                .category{
                     display: inline-block;
                     padding: 0.05rem 0;
                     letter-spacing: 1px;
@@ -281,9 +216,10 @@ $font_color: #444;
                     display: block;
                     color: $font_color;
                     letter-spacing: 1px;
-                    height: 0.3rem;
-                    line-height: 0.3rem;
+                    height: 0.3rem;line-height: 0.3rem;
                 }
+                
+                
                 .btn-view {
                     padding: 0.05rem;
                     margin-top: 0.3rem;

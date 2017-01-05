@@ -1,17 +1,13 @@
 <template>
     <ul class="com-float-bar">
-        <li @click="goTop">顶部</li>
-        <!-- <li>{{$store.state.list.length}}</li> -->
+        <li @click="scrollTop">顶部</li>
     </ul>
 </template>
 <script>
 export default {
     name: 'FloatBar',
-    computed: {
-
-    },
     methods: {
-        goTop() {
+        scrollTop() {
             // 内部函数
             function scrollTop() {
                 var scroll_top = document.documentElement.style.scrollTop || document.body.scrollTop;
