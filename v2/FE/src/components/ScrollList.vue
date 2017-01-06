@@ -23,9 +23,9 @@
             </transition-group>
             <template>
                 <!-- loader -->
-                <loader :opts="{show: $store.state.list_loader}"></loader>
+                <loader :opts="{show: is_loading}"></loader>
                 <!-- info -->
-                <p v-show="!$store.state.list_loader" class="info">没有更多文章喽!</p>
+                <p v-show="page_ready == page_total" class="info">没有更多文章喽!</p>
             </template>
         </div>
     </div>
@@ -38,10 +38,14 @@ export default {
     name: 'scrollList',
     data() {
         return {
+            timer: null,
             list_data: [],
-            translate_y: 0,
-            start_y: 0,
-            start_scroll_top: 0,
+            page_each: 3, // 每页数
+            page_total: 0, // 总页数
+            page_ready: 1, // 已经读取的页数
+            translate_y: 0, // 拖拽距离
+            start_y: 0, // 起始距离
+            start_scroll_top: 0, // 起始滚动条高度
             is_pull_down: false,
             is_loading: false
         };
@@ -53,53 +57,47 @@ export default {
         // 初始化列表数据
         this.$store.dispatch('getList').then(() => {
             this.list_data = this.$store.state.list;
-            this.$store.commit('setPageTotal', Math.ceil(this.list_data.length / this.$store.state.page_each));
+            this.page_total = Math.ceil(this.list_data / this.page_each);
         });
 
-        // 滚动加载, 渲染
-        var timer = null;
-        var _$store = this.$store;
-        var _this = this;
-
-        function isListPosTop() {
-            // 计算list组件距离浏览器顶部距离
-            // console.log(this.$el.getBoundingClientRect().top)
-            if (0 >= _this.$el.getBoundingClientRect().top) {
-                _$store.commit('isListPosTop', true);
-            } else {
-                _$store.commit('isListPosTop', false);
-            }
-        }
-
-        window.addEventListener('scroll', getList, false);
-        window.addEventListener('scroll', isListPosTop, false);
-
-
-        function getList() {
-            // window.scrollY: 滚动条高度
-            // window.screen.availHeight: 可视区高度
-            // *window.innerHeight 浏览器窗口高度
-            // *document.body.scrollTop 滚动条滚动的距离
-            // document.body.clientHeight: 文档高度
-            if (window.screen.availHeight + window.scrollY + 50 >= document.body.clientHeight) {
-                clearTimeout(timer);
-                timer = setTimeout(() => {
-                    if (_$store.state.page < _$store.state.page_total) {
-                        _$store.state.page++;
-                        _$store.commit('setPage', _$store.state.page);
-                    }
-                }, 200);
-            }
-
-            // 如果无数据, 那么解除scroll绑定
-            if (_$store.state.page >= _$store.state.page_total) {
-                window.removeEventListener('scroll', getList);
-                _$store.commit('setListLoader', false);
-            }
-        }
+        // 滚动事件
+        window.addEventListener('scroll', this.scrollList, false);
     },
 
     methods: {
+        isListPosTop() {
+            // 计算list组件距离浏览器顶部距离
+            if (0 >= this.$el.getBoundingClientRect().top) {
+                this.$store.commit('isListPosTop', true);
+            } else {
+                this.$store.commit('isListPosTop', false);
+            }
+        },
+
+        scrollList() {
+            // 到达末页
+            if (this.page_ready >= this.page_total) {
+                window.removeEventListener('scroll', this.scrollList);
+            }
+
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+                // 判断是否列表的头部过了y=0
+                this.isListPosTop();
+                // window.scrollY: 滚动条高度
+                // window.screen.availHeight: 可视区高度
+                // *window.innerHeight 浏览器窗口高度
+                // *document.body.scrollTop 滚动条滚动的距离
+                // document.body.clientHeight: 文档高度
+                if (window.screen.availHeight + window.scrollY + 50 >= document.body.clientHeight) {
+                    if (this.page_ready < this.page_total) {
+                        this.page_ready++;
+                    }
+                }
+            }, 200);
+
+        },
+
         touchStart(e) {
             this.is_pull_down = true;
             this.start_y = e.touches[0].clientY;
