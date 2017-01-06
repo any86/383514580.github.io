@@ -35,10 +35,9 @@ export default {
 <style lang=scss>
 .index-view{
   >.foreground{
-      height: 100%;position: relative;
+      position: relative;
       width: 100%;
       overflow: hidden;
-      position: relative;
       z-index: 1986;}
       $h: .3rem;
       $color: rgba(204,204,204,.38);
@@ -50,7 +49,4 @@ export default {
         }
       }
 }
-
-  
-
 </style>
