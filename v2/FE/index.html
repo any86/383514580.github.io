@@ -16,7 +16,7 @@
     <style type="text/css">
 
 	* { margin: 0; padding: 0; font-family: '微软雅黑', 'microsoft yahei', '新宋体', '宋体', Tahoma, Verdana, Arial, Helvetica, sans-serif;    -webkit-tap-highlight-color: rgba(0,0,0,0);}
-    html { font-size: 100px;width: 100%;}
+    html { font-size: 100px;width: 100%;height: 100%;overflow: hidden; }
 	@media screen and (max-width:769px) {
 		html { font-size: 100px; }
 	}
@@ -29,7 +29,7 @@
 	@media screen and (max-width:321px) {
 		html { font-size: 77px; }
 	}
-	body {width: 100%; background: #fff;  -webkit-text-size-adjust: none;}
+	body {width: 100%; height: 100%;overflow: hidden; background: #fff;  -webkit-text-size-adjust: none;}
 	li { list-style: none; }
 	input { border: 0 none; outline: none; }
 	a { text-decoration: none; }
@@ -44,12 +44,12 @@
 	::-webkit-selection{background:#69c; color:#fff;} 
 	::-ms-selection{background:#69c; color:#fff;} 
 
-	::-webkit-scrollbar{background:#ccc;width: 4px;height: 2px;}
+/*	::-webkit-scrollbar{background:#ccc;width: 4px;height: 2px;}
 	::-webkit-scrollbar-thumb{background:#444; }
 	::-moz-scrollbar{background:#ccc;width: 4px;height: 2px;}
 	::-moz-scrollbar-thumb{background:#444; }
 	::-ms-scrollbar{background:#ccc;width: 4px;height: 2px;}
-	::-ms-scrollbar-thumb{background:#444; }
+	::-ms-scrollbar-thumb{background:#444; }*/
 
 	[v-cloak] {
 	  display: none;

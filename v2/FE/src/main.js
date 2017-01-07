@@ -3,6 +3,9 @@ import App from './App'
 import store from './vuex/store'
 import router from './router'
 
+// import _ from 'underscore'
+// window._ = _;
+
 import VueCordova from 'vue-cordova'
 Vue.use(VueCordova);
 
