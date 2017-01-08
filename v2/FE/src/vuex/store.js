@@ -5,16 +5,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         index_pos_y: 0,
-        top_bar: {
-            show: false
-        },
-        page: 1,
-        count: 0,
         list: [],
-        list_loader: true,
-        page_total: 1,
-        page: 1,
-        page_each: 3,
         detail: {},
         detail_loader: true
     },
@@ -24,24 +15,8 @@ export default new Vuex.Store({
             state.index_pos_y = y;
         },
 
-        isListPosTop(state, bool) {
-            state.top_bar.show = bool;
-        },
-
         setList(state, json) {
             state.list = json;
-        },
-
-        setListLoader(state, bool) {
-            state.list_loader = bool;
-        },
-
-        setPageTotal(state, count) {
-            state.page_total = count;
-        },
-
-        setPage(state, number) {
-            state.page = number;
         },
 
         setDetail(state, data) {

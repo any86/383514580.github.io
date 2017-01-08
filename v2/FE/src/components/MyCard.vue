@@ -94,7 +94,7 @@ export default {
 
 .com-card{background-color: #eee; padding: 0.15rem;box-shadow: 1px 2px 50px rgba(#444, 0.1);border-radius: 0 0 0 0;position: relative;overflow: hidden;
     >.bg-stars{
-        position: absolute;z-index: 1;width: 100%;
+        position: absolute;z-index: 1;width: 100%;height: 100%;
     }
     >.info{position: relative;z-index: 1986;
         .name{ @include textCenter(0.24rem);margin-top: 0.15rem;letter-spacing: 2px;}

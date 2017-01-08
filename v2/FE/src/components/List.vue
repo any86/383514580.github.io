@@ -1,6 +1,7 @@
 <template>
+    <!-- 列表 -->
     <transition-group :css="false" name="staggered-list" class="list" tag="ul" @before-enter="beforeEnter" @enter="enter">
-        <li v-if="(list_already_length > i)" v-for="(row, i) in list_data" :key="i" :data-index="i" class="list-item">
+        <li v-if="(page_each * page_active > i)" v-for="(row, i) in list_data" :key="i" :data-index="i" class="list-item">
             <span class="category">[ {{row.category}} ]</span>
             <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
                 {{row.title}}
@@ -11,6 +12,7 @@
         </li>
     </transition-group>
 </template>
+
 <script>
 import Velocity from 'velocity-animate'
 
@@ -18,100 +20,44 @@ export default {
     name: 'List',
     data() {
         return {
-            list_data: [],
-            translate_y: 0,
-            start_y: 0,
-            start_scroll_top: 0,
-            is_pull_down: false,
-            is_loading: false
+            list_data: [], // 列表数据
+            page_active: 1,
+            page_length: 0, // 总页数
+            page_each: 3 // 每页数量
         };
     },
 
     mounted() {
-    },
-
-    created() {
-        // 初始化列表数据
+        // 初始化渲染, xhr
         this.$store.dispatch('getList').then(() => {
+            // 获取所有列表数据
             this.list_data = this.$store.state.list;
-            this.$store.commit('setPageTotal', Math.ceil(this.list_data.length / this.$store.state.page_each));
+            // 计算总页数
+            this.page_length = Math.ceil(this.list_data.length / this.page_each);
         });
 
-        // 滚动加载, 渲染
-        var timer = null;
-        var _$store = this.$store;
-        var _this = this;
-
-        function isListPosTop(){
-            // 计算list组件距离浏览器顶部距离
-            // console.log(this.$el.getBoundingClientRect().top)
-            if(0 >= _this.$el.getBoundingClientRect().top){
-                _$store.commit('isListPosTop', true);
-            } else {
-                _$store.commit('isListPosTop', false);
-            }
-        }
-
-        window.addEventListener('scroll', getList, false);
-        window.addEventListener('scroll', isListPosTop, false);
-
-
-        function getList(){
-            // window.scrollY: 滚动条高度
-            // window.screen.availHeight: 可视区高度
-            // document.body.clientHeight: 文档高度
-            if (window.screen.availHeight + window.scrollY + 50 >= document.body.clientHeight) {
-                clearTimeout(timer);
-                timer = setTimeout(() => {
-                    if (_$store.state.page < _$store.state.page_total){
-                        _$store.state.page++;
-                        _$store.commit('setPage', _$store.state.page);
-                    }
-                }, 200);
-            }
-
-            // 如果无数据, 那么解除scroll绑定
-            if (_$store.state.page >= _$store.state.page_total){
-                window.removeEventListener('scroll', getList);
-                _$store.commit('setListLoader', false);
-            }
-        }
+        // 总数
+        this.page_length = this.list_data.length;
     },
 
     methods: {
-        beforeEnter(el){
+        beforeEnter(el) {
             el.style.webkitTransform = 'translateY(100px)';
             el.style.opacity = 0;
         },
 
-        enter(el, done){
+        enter(el, done) {
             var index = el.dataset.index % this.$store.state.page_each;
-            console.log(index)
-            setTimeout(function(){
-                Velocity(el,
-                  { translateY: 0, opacity: 1},
-                  { complete: done },
-                  { duration: 1000 }
-                )
+            setTimeout(function() {
+                Velocity(el, {
+                    translateY: 0,
+                    opacity: 1
+                }, {
+                    complete: done
+                }, {
+                    duration: 1000
+                })
             }, index * 300)
-        },
-
-        _getScrollTop() {
-            return window.pageYOffset;
-        },
-
-        goDetail(id){
-            // 记录当前滚动条位置
-            this.$store.commit('setIndexPosY', window.scrollY);
-            // goto
-            this.$router.push({ name: 'detail',  params: { id: id }})
-        }
-    },
-
-    computed: {
-        list_already_length() {
-            // 已经显示的列表长度
-            return this.$store.state.page * this.$store.state.page_each;
         }
     },
 

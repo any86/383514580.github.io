@@ -1,6 +1,6 @@
 <template>
     <transition name="fade">
-        <div class="com-header-bar" v-show="$store.state.top_bar.show">
+        <div class="com-header-bar" v-show="false">
             <div class="center">
                 <img class="avator" src="../assets/avatar.png">
                 <div class="search">

@@ -1,40 +1,32 @@
 <template>
     <div class="com-scroll-view">
-        <!-- 插槽 -->
-        <slot></slot>
-        <!-- /插槽 -->
-        <div class="drag_list" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
-            <div class="body" :class="{bounce: !is_pull_down}" :style="{transform: 'translate3d(0, ' + translate_y + 'px,' +'0)'}">
-                <template>
-                    <div class="arrow" v-show="!is_loading">
-                        <i class="icon" :class="{rotate: is_pull_down}"></i>
-                        <p class="text">松开加载</p>
-                    </div>
-                    <loader :opts="{show: is_loading}"></loader>
-                </template>
-                <!-- list -->
-                <!-- <transition-group class="list" name="list" tag="ul"  @before-enter="beforeEnter"> -->
-                <transition-group :css="false" name="staggered-list" class="list" tag="ul" @before-enter="beforeEnter" @enter="enter">
-                    <li v-if="(page_each * page_active > i)" v-for="(row, i) in list_data" :key="i" :data-index="i" class="list-item">
-                        <span class="category">[ {{row.category}} ]</span>
-                        <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
-                            {{row.title}}
-                        </router-link>
-                        <p class="time">{{row.create_time}}</p>
-                        <p class="desc" v-html="row.desc"></p>
-                        <a @click="goDetail(row.id)" class="btn-view">查看全部</a>
-                    </li>
-                </transition-group>
-                <template>
-                    <!-- loader -->
-                    <loader class="down_loader" :opts="{show: !is_end}"></loader>
-                    <!-- info -->
-                    <p v-show="is_end" class="info">没有更多文章喽!</p>
-                </template>
-            </div>
+        <!-- 内容容器, 自适应高度 -->
+        <div class="body">
+            <!-- 插槽 -->
+            <slot></slot>
+            
+            <!-- 列表 -->
+            <transition-group :css="false" name="staggered-list" class="list" tag="ul" @before-enter="beforeEnter" @enter="enter">
+                <li v-if="(page_each * page_active > i)" v-for="(row, i) in list_data" :key="i" :data-index="i" class="list-item">
+                    <span class="category">[ {{row.category}} ]</span>
+                    <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
+                        {{row.title}}
+                    </router-link>
+                    <p class="time">{{row.create_time}}</p>
+                    <p class="desc" v-html="row.desc"></p>
+                    <a @click="goDetail(row.id)" class="btn-view">查看全部</a>
+                </li>
+            </transition-group>
+
+            <!-- loader -->
+            <loader class="down_loader" :opts="{show: !is_end}"></loader>
+
+            <!-- info -->
+            <p v-show="is_end" class="info">没有更多文章喽!</p>
         </div>
     </div>
 </template>
+
 <script>
 import Loader from './Loader'
 import Velocity from 'velocity-animate'
@@ -51,16 +43,12 @@ export default {
             page_active: 1,
             page_length: 0, // 总页数
             page_each: 3, // 每页数量
-            translate_y: 0, // 列表移动距离
-            start_y: 0, // touch起点
-            start_scroll_top: 0, // touch_start时, 滚动条高度
-            is_pull_down: false,
-            is_loading: false,
-            is_end: false,
+            is_end: false
         };
     },
 
     mounted() {
+
         // 初始化渲染, xhr
         this.$store.dispatch('getList').then(() => {
             // 获取所有列表数据
@@ -80,65 +68,26 @@ export default {
     },
 
     methods: {
-        scrollList(){
+        scrollList() {
             // 加载完全部数据, 解除绑定
-            if(this.page_active >= this.page_length) {
+            if (this.page_active >= this.page_length) {
                 this.$el.removeEventListener('scroll', this.scrollList, false);
-                this.is_loading = false;
                 this.is_end = true;
             }
 
             clearTimeout(this.timer);
-            this.timer = setTimeout(()=>{
+            this.timer = setTimeout(() => {
                 // 滚动条高度
                 var scroll_top = this.$el.scrollTop;
                 // 外壳高度
                 var warp_height = this.$el.offsetHeight;
-                // 拖拽列表高度
-                var list_height = this.$el.querySelector('.drag_list').offsetHeight;
+                // 内容高度
+                var inner_height = this.$el.childNodes[0].offsetHeight;
 
-                if(scroll_top + warp_height + 50 > list_height) {
+                if (scroll_top + warp_height + 50 > inner_height) {
                     this.page_active++;
                 }
             }, 200);
-        },
-
-        touchStart(e) {
-            this.is_pull_down = true;
-            this.start_y = e.touches[0].clientY;
-            this.start_scroll_top = this._getScrollTop();
-        },
-
-        touchMove(e) {
-            // 移动距离 = 当前touch点的Y - touch起点Y - 初touch时候的滚动条高度
-            var move_distance = e.touches[0].clientY - this.start_y - this.start_scroll_top;
-            if (0 < move_distance && 0 == this._getScrollTop()) {
-                this.translate_y = move_distance / 2;
-                e.preventDefault();
-                e.stopPropagation();
-            }
-        },
-
-        touchEnd(e) {
-            if (0 < this.translate_y) {
-                this.is_pull_down = false;
-                this.translate_y = 10;
-                //触发数据拉取等操作
-                this.is_loading = true;
-                setTimeout(() => {
-                    this.is_loading = false;
-                    this.translate_y = 0;
-
-                    this.list_data.splice(0, 0, {
-                        "title": "本站代码",
-                        "time": "2013-01-01 12:32:21",
-                        "category": "javascript",
-                        "id": "0",
-                        "desc": "隐藏"
-                    })
-
-                }, 1000);
-            }
         },
 
         beforeEnter(el) {
@@ -158,10 +107,6 @@ export default {
                     duration: 1000
                 })
             }, index * 300)
-        },
-
-        _getScrollTop() {
-            return window.pageYOffset;
         },
 
         goDetail(id) {
@@ -212,32 +157,10 @@ $font_color: #444;
     height: 100%;
     width: 100%;
     overflow: scroll;
-}
 
-.drag_list {
-    overflow: hidden;
     >.body {
-        >.arrow {
-            height: 50px;
-            margin-top: -50px;
-            overflow: hidden;
-            >.icon {
-                transition: all .3s .3s;
-                border-left: 0.1rem solid transparent;
-                border-right: 0.1rem solid transparent;
-                border-top: 0.15rem solid #ccc;
-                width: 0;
-                height: 0;
-                display: block;
-                margin: auto;
-            }
-            >.text {
-                font-size: 0.14rem;
-                color: #ccc;
-                text-align: center;
-                margin-top: 0.1rem;
-            }
-        }
+        overflow: hidden;
+
         >.list {
             will-change: all;
             max-width: 720px;
@@ -301,7 +224,10 @@ $font_color: #444;
                 }
             }
         }
-        >.down_loader{margin:0.15rem auto;}
+
+        >.down_loader {
+            margin: 0.15rem auto;
+        }
 
         >.info {
             text-align: center;

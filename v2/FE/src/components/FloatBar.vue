@@ -7,39 +7,15 @@
 export default {
     name: 'FloatBar',
 
-    data(){
-        return {scroll_top: 0}
-    },
-
     methods: {
         scrollTop() {
             // 递归函数
-            this.scroll_top = this.$parent.$el.scrollTop;
-            if (0 < this.scroll_top) {
-
-                // this.scroll_top -= document.body.clientHeight / 1000 * 17;
-                console.log(this.$parent.$el.offsetHeight);
-                // window.scrollTo(0, scroll_top);
-                // window.requestAnimationFrame(scrollTop);
+            if (0 < this.$parent.$el.scrollTop) {
+                this.$parent.$el.scrollTop-= this.$parent.$el.scrollTop / 10;
+                window.requestAnimationFrame(this.scrollTop);
             }
-
-            // this.scrollTop();
         }
     }
-    // methods: {
-    //     scrollTop() {
-    //         // 内部函数
-    //         function scrollTop() {
-    //             var scroll_top = document.documentElement.style.scrollTop || document.body.scrollTop;
-    //             if (0 < scroll_top) {
-    //                 scroll_top -= document.body.clientHeight / 1000 * 17;
-    //                 window.scrollTo(0, scroll_top);
-    //                 window.requestAnimationFrame(scrollTop);
-    //             }
-    //         }
-    //         scrollTop();
-    //     }
-    // }
 }
 </script>
 <style lang=scss scoped>
