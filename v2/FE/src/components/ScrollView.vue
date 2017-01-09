@@ -73,6 +73,9 @@ export default {
             if (this.page_active >= this.page_length) {
                 this.$el.removeEventListener('scroll', this.scrollList, false);
                 this.is_end = true;
+
+                // commit 滚动条高度
+                this.$store.commit('setIndexPosY', this.$el.scrollTop);
             }
 
             clearTimeout(this.timer);
