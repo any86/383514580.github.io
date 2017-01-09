@@ -14,7 +14,10 @@
 <script>
 export default {
   name: 'MyCard',
+
   mounted(){
+    this.$store.commit('set_card_height', this.$el.innerHeight);
+
     particlesJS('bg-stars', {
         particles: {
             "number": {

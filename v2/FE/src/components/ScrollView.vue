@@ -2,21 +2,17 @@
     <div class="com-scroll-view">
         <!-- 内容容器, 自适应高度 -->
         <div class="body">
-            <!-- 插槽 -->
-            <slot></slot>
+            <!-- 名片 -->
+            <my-card></my-card>
+            
+            <!-- 浮动按钮 -->
+            <float-bar></float-bar>
+            
+            <!-- 头部条 -->
+            <header-bar :pos="scroll_top"></header-bar>
             
             <!-- 列表 -->
-            <transition-group :css="false" name="staggered-list" class="list" tag="ul" @before-enter="beforeEnter" @enter="enter">
-                <li v-if="(page_each * page_active > i)" v-for="(row, i) in list_data" :key="i" :data-index="i" class="list-item">
-                    <span class="category">[ {{row.category}} ]</span>
-                    <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
-                        {{row.title}}
-                    </router-link>
-                    <p class="time">{{row.create_time}}</p>
-                    <p class="desc" v-html="row.desc"></p>
-                    <a @click="goDetail(row.id)" class="btn-view">查看全部</a>
-                </li>
-            </transition-group>
+            <list :page="view_page" @end="endScroll" :pos="scroll_top" @peak="showHeadBar"></list>    
 
             <!-- loader -->
             <loader class="down_loader" :opts="{show: !is_end}"></loader>
@@ -28,38 +24,25 @@
 </template>
 
 <script>
+import HeaderBar from './HeaderBar'
+import MyCard from './MyCard'
+import FloatBar from './FloatBar'
+import List from './List'
 import Loader from './Loader'
-import Velocity from 'velocity-animate'
 
 export default {
     name: 'ScrollView',
 
-    props: ['scroll_top'],
-
     data() {
         return {
+            scroll_top: 0,
+            view_page: 1,
             timer: null,
-            list_data: [], // 列表数据
-            page_active: 1,
-            page_length: 0, // 总页数
-            page_each: 3, // 每页数量
             is_end: false
         };
     },
 
     mounted() {
-
-        // 初始化渲染, xhr
-        this.$store.dispatch('getList').then(() => {
-            // 获取所有列表数据
-            this.list_data = this.$store.state.list;
-            // 计算总页数
-            this.page_length = Math.ceil(this.list_data.length / this.page_each);
-        });
-
-        // 总数
-        this.page_length = this.list_data.length;
-
         // 绑定滚动
         this.$el.addEventListener('scroll', this.scrollList, false);
 
@@ -68,14 +51,18 @@ export default {
     },
 
     methods: {
-        scrollList() {
+        endScroll(){
             // 加载完全部数据, 解除绑定
-            if (this.page_active >= this.page_length) {
-                this.$el.removeEventListener('scroll', this.scrollList, false);
-                this.is_end = true;
-            }
+            this.$el.removeEventListener('scroll', this.scrollList, false);
+            this.is_end = true;
+        },
+
+        scrollList() {
+            // 同步scroll_top
+            this.scroll_top = this.$el.scrollTop;
 
             clearTimeout(this.timer);
+
             this.timer = setTimeout(() => {
                 // 滚动条高度
                 var scroll_top = this.$el.scrollTop;
@@ -85,49 +72,26 @@ export default {
                 var inner_height = this.$el.childNodes[0].offsetHeight;
 
                 if (scroll_top + warp_height + 50 > inner_height) {
-                    this.page_active++;
+                    this.view_page++;
                 }
             }, 200);
-        },
-
-        beforeEnter(el) {
-            el.style.webkitTransform = 'translateY(100px)';
-            el.style.opacity = 0;
-        },
-
-        enter(el, done) {
-            var index = el.dataset.index % this.$store.state.page_each;
-            setTimeout(function() {
-                Velocity(el, {
-                    translateY: 0,
-                    opacity: 1
-                }, {
-                    complete: done
-                }, {
-                    duration: 1000
-                })
-            }, index * 300)
-        },
-
-        goDetail(id) {
-            // 记录当前滚动条位置
-            this.start_scroll_top = this.$el.scrollTop;
-            // goto
-            this.$router.push({
-                name: 'detail',
-                params: {
-                    id: id
-                }
-            })
         }
     },
 
     components: {
-        Loader
+        HeaderBar,
+        MyCard,
+        FloatBar,
+        Loader, 
+        List
     }
 }
 </script>
 <style scoped lang=scss>
+
+
+
+
 .list-item {
     transition: all 1s;
     display: inline-block;

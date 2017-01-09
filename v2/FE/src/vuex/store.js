@@ -15,6 +15,11 @@ export default new Vuex.Store({
             state.index_pos_y = y;
         },
 
+        // 我的名片的高度
+        set_card_height(state, h) {
+            state.card_height = h;
+        },
+
         setList(state, json) {
             state.list = json;
         },

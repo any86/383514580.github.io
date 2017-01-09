@@ -1,7 +1,6 @@
 <template>
-    <!-- 列表 -->
-    <transition-group :css="false" name="staggered-list" class="list" tag="ul" @before-enter="beforeEnter" @enter="enter">
-        <li v-if="(page_each * page_active > i)" v-for="(row, i) in list_data" :key="i" :data-index="i" class="list-item">
+    <transition-group :css="false" name="staggered-list" class="com-list" tag="ul" @before-enter="beforeEnter" @enter="enter">
+        <li v-if="(each * page > i)" v-for="(row, i) in list_data" :key="i" :data-index="i" class="list-item">
             <span class="category">[ {{row.category}} ]</span>
             <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
                 {{row.title}}
@@ -18,12 +17,14 @@ import Velocity from 'velocity-animate'
 
 export default {
     name: 'List',
+
+    props: ['page', 'pos'],
+
     data() {
         return {
             list_data: [], // 列表数据
-            page_active: 1,
-            page_length: 0, // 总页数
-            page_each: 3 // 每页数量
+            total: 0, // 总页数
+            each: 3 // 每页数量
         };
     },
 
@@ -33,11 +34,8 @@ export default {
             // 获取所有列表数据
             this.list_data = this.$store.state.list;
             // 计算总页数
-            this.page_length = Math.ceil(this.list_data.length / this.page_each);
+            this.total = Math.ceil(this.list_data.length / this.each);
         });
-
-        // 总数
-        this.page_length = this.list_data.length;
     },
 
     methods: {
@@ -47,7 +45,7 @@ export default {
         },
 
         enter(el, done) {
-            var index = el.dataset.index % this.$store.state.page_each;
+            var index = el.dataset.index % this.each;
             setTimeout(function() {
                 Velocity(el, {
                     translateY: 0,
@@ -61,8 +59,18 @@ export default {
         }
     },
 
-    components: {
-        Loader
+    watch: {
+        page(v){
+            if(this.total == v){
+                this.$emit('end');
+            }
+        },
+
+        pos(){
+            if(0 == this.$el.getBoundingClientRect().top){
+                this.$emit('peak');
+            }
+        }
     }
 }
 </script>
@@ -91,101 +99,67 @@ export default {
     transform: rotate(180deg);
 }
 
-
 $font_color: #444;
-.com-scroll-list {
+.com-list {
+    will-change: all;
+    max-width: 720px;
+    margin: 0.15rem auto;
+    display: block;
     overflow: hidden;
-    >.body {
-        >.arrow {
-            height: 50px;
-            margin-top: -50px;
-            overflow: hidden;
-            >.icon {
-                transition: all .3s .3s;
-                border-left: 0.1rem solid transparent;
-                border-right: 0.1rem solid transparent;
-                border-top: 0.15rem solid #ccc;
-                width: 0;
-                height: 0;
-                display: block;
-                margin: auto;
-            }
-            >.text {
-                font-size: 0.14rem;
-                color: #ccc;
-                text-align: center;
-                margin-top: 0.1rem;
-            }
-        }
-        >.list {
-            will-change: all;
-            max-width: 720px;
-            margin: 0.15rem auto;
-            display: block;
-            overflow: hidden;
-            li {
-                padding: 0.3rem 0.15rem;
-                display: block;
-                overflow: hidden;
-                p,
-                a {
-                    font-size: 0.14rem;
-                }
-                a:visited {
-                    text-decoration: none;
-                    outline: none;
-                    border: none;
-                }
-                .category{
-                    display: inline-block;
-                    padding: 0.05rem 0;
-                    letter-spacing: 1px;
-                    font-size: 0.2rem;
-                }
-                .title {
-                    font-size: 0.2rem;
-                    color: #333;
-                    display: inline-block;
-                    letter-spacing: 1px;
-                    font-weight: 600;
-                    cursor: pointer;
-                }
-                .desc {
-                    margin-top: 0.15rem;
-                    letter-spacing: 0.01rem;
-                    color: $font_color;
-                    display: block;
-                    line-height: 1.5;
-                    letter-spacing: 1px;
-                }
-                .time {
-                    display: block;
-                    color: $font_color;
-                    letter-spacing: 1px;
-                    height: 0.3rem;line-height: 0.3rem;
-                }
-                
-                
-                .btn-view {
-                    padding: 0.05rem;
-                    margin-top: 0.3rem;
-                    width: 0.7rem;
-                    background: #999;
-                    color: #fff;
-                    clear: both;
-                    cursor: pointer;
-                    display: block;
-                    text-align: center;
-                    border-radius: 4px;
-                    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
-                }
-            }
-        }
-        >.info {
-            text-align: center;
+    li {
+        padding: 0.3rem 0.15rem;
+        display: block;
+        overflow: hidden;
+        p,
+        a {
             font-size: 0.14rem;
-            color: #aaa;
-            margin: 0.3rem auto;
+        }
+        a:visited {
+            text-decoration: none;
+            outline: none;
+            border: none;
+        }
+        .category {
+            display: inline-block;
+            padding: 0.05rem 0;
+            letter-spacing: 1px;
+            font-size: 0.2rem;
+        }
+        .title {
+            font-size: 0.2rem;
+            color: #333;
+            display: inline-block;
+            letter-spacing: 1px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .desc {
+            margin-top: 0.15rem;
+            letter-spacing: 0.01rem;
+            color: $font_color;
+            display: block;
+            line-height: 1.5;
+            letter-spacing: 1px;
+        }
+        .time {
+            display: block;
+            color: $font_color;
+            letter-spacing: 1px;
+            height: 0.3rem;
+            line-height: 0.3rem;
+        }
+        .btn-view {
+            padding: 0.05rem;
+            margin-top: 0.3rem;
+            width: 0.7rem;
+            background: #999;
+            color: #fff;
+            clear: both;
+            cursor: pointer;
+            display: block;
+            text-align: center;
+            border-radius: 4px;
+            box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
         }
     }
 }
