@@ -51,6 +51,10 @@ export default {
     },
 
     methods: {
+        showHeadBar(){
+
+        },
+        
         endScroll(){
             // 加载完全部数据, 解除绑定
             this.$el.removeEventListener('scroll', this.scrollList, false);
