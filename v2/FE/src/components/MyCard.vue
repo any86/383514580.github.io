@@ -16,7 +16,7 @@ export default {
   name: 'MyCard',
 
   mounted(){
-    this.$store.commit('set_card_height', this.$el.innerHeight);
+    this.$emit('getHeight', this.$el.offsetHeight);
 
     particlesJS('bg-stars', {
         particles: {
@@ -100,11 +100,14 @@ export default {
         position: absolute;z-index: 1;width: 100%;height: 100%;
     }
     >.info{position: relative;z-index: 1986;
-        .name{ @include textCenter(0.24rem);margin-top: 0.15rem;letter-spacing: 2px;}
-        .avatar{width: 1.2rem; height: 1.2rem;margin: 0.15rem auto;border-radius: 100%;
-            img{display: block;width: 100%;}
+        >.name{ @include textCenter(0.24rem);margin-top: 0.15rem;letter-spacing: 2px;}
+        
+        >.avatar{width: 1.2rem; height: 1.2rem;margin: 0.15rem auto;border-radius: 100%;overflow: hidden;
+
+            >img{display: block;width: 100%;}
         }
-        .say{ @include textCenter(0.18rem);margin: 0.3rem auto 0.15rem; letter-spacing: 2px;}
+        
+        >.say{ @include textCenter(0.18rem);margin: 0.3rem auto 0.15rem; letter-spacing: 2px;}
     }
 
 }

@@ -1,15 +1,21 @@
 <template>
-    <transition-group :css="false" name="staggered-list" class="com-list" tag="ul" @before-enter="beforeEnter" @enter="enter">
-        <li v-if="(each * page > i)" v-for="(row, i) in list_data" :key="i" :data-index="i" class="list-item">
-            <span class="category">[ {{row.category}} ]</span>
-            <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
-                {{row.title}}
-            </router-link>
-            <p class="time">{{row.create_time}}</p>
-            <p class="desc" v-html="row.desc"></p>
-            <a @click="goDetail(row.id)" class="btn-view">查看全部</a>
-        </li>
-    </transition-group>
+    <div class="com-list"> 
+        <!-- 列表 -->
+        <transition-group :css="false" name="staggered-list" tag="ul" @before-enter="beforeEnter" @enter="enter">
+            <li v-if="(each * page > i)" v-for="(row , i) in list_data" :key="i" :data-index="i" class="list-item">
+                <span class="category">[ {{row.category}} ]</span>
+                <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
+                    {{row.title}}
+                </router-link>
+                <p class="time">{{row.create_time}}</p>
+                <p class="desc" v-html="row.desc"></p>
+                <router-link class="btn-view" :to="{ name: 'detail', params: { id: row.id }}" tag="a">查看全部</router-link>
+            </li>
+        </transition-group>
+        
+        <!-- info -->
+        <p v-show="no_more" class="info">没有更多文章喽!</p>
+    </div>
 </template>
 
 <script>
@@ -18,24 +24,32 @@ import Velocity from 'velocity-animate'
 export default {
     name: 'List',
 
-    props: ['page', 'pos'],
-
-    data() {
-        return {
-            list_data: [], // 列表数据
-            total: 0, // 总页数
-            each: 3 // 每页数量
-        };
-    },
+    props: ['page', 'no_more'],
 
     mounted() {
         // 初始化渲染, xhr
         this.$store.dispatch('getList').then(() => {
             // 获取所有列表数据
             this.list_data = this.$store.state.list;
-            // 计算总页数
             this.total = Math.ceil(this.list_data.length / this.each);
         });
+
+    },
+
+    data() {
+        return {
+            total: 0,
+            list_data: [],
+            each: 3 // 每页数量
+        };
+    },
+
+    watch: {
+        page(){
+            if(this.page >= this.total) {
+                this.$emit('end');
+            }
+        }
     },
 
     methods: {
@@ -57,20 +71,6 @@ export default {
                 })
             }, index * 300)
         }
-    },
-
-    watch: {
-        page(v){
-            if(this.total == v){
-                this.$emit('end');
-            }
-        },
-
-        pos(){
-            if(0 == this.$el.getBoundingClientRect().top){
-                this.$emit('peak');
-            }
-        }
     }
 }
 </script>
@@ -80,24 +80,6 @@ export default {
     display: inline-block;
 }
 
-.list-enter-active,
-.list-leave-active {
-    transition: all 1s;
-}
-
-.list-enter,
-.list-leave-active {
-    opacity: 0;
-    transform: translateY(-30px);
-}
-
-.bounce {
-    transition: all .2s ease-in;
-}
-
-.rotate {
-    transform: rotate(180deg);
-}
 
 $font_color: #444;
 .com-list {
@@ -161,6 +143,12 @@ $font_color: #444;
             border-radius: 4px;
             box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
         }
+    }
+    >.info {
+        text-align: center;
+        font-size: 0.14rem;
+        color: #aaa;
+        margin: 0.3rem auto;
     }
 }
 </style>

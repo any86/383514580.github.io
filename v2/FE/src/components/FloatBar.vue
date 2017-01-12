@@ -1,7 +1,9 @@
 <template>
-    <ul class="com-float-bar">
-        <li @click="scrollTop">顶部</li>
-    </ul>
+    <transition name="fade">
+        <ul class="com-float-bar">
+            <li @click="scrollTop">顶部</li>
+        </ul>
+    </transition>
 </template>
 <script>
 export default {
@@ -19,6 +21,20 @@ export default {
 }
 </script>
 <style lang=scss scoped>
+.fade-enter-active,
+.fade-leave-active {
+    opacity: 1;
+    transition: all .5s
+}
+
+.fade-enter,
+.fade-leave-active {
+    opacity: 0;
+    transform: translateY(-.5rem);
+}
+
+
+
 $btn_width: 0.5rem;
 .com-float-bar {
     position: fixed;

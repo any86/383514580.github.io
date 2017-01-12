@@ -1,8 +1,10 @@
 <template>
-    <div class="detail-view">
+    <scroll-view>
+
         <float-bar></float-bar>
+
         <loader :opts="{show: $store.state.detail_loader}"></loader>
-        <!-- <header-bar v-show="!$store.state.detail_loader"></header-bar>  -->
+        
         <section v-show="!$store.state.detail_loader">
             <header>
                 <router-link class="btn-return" :to="{ name: 'index'}" tag="a">返回</router-link>
@@ -10,11 +12,12 @@
             </header>
             <article class="article" v-html="detail"></article>            
         </section>
-    </div>
+    </scroll-view>
 </template>
 <script>
+import ScrollView from '../components/ScrollView'
 import Loader from '../components/Loader'
-import HeaderBar from '../components/HeaderBar'
+import SearchBar from '../components/SearchBar'
 import FloatBar from '../components/FloatBar'
 
 export default {
@@ -26,7 +29,6 @@ export default {
         // 获取数据
         this.$store.dispatch('getDetail', this.$route.params.id).then(() => {
             this.list_data = this.$store.state.list;
-            this.$store.commit('setPageTotal', Math.ceil(this.list_data.length / this.$store.state.page_each));
         });
 
         // window.onscroll = null;
@@ -37,12 +39,14 @@ export default {
         }
     },
     components: {
-        Loader, HeaderBar, FloatBar
+        ScrollView,
+        Loader, 
+        SearchBar, 
+        FloatBar
     }
 }
 </script>
 <style lang=scss>
-.detail-view {
     header { overflow: hidden; font-size: 0.14rem; color: #444; max-width: 720px; padding: 0.15rem; margin: 0.15rem auto 0;
         >.btn-return { float: left; padding: 0.05rem 0.15rem; background: #ccc; color: #fff; border-radius: 4px; letter-spacing: 2px;}
         >.email{float: right;
@@ -66,5 +70,4 @@ export default {
         pre{padding: 0.1rem;border:1px dashed #ccc;}
 
     }
-}
 </style>
