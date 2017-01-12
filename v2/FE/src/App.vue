@@ -1,5 +1,5 @@
 <template>
-		<transition name="bounce" mode="out-in">
+		<transition name="fade" mode="out-in">
         <keep-alive>
   		    <router-view></router-view>
         </keep-alive>
@@ -9,29 +9,16 @@
 <script>
 </script>
 
-<style>
-
-.bounce-enter-active {
-  animation: bounce-in .5s;
-}
-.bounce-leave-active {
-  animation: bounce-out .5s;
-}
-@keyframes bounce-in {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
+<style scoped lang=scss>
+.fade-enter-active,
+.fade-leave-active {
     opacity: 1;
-  }
+    transition: all .5s;
 }
-@keyframes bounce-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
+
+.fade-enter,
+.fade-leave-active {
     opacity: 0;
-  }
+    transform: translateY(-.5rem);
 }
 </style>

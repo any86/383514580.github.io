@@ -1,10 +1,12 @@
 <template>
-    <scroll-view>
-
-        <float-bar></float-bar>
-
-        <loader :opts="{show: $store.state.detail_loader}"></loader>
+    <scroll-view @scrolly="scrollyChange" :scroll_top="scroll_top">
+        <!-- 浮动工具 -->
+        <float-bar v-show="0 < scroll_top"></float-bar>
         
+        <!-- loader -->
+        <loader :opts="{show: loader_show}"></loader>
+        
+        <!-- 内容 -->
         <section v-show="!$store.state.detail_loader">
             <header>
                 <router-link class="btn-return" :to="{ name: 'index'}" tag="a">返回</router-link>
@@ -12,8 +14,10 @@
             </header>
             <article class="article" v-html="detail"></article>            
         </section>
+
     </scroll-view>
 </template>
+
 <script>
 import ScrollView from '../components/ScrollView'
 import Loader from '../components/Loader'
@@ -22,22 +26,31 @@ import FloatBar from '../components/FloatBar'
 
 export default {
     name: 'Detail',
-    activated() {
-        // 初始化detail页的loader
-        this.$store.commit('setDetailLoader', true);
 
+    data(){
+        return {scroll_top: 0, loader_show: true};
+    },
+
+    methods: {
+        scrollyChange(top){
+            this.scroll_top = top;
+        }
+    },
+
+    activated() {
         // 获取数据
         this.$store.dispatch('getDetail', this.$route.params.id).then(() => {
             this.list_data = this.$store.state.list;
+            this.loader_show = false;
         });
-
-        // window.onscroll = null;
     },
+
     computed: {
         detail() {
             return this.$store.state.detail;
         }
     },
+
     components: {
         ScrollView,
         Loader, 
@@ -46,7 +59,7 @@ export default {
     }
 }
 </script>
-<style lang=scss>
+<style scoped lang=scss>
     header { overflow: hidden; font-size: 0.14rem; color: #444; max-width: 720px; padding: 0.15rem; margin: 0.15rem auto 0;
         >.btn-return { float: left; padding: 0.05rem 0.15rem; background: #ccc; color: #fff; border-radius: 4px; letter-spacing: 2px;}
         >.email{float: right;
