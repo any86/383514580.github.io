@@ -16,7 +16,7 @@
 export default {
     name: 'ScrollView',
 
-    props: ['scroll_top'],
+    props: ['scroll_top', 'pullable'],
 
     data() {
         return {
@@ -41,35 +41,35 @@ export default {
         }
     },
 
-    computed: {
-        distance(){
-            return this.touch.end_y - this.touch.start_y - this.scroll_top;
-        }
-    },
-
     methods: {
         touchStart(e){
-            this.touch.is = 'start';
-            this.touch.start_y = e.touches[0].clientY;
-            this.$emit('touchstart');
+            if(this.pullable) {
+                this.touch.is = 'start';
+                this.touch.start_y = e.touches[0].clientY;
+                this.$emit('touchstart');                
+            }
         },
 
         touchMove(e){
-            this.touch.is = 'move';
-            this.touch.end_y = e.touches[0].clientY;
-            var distance = this.touch.end_y - this.touch.start_y - this.scroll_top;
-            if(0 < distance) {
-                this.translate_y = distance / 2;
-                e.preventDefault();
-                e.stopPropagation();
-                this.$emit('touchmove');
+            if(this.pullable) {
+                this.touch.is = 'move';
+                this.touch.end_y = e.touches[0].clientY;
+                var distance = this.touch.end_y - this.touch.start_y - this.scroll_top;
+                if(0 < distance) {
+                    this.translate_y = distance / 2;
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.$emit('touchmove');
+                }
             }
         },
 
         touchEnd(e){
-            this.touch.is = 'end';
-            this.translate_y = 0;
-            this.$emit('touchend');
+            if(this.pullable) {
+                this.touch.is = 'end';
+                this.translate_y = 0;
+                this.$emit('touchend');
+            }
         },
 
         scrollList() {

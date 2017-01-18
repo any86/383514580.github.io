@@ -1,10 +1,10 @@
 <template>
-    <scroll-view @touchstart="touchStart" @touchend="touchEnd" @scrolly="scrollyChange" :scroll_top="scroll_top"  @append="addPage">
-        
+    <scroll-view :pullable="true" @touchstart="touchStart" @touchend="touchEnd" @scrolly="scrollyChange" :scroll_top="scroll_top"  @append="addPage">
+
+        <!-- 背景 -->
         <div slot="bg">
             <spinner class="down_spinner">{{top_spinner_text}}</spinner>
         </div>
-
 
         <!-- 名片 -->
         <my-card @getHeight="getCardHeight"></my-card>

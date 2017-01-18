@@ -1,7 +1,7 @@
 <template>
     <scroll-view @scrolly="scrollyChange" :scroll_top="scroll_top">
         <!-- 浮动工具 -->
-        <float-bar v-show="0 < scroll_top"></float-bar>
+        <float-bar  slot="not_in_body" v-show="0 < scroll_top"></float-bar>
         
         <!-- spinner -->
         <spinner v-show="spinner_show"></spinner>
