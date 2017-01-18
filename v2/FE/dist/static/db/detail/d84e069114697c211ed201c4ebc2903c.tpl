@@ -1,5 +1,5 @@
 <h1 id="-">滚动条控制</h1>
-<p><strong>[js/css]</strong> <strong>[2016-12-21 11:12:21]</strong></p>
+<p><strong>[js/css]</strong>   <strong>[2016-12-24 12:12:21]</strong></p>
 <p>注：如无特别标注，那么全部浏览器都兼容</p>
 <h2 id="window-">window滚动条</h2>
 <p>读取：</p>

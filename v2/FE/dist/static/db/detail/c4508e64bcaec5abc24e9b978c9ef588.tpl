@@ -1,13 +1,13 @@
 <h1 id="vuex-">vuex的简单使用</h1>
-<p><strong>[js/css]</strong> <strong>[ 2016-12-20 11:12:21]</strong></p>
-<h2 id="-">本文适合读者</h2>
-<p>可以使用vue-cli开发项目, 本文的例子都是基于他来写的, 但是如果只是了解概念那就无所谓了, 后续有时间我会写一个不依赖vue-cli的小例子.</p>
-<h2 id="vuex-">vuex用来干什么的?</h2>
-<p>对于vuex简单来说是把vue中<code>data</code>参数的数据结构<code>单独拿了出来</code>进行<code>管理</code></p>
-<h2 id="-">为什么单独管理?</h2>
-<p>当组件关系变得复杂的时候, 如果用prop或者内部的信息传播机制共享数据会使代码结构乱到难以维护, 所以vuex出现了, 使用前提建立在<code>复杂项目</code>下, 如果项目内部的组件很少请不要使用vuex, 因为用vuex会有增加代码量(需要写出State, Mutations, Action等代码结构);</p>
-<h2 id="-">写一个小例子前的准备工作</h2>
-<p>.首先, 建立一个store.js文件, 放在和入口main.js同级, 这就可以把store想成vuex的一个实例好了(个人方法, 并非正确); store里面有State, Mutations, Action等代码结构.</p>
+<p><strong>[js/css]</strong>   <strong>[2016-12-24 12:12:21]</strong></p>
+<p>##本文适合读者
+可以使用vue-cli开发项目, 本文的例子都是基于他来写的, 但是如果只是了解概念那就无所谓了, 后续有时间我会写一个不依赖vue-cli的小例子.</p>
+<p>##vuex用来干什么的?
+对于vuex简单来说是把vue中<code>data</code>参数的数据结构<code>单独拿了出来</code>进行<code>管理</code></p>
+<p>##为什么单独管理?
+当组件关系变得复杂的时候, 如果用prop或者内部的信息传播机制共享数据会使代码结构乱到难以维护, 所以vuex出现了, 使用前提建立在<code>复杂项目</code>下, 如果项目内部的组件很少请不要使用vuex, 因为用vuex会有增加代码量(需要写出State, Mutations, Action等代码结构);</p>
+<p>##写一个小例子前的准备工作
+.首先, 建立一个store.js文件, 放在和入口main.js同级, 这就可以把store想成vuex的一个实例好了(个人方法, 并非正确); store里面有State, Mutations, Action等代码结构.</p>
 <p><code>store.js</code></p>
 <pre><code class="lang-javascript"><span class="hljs-comment">// 引入 vuex</span>
 <span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>

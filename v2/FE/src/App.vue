@@ -1,5 +1,5 @@
 <template>
-		<transition name="fade" mode="out-in">
+	<transition name="fade" mode="out-in">
         <keep-alive>
   		    <router-view></router-view>
         </keep-alive>
