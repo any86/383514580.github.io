@@ -3,11 +3,14 @@
         <div class="bg">
             <slot name="bg"></slot>  
         </div>
+        
+        <slot name="header-bar"></slot>
+
         <!-- 内容容器, 自适应高度 -->
-        <div class="body" :class="{'touch-end': 'end' == touch.is}" :style="{transform: 'translate3d(0, ' + translate_y + 'px, 0)'}" @touchmove="touchMove" @touchstart="touchStart" @touchend="touchEnd">
+        <div ref="body" class="body" :class="{'touch-end': 'end' == touch.is}" :style="{transform: 'translate3d(0, ' + translate_y + 'px, 0)'}" @touchmove="touchMove" @touchstart="touchStart" @touchend="touchEnd">
             <slot></slot>
         </div>
-        <slot name="not_in_body"></slot>        
+        <slot name="not-in-body"></slot>        
     </div>
 </template>
 
@@ -84,8 +87,7 @@ export default {
                     // 外壳高度
                     var warp_height = this.$el.offsetHeight;
                     // 内容高度
-                    var inner_height = this.$el.childNodes[0].offsetHeight;
-
+                    var inner_height = this.$refs.body.offsetHeight;
                     if (scroll_top + warp_height + 50 > inner_height) {
                         this.$emit('append');
                     }

@@ -30,8 +30,15 @@ export default {
         // 初始化渲染, xhr
         this.$store.dispatch('getList').then(() => {
             // 获取所有列表数据
-            this.list_data = this.$store.state.list;
-            this.total = Math.ceil(this.list_data.length / this.each);
+            if('' == this.$store.state.keyword){
+                this.list_data = this.$store.state.list;
+                this.total = Math.ceil(this.list_data.length / this.each);
+            } else {
+                this.list_data = this.$store.state.list.map(item=>{
+                    
+                });
+            }
+            
         });
 
     },

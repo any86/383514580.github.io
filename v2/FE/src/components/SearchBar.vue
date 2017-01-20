@@ -3,8 +3,8 @@
         <div class="com-header-bar">
             <div class="center">
                 <div class="search">
-                    <input type="text" placeholder="输入想搜啥">
-                    <a class="btn">搜索</a>
+                    <input v-model="keyword" type="text" placeholder="输入想搜啥">
+                    <a @click="submit" class="btn">搜索</a>
                 </div>
             </div>
         </div>
@@ -14,6 +14,16 @@
 <script>
 export default {
     name: 'SearchBar',
+
+    data(){
+        return {keyword: ''};
+    },
+
+    methods: {
+        submit(){
+            this.$store.commit('setKeyword', this.keyword);
+        }
+    }
 }
 </script>
 <style lang=scss scoped>

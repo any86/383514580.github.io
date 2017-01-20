@@ -5,9 +5,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         list: [],
-        detail: {}
+        detail: {},
+        keyword: ''
     },
     mutations: {
+        setKeyword(state, keyword){
+            state.keyword = keyword;
+        },
+
         setError(state, info){
             state.error = info;
         },
@@ -21,7 +26,7 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        getList(context, page) {
+        getList(context) {
             // context可能是store也可能是module
             // context.commit('setListLoader', true);
             return new Promise((resolve, reject) => {

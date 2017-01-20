@@ -5,12 +5,12 @@
         <div slot="bg">
             <spinner class="down_spinner">{{top_spinner_text}}</spinner>
         </div>
-
+    
         <!-- 名片 -->
         <my-card @getHeight="getCardHeight"></my-card>
         
         <!-- 搜索 -->
-        <search-bar v-show="scroll_top > card_height"></search-bar>
+        <search-bar slot="header-bar" v-show="scroll_top > card_height"></search-bar>
 
         <!-- 列表 -->
         <list :page="view_page" @end="no_more = true" :no_more="no_more"></list>    
@@ -19,7 +19,7 @@
         <spinner class="down_spinner" v-show="!no_more"></spinner>
 
         <!-- 浮动按钮 -->
-        <float-bar slot="not_in_body" v-show="0 < scroll_top"></float-bar>
+        <float-bar slot="not-in-body" v-show="0 < scroll_top"></float-bar>
 
     </scroll-view>
 </template>
