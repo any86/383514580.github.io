@@ -3,7 +3,7 @@
         <div class="com-header-bar">
             <div class="center">
                 <div class="search">
-                    <input v-model="keyword" type="text" placeholder="输入想搜啥">
+                    <input  @keyup.enter="submit" v-model="keyword" type="text" placeholder="输入想搜啥">
                     <a @click="submit" class="btn">搜索</a>
                 </div>
             </div>
@@ -21,6 +21,7 @@ export default {
 
     methods: {
         submit(){
+            // 改成路由传值
             this.$store.commit('setKeyword', this.keyword);
         }
     }

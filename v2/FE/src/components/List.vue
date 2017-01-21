@@ -2,7 +2,7 @@
     <div class="com-list"> 
         <!-- 列表 -->
         <transition-group :css="false" name="staggered-list" tag="ul" @before-enter="beforeEnter" @enter="enter">
-            <li v-if="(each * page > i)" v-for="(row , i) in list_data" :key="i" :data-index="i" class="list-item">
+            <li v-if="(each * page > i)" v-for="(row , i) in list_data_computed" :key="i" :data-index="i" class="list-item">
                 <span class="category">[ {{row.category}} ]</span>
                 <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
                     {{row.title}}
@@ -30,17 +30,24 @@ export default {
         // 初始化渲染, xhr
         this.$store.dispatch('getList').then(() => {
             // 获取所有列表数据
-            if('' == this.$store.state.keyword){
-                this.list_data = this.$store.state.list;
-                this.total = Math.ceil(this.list_data.length / this.each);
-            } else {
-                this.list_data = this.$store.state.list.map(item=>{
-                    
-                });
-            }
-            
+            this.list_data = this.$store.state.list;
+            this.total = Math.ceil(this.list_data.length / this.each);
         });
 
+    },
+
+    computed: {
+        list_data_computed(){
+            if('' == this.$store.state.keyword) {
+                return this.list_data;
+            } else {
+                return this.list_data.filter(item=>{
+                    if(-1 < item.title.search(this.$store.state.keyword)){
+                        return item;
+                    }
+                });
+            }
+        }
     },
 
     data() {
