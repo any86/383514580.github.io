@@ -1,25 +1,44 @@
 <template>
-    <scroll-view :pullable="true" @touchstart="touchStart" @touchend="touchEnd" @scrolly="scrollyChange" :scroll_top="scroll_top"  @append="addPage">
+    <scroll-view 
+        :pullable="true" 
+        :scrollTop="scrollTop"  
+        @touchstart="touchStart" 
+        @touchend="touchEnd" 
+        @scrolly="scrollyChange" 
+        @append="addPage">
 
         <!-- 背景 -->
-        <div slot="bg">
-            <spinner class="down_spinner">{{top_spinner_text}}</spinner>
-        </div>
-    
+        <!-- slot: bg -->
+        <spinner slot="bg" class="down_spinner">{{top_spinner_text}}</spinner>
+        
         <!-- 名片 -->
-        <my-card @getHeight="getCardHeight"></my-card>
+        <!-- slot: banner -->
+        <my-card slot="banner" @getHeight="getCardHeight"></my-card>
         
         <!-- 搜索 -->
-        <search-bar slot="header-bar" v-show="scroll_top > card_height"></search-bar>
+        <!-- slot:header-fixed -->
+        <search-bar slot="header-fixed" v-show="scrollTop > card_height"></search-bar>
+        
+        <!-- slot: content -->
+        <template slot="content">
+            <!-- 列表 -->
+            <list 
+                v-if="null != list_length" 
+                :length="list_length" 
+                :list="list_data" 
+                :each="3" 
+                :keyword="$route.query.keyword" 
+                :page="viewPage" 
+                @end="no_more = true">
+            </list>    
 
-        <!-- 列表 -->
-        <list :page="view_page" @end="no_more = true" :no_more="no_more"></list>    
-
-        <!-- spinner -->
-        <spinner class="down_spinner" v-show="!no_more"></spinner>
+            <!-- spinner -->
+            <spinner class="down_spinner" v-show="!no_more"></spinner>
+        </template>
 
         <!-- 浮动按钮 -->
-        <float-bar slot="not-in-body" v-show="0 < scroll_top"></float-bar>
+        <!-- slot: footer-fixed -->
+        <float-bar slot="footer-fixed" v-show="0 < scrollTop"></float-bar>
 
     </scroll-view>
 </template>
@@ -35,10 +54,20 @@ import Spinner from '../components/Spinner'
 export default {
     name: 'Index',
 
+    mounted(){
+        this.$store.dispatch('getList').then(() => {
+            // 获取所有列表数据
+            this.list_data = this.$store.state.list;
+            this.list_length = this.list_data.length;
+        });
+    },
+
     data(){
     	return {
-    		scroll_top: 0,
-            view_page: 1,
+            list_data: [],
+            list_length: null,
+    		scrollTop: 0,
+            viewPage: 1,
             no_more: false,
             card_height: 0,
             top_spinner_text: '松开加载'
@@ -59,11 +88,11 @@ export default {
     	},
 
     	scrollyChange(top){
-    		this.scroll_top = top;
+    		this.scrollTop = top;
     	},
 
     	addPage(){
-    		this.view_page++;
+    		this.viewPage++;
     	}
     },
 
@@ -78,8 +107,11 @@ export default {
 
     activated() {
         // 没办法
-        // 让scroll_top的值变了才能触发callback去渲染dom
-        this.scroll_top++;
+        // 让scrollTop的值变了才能触发callback去渲染dom
+        if(0 < this.scrollTop) {
+            this.scrollTop++;
+        }
+        
     }
 }
 </script>

@@ -21,8 +21,7 @@ export default {
 
     methods: {
         submit(){
-            // 改成路由传值
-            this.$store.commit('setKeyword', this.keyword);
+            this.$router.push({ path: 'index', query: { keyword: this.keyword}});
         }
     }
 }
@@ -30,16 +29,16 @@ export default {
 <style lang=scss scoped>
 .fade-enter-active,
 .fade-leave-active {
-    transition: all .5s
+    transition: all .2s
 }
 
 .fade-enter,
 .fade-leave-active {
-    transform: translateY(-.5rem);
+    transform: translateY(-.3rem);
 }
 
 .com-header-bar {
-    background: rgba(238,238,238,.3);
+    background: rgba(244,244,244,.9);
     width: 100%;
     overflow: hidden;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);

@@ -1,16 +1,32 @@
 <template>
     <div class="com-scroll-view" @scroll="scrollList">
+        <!-- 背景 -->
         <div class="bg">
             <slot name="bg"></slot>  
         </div>
         
-        <slot name="header-bar"></slot>
+        <!-- 头部 -->
+        <slot name="header-fixed"></slot>
 
         <!-- 内容容器, 自适应高度 -->
-        <div ref="body" class="body" :class="{'touch-end': 'end' == touch.is}" :style="{transform: 'translate3d(0, ' + translate_y + 'px, 0)'}" @touchmove="touchMove" @touchstart="touchStart" @touchend="touchEnd">
-            <slot></slot>
+        <div 
+            ref="body" 
+            class="body" 
+            :class="{'touch-end': 'end' == touch.is}" 
+            :style="{transform: 'translate3d(0, ' + translateY + 'px, 0)'}" 
+            @touchmove="touchMove" 
+            @touchstart="touchStart" 
+            @touchend="touchEnd">
+
+            <!-- 头图等[可选] -->
+            <slot name="banner"></slot>
+            
+            <!-- 主体 -->
+            <slot name="content"></slot>
         </div>
-        <slot name="not-in-body"></slot>        
+        
+        <!-- 尾部 -->
+        <slot name="footer-fixed"></slot>        
     </div>
 </template>
 
@@ -19,28 +35,23 @@
 export default {
     name: 'ScrollView',
 
-    props: ['scroll_top', 'pullable'],
+    props: ['scrollTop', 'pullable'],
 
     data() {
         return {
             timer: null,
-            is_end: false,
+            isEnd: false,
             touch: {
-                start_y: 0,
-                end_y: 0
+                startY: 0,
+                endY: 0
             },
-            translate_y: 0
+            translateY: 0
         };
     },
 
-    mounted() {
-        // 滚动到记忆位置
-        // this.$el.scrollTop = this.scroll_top;
-    },
-
     watch: {
-        scroll_top(){
-            this.$el.scrollTop = this.scroll_top;
+        scrollTop(){
+            this.$el.scrollTop = this.scrollTop;
         }
     },
 
@@ -48,7 +59,7 @@ export default {
         touchStart(e){
             if(this.pullable) {
                 this.touch.is = 'start';
-                this.touch.start_y = e.touches[0].clientY;
+                this.touch.startY = e.touches[0].clientY;
                 this.$emit('touchstart');                
             }
         },
@@ -56,10 +67,10 @@ export default {
         touchMove(e){
             if(this.pullable) {
                 this.touch.is = 'move';
-                this.touch.end_y = e.touches[0].clientY;
-                var distance = this.touch.end_y - this.touch.start_y - this.scroll_top;
+                this.touch.endY = e.touches[0].clientY;
+                var distance = this.touch.endY - this.touch.startY - this.scrollTop;
                 if(0 < distance) {
-                    this.translate_y = distance / 2;
+                    this.translateY = distance / 2;
                     e.preventDefault();
                     e.stopPropagation();
                     this.$emit('touchmove');
@@ -70,28 +81,29 @@ export default {
         touchEnd(e){
             if(this.pullable) {
                 this.touch.is = 'end';
-                this.translate_y = 0;
+                this.translateY = 0;
                 this.$emit('touchend');
             }
         },
 
         scrollList() {
-            this.$emit('scrolly', this.$el.scrollTop);
 
-            if(!this.is_end) {
+            if(!this.isEnd) {
                 clearTimeout(this.timer);
 
                 this.timer = setTimeout(() => {
+                    this.$emit('scrolly', this.$el.scrollTop);
+
                     // 滚动条高度
-                    var scroll_top = this.$el.scrollTop;
+                    var scrollTop = this.$el.scrollTop;
                     // 外壳高度
-                    var warp_height = this.$el.offsetHeight;
+                    var warpHeight = this.$el.offsetHeight;
                     // 内容高度
-                    var inner_height = this.$refs.body.offsetHeight;
-                    if (scroll_top + warp_height + 50 > inner_height) {
+                    var innerHeight = this.$refs.body.offsetHeight;
+                    if (scrollTop + warpHeight + 50 > innerHeight) {
                         this.$emit('append');
                     }
-                }, 200);
+                }, 120);
             }
         }
     }

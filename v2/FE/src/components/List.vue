@@ -2,7 +2,7 @@
     <div class="com-list"> 
         <!-- 列表 -->
         <transition-group :css="false" name="staggered-list" tag="ul" @before-enter="beforeEnter" @enter="enter">
-            <li v-if="(each * page > i)" v-for="(row , i) in list_data_computed" :key="i" :data-index="i" class="list-item">
+            <li v-if="(each * page > i)" v-for="(row , i) in list_computed" :key="i" :data-index="i" class="list-item">
                 <span class="category">[ {{row.category}} ]</span>
                 <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
                     {{row.title}}
@@ -14,7 +14,7 @@
         </transition-group>
         
         <!-- info -->
-        <p v-show="no_more" class="info">没有更多文章喽!</p>
+        <p v-show="total < page && null != list" class="info">没有更多文章喽!</p>
     </div>
 </template>
 
@@ -24,38 +24,36 @@ import Velocity from 'velocity-animate'
 export default {
     name: 'List',
 
-    props: ['page', 'no_more'],
-
-    mounted() {
-        // 初始化渲染, xhr
-        this.$store.dispatch('getList').then(() => {
-            // 获取所有列表数据
-            this.list_data = this.$store.state.list;
-            this.total = Math.ceil(this.list_data.length / this.each);
-        });
-
+    data(){
+        return {total: 0};
     },
 
+    props: ['page', 'length', 'list', 'each', 'keyword'],
+
     computed: {
-        list_data_computed(){
-            if('' == this.$store.state.keyword) {
-                return this.list_data;
+
+        list_computed(){
+            var no_exist = false;
+
+            if('' == this.keyword) {
+                this.total = Math.ceil(this.length / this.each);
+                return this.list;
             } else {
-                return this.list_data.filter(item=>{
-                    if(-1 < item.title.search(this.$store.state.keyword)){
+                var new_list = [];
+                new_list = this.list.filter(item=>{
+                    if(-1 < item.title.search(this.keyword)){
                         return item;
                     }
                 });
+                this.total = Math.ceil(new_list.length / this.each);
+                // 判断是否有数据
+                if(0 == this.total) {
+                    this.$emit('end');
+                }
+
+                return new_list;
             }
         }
-    },
-
-    data() {
-        return {
-            total: 0,
-            list_data: [],
-            each: 3 // 每页数量
-        };
     },
 
     watch: {

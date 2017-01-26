@@ -1,5 +1,5 @@
 <template>
-	<transition name="fade" mode="out-in">
+	<transition mode="out-in">
         <keep-alive>
   		    <router-view></router-view>
         </keep-alive>
@@ -10,15 +10,27 @@
 </script>
 
 <style scoped lang=scss>
-.fade-enter-active,
-.fade-leave-active {
-    opacity: 1;
-    transition: all .5s;
+.v-enter{
+    opacity: 0;
+    transform: translateY(-.5rem);	
 }
 
-.fade-enter,
-.fade-leave-active {
+.v-enter-active {
+    opacity: 1;
+    transition: all .5s;
+    transform: translateY(0);
+}
+
+
+.v-leave {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.v-leave-active {
     opacity: 0;
+    transition: all .5s;
     transform: translateY(-.5rem);
 }
+
 </style>

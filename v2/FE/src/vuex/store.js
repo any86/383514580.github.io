@@ -5,14 +5,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         list: [],
-        detail: {},
-        keyword: ''
+        detail: {}
     },
     mutations: {
-        setKeyword(state, keyword){
-            state.keyword = keyword;
-        },
-
         setError(state, info){
             state.error = info;
         },
