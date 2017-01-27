@@ -16,8 +16,6 @@ export default {
   name: 'MyCard',
 
   mounted(){
-    this.$emit('getHeight', this.$el.offsetHeight);
-
     particlesJS('bg-stars', {
         particles: {
             "number": {

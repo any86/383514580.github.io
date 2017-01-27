@@ -16,15 +16,7 @@
 }
 
 .v-enter-active {
-    opacity: 1;
     transition: all .5s;
-    transform: translateY(0);
-}
-
-
-.v-leave {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .v-leave-active {
@@ -32,5 +24,4 @@
     transition: all .5s;
     transform: translateY(-.5rem);
 }
-
 </style>

@@ -1,14 +1,12 @@
 <template>
-    <transition name="fade">
-        <div class="com-header-bar">
-            <div class="center">
-                <div class="search">
-                    <input  @keyup.enter="submit" v-model="keyword" type="text" placeholder="输入想搜啥">
-                    <a @click="submit" class="btn">搜索</a>
-                </div>
+    <div class="com-search">
+        <div class="center">
+            <div class="search">
+                <input  @keyup.enter="submit" v-model="keyword" type="text" placeholder="输入想搜啥">
+                <a @click="submit" class="btn">搜索</a>
             </div>
         </div>
-    </transition>
+    </div>
 </template>
 
 <script>
@@ -27,25 +25,11 @@ export default {
 }
 </script>
 <style lang=scss scoped>
-.fade-enter-active,
-.fade-leave-active {
-    transition: all .2s
-}
-
-.fade-enter,
-.fade-leave-active {
-    transform: translateY(-.3rem);
-}
-
-.com-header-bar {
+.com-search {
     background: rgba(244,244,244,.9);
     width: 100%;
     overflow: hidden;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1986;
     >.center {
         max-width: 720px;
         margin: auto;

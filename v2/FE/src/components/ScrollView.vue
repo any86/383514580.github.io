@@ -1,44 +1,44 @@
 <template>
     <div class="com-scroll-view" @scroll="scrollList">
         <!-- 背景 -->
-        <div class="bg">
-            <slot name="bg"></slot>  
+        <div class="background">
+            <slot name="background"></slot>
         </div>
-        
-        <!-- 头部 -->
-        <slot name="header-fixed"></slot>
+
+        <!-- 固定头部 -->
+        <transition name="header-fixed">
+            <div class="header-fixed" v-show="scrollTop > bannerHeight">
+                <slot name="header-fixed"></slot>
+            </div>
+        </transition>
 
         <!-- 内容容器, 自适应高度 -->
-        <div 
-            ref="body" 
-            class="body" 
-            :class="{'touch-end': 'end' == touch.is}" 
-            :style="{transform: 'translate3d(0, ' + translateY + 'px, 0)'}" 
-            @touchmove="touchMove" 
-            @touchstart="touchStart" 
-            @touchend="touchEnd">
-
-            <!-- 头图等[可选] -->
+        <div ref="body" class="body" :class="{'body-touch-end': 'end' == touch.is}" :style="{transform: 'translate3d(0, ' + translateY + 'px, 0)'}" @touchmove="touchMove" @touchstart="touchStart" @touchend="touchEnd">
+            <!-- 头图等 -->
             <slot name="banner"></slot>
-            
             <!-- 主体 -->
             <slot name="content"></slot>
         </div>
-        
+
         <!-- 尾部 -->
-        <slot name="footer-fixed"></slot>        
+        <slot name="footer-fixed"></slot>
     </div>
 </template>
-
 <script>
-
 export default {
     name: 'ScrollView',
 
     props: ['scrollTop', 'pullable'],
 
+    mounted() {
+        if(!!this.$slots.banner) {
+            this.bannerHeight = this.$slots.banner[0].elm.offsetHeight;
+        }
+    },
+
     data() {
         return {
+            bannerHeight: 0,
             timer: null,
             isEnd: false,
             touch: {
@@ -50,26 +50,35 @@ export default {
     },
 
     watch: {
-        scrollTop(){
-            this.$el.scrollTop = this.scrollTop;
+        scrollTop(newValue) {
+            this.animateScrollTop(newValue);
         }
     },
 
     methods: {
-        touchStart(e){
-            if(this.pullable) {
-                this.touch.is = 'start';
-                this.touch.startY = e.touches[0].clientY;
-                this.$emit('touchstart');                
+
+        animateScrollTop(value) {
+            // 递归函数
+            if (value < this.$el.scrollTop) {
+                this.$el.scrollTop-= this.scrollTop / 10;
+                window.requestAnimationFrame(this.animateScrollTop);
             }
         },
 
-        touchMove(e){
-            if(this.pullable) {
+        touchStart(e) {
+            if (this.pullable) {
+                this.touch.is = 'start';
+                this.touch.startY = e.touches[0].clientY;
+                this.$emit('touchstart');
+            }
+        },
+
+        touchMove(e) {
+            if (this.pullable) {
                 this.touch.is = 'move';
                 this.touch.endY = e.touches[0].clientY;
                 var distance = this.touch.endY - this.touch.startY - this.scrollTop;
-                if(0 < distance) {
+                if (0 < distance) {
                     this.translateY = distance / 2;
                     e.preventDefault();
                     e.stopPropagation();
@@ -78,8 +87,8 @@ export default {
             }
         },
 
-        touchEnd(e){
-            if(this.pullable) {
+        touchEnd(e) {
+            if (this.pullable) {
                 this.touch.is = 'end';
                 this.translateY = 0;
                 this.$emit('touchend');
@@ -88,7 +97,7 @@ export default {
 
         scrollList() {
 
-            if(!this.isEnd) {
+            if (!this.isEnd) {
                 clearTimeout(this.timer);
 
                 this.timer = setTimeout(() => {
@@ -109,27 +118,13 @@ export default {
     }
 }
 </script>
-
 <style scoped lang=scss>
-
-.list-item {
-    transition: all 1s;
-    display: inline-block;
+.header-fixed-enter-active, .header-fixed-leave-active {
+  transition: all .5s
 }
-
-.list-enter-active,
-.list-leave-active {
-    transition: all 1s;
-}
-
-.list-enter,
-.list-leave-active {
-    opacity: 0;
-    transform: translateY(-30px);
-}
-
-.touch-end {
-    transition: all .2s ease-in;
+.header-fixed-enter, .header-fixed-leave-active {
+  opacity: 0;
+  transform: translateY(-.5rem);
 }
 
 
@@ -139,15 +134,24 @@ $font_color: #444;
     height: 100%;
     width: 100%;
     overflow: scroll;
-    
-    .bg{    
+    >.background {
         width: 100%;
         position: absolute;
-        top:0;left:0;
+        top: 0;
+        left: 0;
     }
-
+    >.header-fixed {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1986;
+    }
     >.body {
         overflow: hidden;
+    }
+    >.body-touch-end {
+        transition: all .2s ease-in;
     }
 }
 </style>

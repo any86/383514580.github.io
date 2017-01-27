@@ -1,26 +1,27 @@
 <template>
+
     <scroll-view 
         :pullable="true" 
         :scrollTop="scrollTop"  
         @touchstart="touchStart" 
         @touchend="touchEnd" 
-        @scrolly="scrollyChange" 
         @append="addPage">
 
         <!-- 背景 -->
-        <!-- slot: bg -->
-        <spinner slot="bg" class="down_spinner">{{top_spinner_text}}</spinner>
+        <!-- slot: background -->
+        <spinner slot="background" class="down_spinner">{{top_spinner_text}}</spinner>
         
         <!-- 名片 -->
         <!-- slot: banner -->
-        <my-card slot="banner" @getHeight="getCardHeight"></my-card>
+        <my-card slot="banner"></my-card>
         
         <!-- 搜索 -->
         <!-- slot:header-fixed -->
-        <search-bar slot="header-fixed" v-show="scrollTop > card_height"></search-bar>
+        <search-bar slot="header-fixed"></search-bar>
         
         <!-- slot: content -->
         <template slot="content">
+        <button @click="click">确定</button>
             <!-- 列表 -->
             <list 
                 v-if="null != list_length" 
@@ -69,12 +70,15 @@ export default {
     		scrollTop: 0,
             viewPage: 1,
             no_more: false,
-            card_height: 0,
             top_spinner_text: '松开加载'
         };
     },
 
     methods: {
+        click(){
+            this.scrollTop = 110;
+        },
+
         touchEnd(){
             this.top_spinner_text = '正在努力加载';
         },
@@ -82,14 +86,6 @@ export default {
         touchStart(){
             this.top_spinner_text = '松开加载';
         },
-
-    	getCardHeight(card_height){
-    		this.card_height = card_height;
-    	},
-
-    	scrollyChange(top){
-    		this.scrollTop = top;
-    	},
 
     	addPage(){
     		this.viewPage++;

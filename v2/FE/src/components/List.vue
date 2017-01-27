@@ -92,6 +92,17 @@ export default {
     display: inline-block;
 }
 
+.list-enter-active,
+.list-leave-active {
+    transition: all 1s;
+}
+
+.list-enter,
+.list-leave-active {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
 
 $font_color: #444;
 .com-list {

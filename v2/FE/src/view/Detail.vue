@@ -3,21 +3,24 @@
         <!-- 浮动工具 -->
         <float-bar  slot="footer-fixed" v-show="0 < scroll_top"></float-bar>
         
-        <!-- spinner -->
-        <spinner v-show="spinner_show"></spinner>
-        
-        <!-- 内容 -->
-        <section v-show="!spinner_show">
-            <header>
-                <router-link class="btn-return" :to="{ name: 'index'}" tag="a">返回</router-link>
-                <p class="email">Email: <a href="mailto:383514580@qq.com">383514580@qq.com</a></p>
-            </header>
+        <template slot="content">
+            <!-- spinner -->
+            <spinner v-show="spinner_show"></spinner>
+            
+            <!-- 内容 -->
+            <section v-show="!spinner_show">
+                <header>
+                    <router-link class="btn-return" :to="{ name: 'index'}" tag="a">返回</router-link>
+                    <p class="email">Email: <a href="mailto:383514580@qq.com">383514580@qq.com</a></p>
+                </header>
 
-            <article class="article" v-html="detail"></article>  
+                <article class="article" v-html="detail"></article>  
 
-            <router-link class="btn-return-bottom" :to="{ name: 'index'}" tag="a">返回</router-link>
+                <router-link class="btn-return-bottom" :to="{ name: 'index'}" tag="a">返回</router-link>
 
-        </section>
+            </section>
+            
+        </template>
         
     </scroll-view>
 </template>
