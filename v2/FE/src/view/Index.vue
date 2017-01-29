@@ -2,7 +2,6 @@
 
     <scroll-view 
         :pullable="true" 
-        :scrollTop="scrollTop"  
         @touchstart="touchStart" 
         @touchend="touchEnd" 
         @append="addPage">
@@ -21,7 +20,6 @@
         
         <!-- slot: content -->
         <template slot="content">
-        <button @click="click">确定</button>
             <!-- 列表 -->
             <list 
                 v-if="null != list_length" 
@@ -29,7 +27,7 @@
                 :list="list_data" 
                 :each="3" 
                 :keyword="$route.query.keyword" 
-                :page="viewPage" 
+                :page="page" 
                 @end="no_more = true">
             </list>    
 
@@ -39,7 +37,8 @@
 
         <!-- 浮动按钮 -->
         <!-- slot: footer-fixed -->
-        <float-bar slot="footer-fixed" v-show="0 < scrollTop"></float-bar>
+        <float-bar @click="click2" slot="footer-fixed" v-show="0 <= scrollTop">
+        </float-bar>
 
     </scroll-view>
 </template>
@@ -68,15 +67,19 @@ export default {
             list_data: [],
             list_length: null,
     		scrollTop: 0,
-            viewPage: 1,
+            page: 1,
             no_more: false,
             top_spinner_text: '松开加载'
         };
     },
 
     methods: {
-        click(){
-            this.scrollTop = 110;
+        click2(){
+            this.scrollTop = 0;
+        },
+
+        scrollY(y){
+            console.log(y)
         },
 
         touchEnd(){
@@ -88,7 +91,7 @@ export default {
         },
 
     	addPage(){
-    		this.viewPage++;
+    		this.page++;
     	}
     },
 

@@ -51,7 +51,8 @@ export default {
 
     watch: {
         scrollTop(newValue) {
-            this.animateScrollTop(newValue);
+            // this.$el.scrollTop = newValue;
+            // this.animateScrollTop(newValue);
         }
     },
 

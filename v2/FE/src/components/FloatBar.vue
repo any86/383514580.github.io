@@ -1,7 +1,7 @@
 <template>
     <transition>
         <ul class="com-floatbar">
-            <li @click="scrollTop">顶部</li>
+            <li @click="goTop">顶部</li>
         </ul>
     </transition>
 </template>
@@ -10,12 +10,8 @@ export default {
     name: 'FloatBar',
 
     methods: {
-        scrollTop() {
-            // 递归函数
-            if (0 < this.$parent.$el.scrollTop) {
-                this.$parent.$el.scrollTop-= this.$parent.$el.scrollTop / 10;
-                window.requestAnimationFrame(this.scrollTop);
-            }
+        goTop(){
+            this.$emit('click');
         }
     }
 }
