@@ -41,6 +41,9 @@ export default {
     }
     $h: .3rem;
     $color: rgba(204, 204, 204, .38);
+
+    .search-placeholder{text-align: center;color: #ccc;}
+
     .search {
         height: $h;
         width: 100%;

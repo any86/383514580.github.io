@@ -1,5 +1,5 @@
 <template>
-    <div class="com-scroll-view" @scroll="scrollList">
+    <div class="com-scroll-view" @scroll="scrollView">
         <!-- 背景 -->
         <div class="background">
             <slot name="background"></slot>
@@ -7,38 +7,40 @@
 
         <!-- 固定头部 -->
         <transition name="header-fixed">
-            <div class="header-fixed" v-show="scrollTop > bannerHeight">
+            <div class="header-fixed" v-show="scrollTop > beforeContentHeight">
                 <slot name="header-fixed"></slot>
             </div>
         </transition>
 
         <!-- 内容容器, 自适应高度 -->
         <div ref="body" class="body" :class="{'body-touch-end': 'end' == touch.is}" :style="{transform: 'translate3d(0, ' + translateY + 'px, 0)'}" @touchmove="touchMove" @touchstart="touchStart" @touchend="touchEnd">
-            <!-- 头图等 -->
-            <slot name="banner"></slot>
+            <!-- 主体前插槽-->
+            <slot name="before-content"></slot>
             <!-- 主体 -->
             <slot name="content"></slot>
         </div>
 
-        <!-- 尾部 -->
-        <slot name="footer-fixed"></slot>
+        <!-- 默认插槽 -->
+        <slot></slot>
     </div>
 </template>
+
 <script>
 export default {
     name: 'ScrollView',
 
-    props: ['scrollTop', 'pullable'],
+    props: ['pullable'],
 
     mounted() {
-        if(!!this.$slots.banner) {
-            this.bannerHeight = this.$slots.banner[0].elm.offsetHeight;
+        if(!!this.$slots['before-content']) {
+            this.beforeContentHeight = this.$slots['before-content'][0].elm.offsetHeight;
         }
     },
 
     data() {
         return {
-            bannerHeight: 0,
+            scrollTop: 0,
+            beforeContentHeight: 0,
             timer: null,
             isEnd: false,
             touch: {
@@ -49,23 +51,7 @@ export default {
         };
     },
 
-    watch: {
-        scrollTop(newValue) {
-            // this.$el.scrollTop = newValue;
-            // this.animateScrollTop(newValue);
-        }
-    },
-
     methods: {
-
-        animateScrollTop(value) {
-            // 递归函数
-            if (value < this.$el.scrollTop) {
-                this.$el.scrollTop-= this.scrollTop / 10;
-                window.requestAnimationFrame(this.animateScrollTop);
-            }
-        },
-
         touchStart(e) {
             if (this.pullable) {
                 this.touch.is = 'start';
@@ -78,8 +64,12 @@ export default {
             if (this.pullable) {
                 this.touch.is = 'move';
                 this.touch.endY = e.touches[0].clientY;
-                var distance = this.touch.endY - this.touch.startY - this.scrollTop;
+
+                // 手指滑动的距离
+                var distance = this.touch.endY - this.touch.startY - this.$el.scrollTop;
+
                 if (0 < distance) {
+                    // 滑动减速, 太快体验不好
                     this.translateY = distance / 2;
                     e.preventDefault();
                     e.stopPropagation();
@@ -96,7 +86,7 @@ export default {
             }
         },
 
-        scrollList() {
+        scrollView() {
 
             if (!this.isEnd) {
                 clearTimeout(this.timer);
@@ -105,15 +95,16 @@ export default {
                     this.$emit('scrolly', this.$el.scrollTop);
 
                     // 滚动条高度
-                    var scrollTop = this.$el.scrollTop;
+                    var scrollTop = this.scrollTop = this.$el.scrollTop;
                     // 外壳高度
                     var warpHeight = this.$el.offsetHeight;
                     // 内容高度
                     var innerHeight = this.$refs.body.offsetHeight;
+                    // 距离底部50px就触发
                     if (scrollTop + warpHeight + 50 > innerHeight) {
                         this.$emit('append');
                     }
-                }, 120);
+                }, 100);
             }
         }
     }

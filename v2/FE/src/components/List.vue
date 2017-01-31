@@ -1,20 +1,30 @@
 <template>
     <div class="com-list"> 
         <!-- 列表 -->
-        <transition-group :css="false" name="staggered-list" tag="ul" @before-enter="beforeEnter" @enter="enter">
-            <li v-if="(each * page > i)" v-for="(row , i) in list_computed" :key="i" :data-index="i" class="list-item">
+        <transition-group 
+            :css="false" 
+            tag="ul" 
+            @before-enter="beforeEnter" 
+            @enter="enter">
+
+            <li v-if="(each * page > i)" v-for="(row , i) in list" :key="i" :data-index="i" class="list-item">
                 <span class="category">[ {{row.category}} ]</span>
+
                 <router-link class="title" :to="{ name: 'detail', params: { id: row.id }}" tag="h1">
                     {{row.title}}
                 </router-link>
+
                 <p class="time">{{row.create_time}}</p>
+
                 <p class="desc" v-html="row.desc"></p>
+
                 <router-link class="btn-view" :to="{ name: 'detail', params: { id: row.id }}" tag="a">查看全部</router-link>
             </li>
+
         </transition-group>
         
         <!-- info -->
-        <p v-show="total < page && null != list" class="info">没有更多文章喽!</p>
+        <p v-show="total < page && ready" class="info">没有更多文章喽!</p>
     </div>
 </template>
 
@@ -25,33 +35,30 @@ export default {
     name: 'List',
 
     data(){
-        return {total: 0};
+        return {total: 0, each: 3, data: [], ready: false};
     },
 
-    props: ['page', 'length', 'list', 'each', 'keyword'],
+    mounted(){
+        this.$store.dispatch('getList').then(() => {
+            // 获取所有列表数据
+            this.ready = true;
+            this.data = this.$store.state.list;
+            this.total = Math.ceil(this.data.length / this.each);
+        });
+    },
+
+    props: ['page', 'keyword'],
 
     computed: {
-
-        list_computed(){
-            var no_exist = false;
-
+        list(){
             if('' == this.keyword) {
-                this.total = Math.ceil(this.length / this.each);
-                return this.list;
+                return this.data;
             } else {
-                var new_list = [];
-                new_list = this.list.filter(item=>{
+                return this.data.filter(item=>{
                     if(-1 < item.title.search(this.keyword)){
                         return item;
                     }
                 });
-                this.total = Math.ceil(new_list.length / this.each);
-                // 判断是否有数据
-                if(0 == this.total) {
-                    this.$emit('end');
-                }
-
-                return new_list;
             }
         }
     },

@@ -1,18 +1,22 @@
 <template>
 
     <scroll-view 
-        :pullable="true" 
+        ref="scrollView"
+        :pullable="true"
+        @scrolly = "scrollY"
         @touchstart="touchStart" 
         @touchend="touchEnd" 
         @append="addPage">
 
         <!-- 背景 -->
         <!-- slot: background -->
-        <spinner slot="background" class="down_spinner">{{top_spinner_text}}</spinner>
+        <spinner slot="background" class="down-spinner">
+            {{topSpinnerText}}
+        </spinner>
         
         <!-- 名片 -->
-        <!-- slot: banner -->
-        <my-card slot="banner"></my-card>
+        <!-- slot: before-content -->
+        <my-card slot="before-content"></my-card>
         
         <!-- 搜索 -->
         <!-- slot:header-fixed -->
@@ -21,24 +25,16 @@
         <!-- slot: content -->
         <template slot="content">
             <!-- 列表 -->
-            <list 
-                v-if="null != list_length" 
-                :length="list_length" 
-                :list="list_data" 
-                :each="3" 
-                :keyword="$route.query.keyword" 
-                :page="page" 
-                @end="no_more = true">
+            <list :keyword="$route.query.keyword" :page="page" @end="isEnd = true">
             </list>    
 
             <!-- spinner -->
-            <spinner class="down_spinner" v-show="!no_more"></spinner>
+            <spinner class="down-spinner" v-show="!isEnd"></spinner>
         </template>
 
         <!-- 浮动按钮 -->
-        <!-- slot: footer-fixed -->
-        <float-bar @click="click2" slot="footer-fixed" v-show="0 <= scrollTop">
-        </float-bar>
+        <!-- slot: 默认插槽 -->
+        <back-top v-show="0 < y"></back-top>
 
     </scroll-view>
 </template>
@@ -47,47 +43,35 @@
 import ScrollView from '../components/ScrollView'
 import SearchBar from '../components/SearchBar'
 import MyCard from '../components/MyCard'
-import FloatBar from '../components/FloatBar'
+import BackTop from '../components/BackTop'
 import List from '../components/List'
 import Spinner from '../components/Spinner'
 
 export default {
     name: 'Index',
 
-    mounted(){
-        this.$store.dispatch('getList').then(() => {
-            // 获取所有列表数据
-            this.list_data = this.$store.state.list;
-            this.list_length = this.list_data.length;
-        });
-    },
-
     data(){
     	return {
-            list_data: [],
-            list_length: null,
-    		scrollTop: 0,
+            listData: [],
+            listLength: null,
+    		y: 0,
             page: 1,
-            no_more: false,
-            top_spinner_text: '松开加载'
+            isEnd: false,
+            topSpinnerText: '松开加载'
         };
     },
 
     methods: {
-        click2(){
-            this.scrollTop = 0;
-        },
-
         scrollY(y){
-            console.log(y)
+            this.y = y;
         },
 
         touchEnd(){
-            this.top_spinner_text = '正在努力加载';
+            this.topSpinnerText = '正在努力加载';
         },
 
         touchStart(){
-            this.top_spinner_text = '松开加载';
+            this.topSpinnerText = '松开加载';
         },
 
     	addPage(){
@@ -99,18 +83,13 @@ export default {
         ScrollView,
         SearchBar,
         MyCard,
-        FloatBar,
+        BackTop,
         Spinner, 
         List
     },
 
     activated() {
-        // 没办法
-        // 让scrollTop的值变了才能触发callback去渲染dom
-        if(0 < this.scrollTop) {
-            this.scrollTop++;
-        }
-        
+        this.$refs.scrollView.$el.scrollTop = this.y;        
     }
 }
 </script>
@@ -121,7 +100,7 @@ export default {
 }
 
 
-.down_spinner{
+.down-spinner{
 	margin:0.15rem auto;
 }
 </style>
