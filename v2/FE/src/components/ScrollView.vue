@@ -22,6 +22,13 @@
 
         <!-- 默认插槽 -->
         <slot></slot>
+        
+        <!-- 固定底部 -->
+        <transition name="bottom-fixed">
+            <div class="bottom-fixed" v-show="0 < scrollTop">
+                <slot name="bottom-fixed"></slot>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -111,16 +118,6 @@ export default {
 }
 </script>
 <style scoped lang=scss>
-.header-fixed-enter-active, .header-fixed-leave-active {
-  transition: all .5s
-}
-.header-fixed-enter, .header-fixed-leave-active {
-  opacity: 0;
-  transform: translateY(-.5rem);
-}
-
-
-$font_color: #444;
 .com-scroll-view {
     position: relative;
     height: 100%;
@@ -139,11 +136,28 @@ $font_color: #444;
         left: 0;
         z-index: 1986;
     }
+    .header-fixed-enter-active, .header-fixed-leave-active {
+      transition: all .5s
+    }
+    .header-fixed-enter, .header-fixed-leave-active {
+      opacity: 0;
+      transform: translateY(-.5rem);
+    }
+    
     >.body {
         overflow: hidden;
     }
     >.body-touch-end {
         transition: all .2s ease-in;
+    }
+
+    .bottom-fixed{position: fixed;bottom: 0;left: 0;width: 100%;}
+    .bottom-fixed-enter-active, .bottom-fixed-leave-active {
+      transition: all .5s
+    }
+    .bottom-fixed-enter, .bottom-fixed-leave-active {
+      opacity: 0;
+      transform: translateY(.5rem);
     }
 }
 </style>

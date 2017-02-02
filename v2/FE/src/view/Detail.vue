@@ -1,7 +1,5 @@
 <template>
-    <scroll-view @scrolly="scrollyChange" :scroll_top="scroll_top">
-        <!-- 浮动工具 -->
-        <float-bar  slot="footer-fixed" v-show="0 < scroll_top"></float-bar>
+    <scroll-view @scrolly="getScrollY">
         
         <template slot="content">
             <!-- spinner -->
@@ -22,27 +20,30 @@
             
         </template>
         
+        <!-- 返回顶部 -->
+        <back-top v-show="0 < y"></back-top>
+
     </scroll-view>
 </template>
 
 <script>
 import ScrollView from '../components/ScrollView'
 import Spinner from '../components/Spinner'
-import FloatBar from '../components/FloatBar'
+import BackTop from '../components/BackTop'
 
 export default {
     name: 'Detail',
 
     data(){
         return {
-            scroll_top: 0, 
+            y: 0, 
             spinner_show: true
         };
     },
 
     methods: {
-        scrollyChange(top){
-            this.scroll_top = top;
+        getScrollY(y){
+            this.y = y;
         }
     },
 
@@ -65,7 +66,7 @@ export default {
     components: {
         ScrollView,
         Spinner, 
-        FloatBar
+        BackTop
     }
 }
 </script>
@@ -97,5 +98,5 @@ export default {
 
     }
 
-    .btn-return-bottom{ background: #ccc; color: #fff; border-radius: 4px; letter-spacing: 2px;margin: 0.15rem auto;display: block;text-align: center; width: 60%;height: 0.3rem;line-height: 0.3rem;}
+    .btn-return-bottom{ background: #fff; border:1px solid #999; color: #999; border-radius: 4px; letter-spacing: 2px;margin: 0.15rem auto;display: block;text-align: center; width: 60%;height: 0.3rem;line-height: 0.3rem;}
 </style>

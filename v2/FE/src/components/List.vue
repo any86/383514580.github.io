@@ -41,7 +41,8 @@ export default {
 
     methods: {
         beforeEnter(el) {
-            el.style.webkitTransform = 'translateY(100px)';
+            el.style.webkitTransition = 'all .3s';
+            el.style.webkitTransform = 'translateY(2rem)';
             el.style.opacity = 0;
         },
 

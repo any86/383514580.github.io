@@ -3,14 +3,14 @@
     <scroll-view 
         ref="scrollView"
         :pullable="true"
-        @scrolly = "scrollY"
+        @scrolly="getScrollY"
         @touchstart="touchStart" 
         @touchend="touchEnd" 
         @append="addPage">
 
         <!-- 背景 -->
         <!-- slot: background -->
-        <spinner slot="background" class="header-spinner">
+        <spinner slot="background" class="spinner">
             {{topSpinnerText}}
         </spinner>
         
@@ -47,13 +47,14 @@
                     <router-link class="btn-view" :to="{ name: 'detail', params: { id: props.row.id }}" tag="a">查看全部</router-link>
                 </template>
             </list>    
-
+            <router-link v-if="!!$route.query.keyword" class="btn-empty" :to="{ name: 'index'}" tag="a">
+                清空搜索
+            </router-link>
             <!-- spinner -->
-            <spinner class="down-spinner" v-show="!isEnd"></spinner>
+            <spinner class="spinner" v-show="!isEnd"></spinner>
         </template>
 
-        <!-- 浮动按钮 -->
-        <!-- slot: 默认插槽 -->
+        <!-- 返回顶部 -->
         <back-top v-show="0 < y"></back-top>
 
     </scroll-view>
@@ -85,7 +86,8 @@ export default {
     computed: {
         list(){
             return this.listData.filter((item, i)=>{
-                    return (this.listEach * this.page > i);
+                return (this.listEach * this.page > i) && 
+                (-1 != item.title.search(this.$route.query.keyword));
             });
         }
     },
@@ -98,7 +100,7 @@ export default {
     },
 
     methods: {
-        scrollY(y){
+        getScrollY(y){
             this.y = y;
         },
 
@@ -131,11 +133,7 @@ export default {
 </script>
 
 <style scoped lang=scss>
->.header-spinner{
-    p{padding: 0.15rem auto;}
-}
-
-.down-spinner{
+.spinner{
 	margin:0.15rem auto;
 }
 
@@ -190,6 +188,22 @@ $font_color: #444;
         border-radius: 4px;
         box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
     }
+}
+
+$btnEmptyColor: #999;
+.btn-empty{
+    padding: 0.05rem;
+    margin: 0.3rem auto;
+    width: 0.7rem;
+    background: #fff;
+    border:1px solid $btnEmptyColor;
+    color: $btnEmptyColor;
+    clear: both;
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);        
 }
 
 </style>

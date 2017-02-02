@@ -24,7 +24,8 @@ export default {
 <style lang=scss scoped>
 .v-enter{
     opacity: 0;
-    transform: translateY(1rem);
+    /*transform: translateY(1rem);*/
+    transform: scale(.1);
 
 }
 .v-enter-active{
@@ -36,7 +37,8 @@ export default {
 }
 .v-leave-active{
     opacity: 0;
-    transform: translateY(1rem);    
+    transform: scale(1);
+    /*transform: translateY(1rem);    */
     transition: all .3s;
 }
 

@@ -30,6 +30,7 @@ export default new Vuex.Store({
                     .end(function(err, res) {
                         if (err) {
                             alert(err);
+                            reject(err);
                         } else {
                             context.commit('setList', res.body);
                             resolve();
@@ -48,6 +49,7 @@ export default new Vuex.Store({
                     .end(function(err, res) {
                         if (err) {
                             context.commit('setError', res.text);
+                            reject(err);
                         } else {
                             context.commit('setDetail', res.text);
                             resolve();
