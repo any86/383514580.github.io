@@ -123,6 +123,7 @@ export default {
     height: 100%;
     width: 100%;
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
     >.background {
         width: 100%;
         position: absolute;

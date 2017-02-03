@@ -2209,6 +2209,10 @@ ieee754@^1.1.4:
   version "1.1.8"
   resolved "http://r.cnpmjs.org/ieee754/download/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
 
+immutable@^3.8.1:
+  version "3.8.1"
+  resolved "http://registry.npm.taobao.org/immutable/download/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
+
 in-publish@^2.0.0:
   version "2.0.0"
   resolved "http://r.cnpmjs.org/in-publish/download/in-publish-2.0.0.tgz#e20ff5e3a2afc2690320b6dc552682a9c7fadf51"

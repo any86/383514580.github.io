@@ -67,6 +67,7 @@ import MyCard from '../components/MyCard'
 import BackTop from '../components/BackTop'
 import List from '../components/List'
 import Spinner from '../components/Spinner'
+import immutable from 'immutable'
 
 export default {
     name: 'Index',
@@ -93,6 +94,10 @@ export default {
     },
 
     mounted(){
+        var obj = {a:1,b:2};
+        var abc = immutable.fromJS(obj);
+        console.log(abc.get('a'));
+
         this.$store.dispatch('getList').then(() => {
             this.listLoading = false;
             this.listData    = this.$store.state.list;
