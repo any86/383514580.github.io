@@ -1,11 +1,12 @@
 # mac上sourcetree每次提交都要输入密码解决
 **[mac]**   **[2017-02-09 09:18:21]**
 
-## 看图说事
+## 2步解决
 
+### 第1步, 打开项目的设置页面
 ![image](https://383514580.github.io/server/assets/1.png)
 
-### 把用户名添加到url的前面
+### 第2步, 把用户名添加到url的前面
 
 ![image](https://383514580.github.io/server/assets/2.png)
 

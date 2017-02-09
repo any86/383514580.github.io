@@ -7,11 +7,11 @@
         "desc": "<blockquote>\n<p>should</p>\n<pre><code class=\"lang-javascript\"><span class=\"hljs-selector-tag\">chai</span><span class=\"hljs-selector-class\">.should</span>();\n<span class=\"hljs-selector-tag\">foo</span><span class=\"hljs-selector-class\">.should</span><span class=\"hljs-selector-class\">.be</span><span class=\"hljs-selector-class\">.a</span>(<span class=\"hljs-string\">'string'</span>);\n<span class=\"hljs-selector-tag\">foo</span><span class=\"hljs-selector-class\">.should</span><span class=\"hljs-selector-class\">.equal</span>(<span class=\"hljs-string\">'bar'</span>);\n<span class=\"hljs-selector-tag\">foo</span><span class=\"hljs-selector-class\">.should</span><span class=\"hljs-selector-class\">.have</span><span class=\"hljs-selector-class\">.length</span>(<span class=\"hljs-number\">3</span>);\n<span class=\"hljs-selector-tag\">tea</span><span class=\"hljs-selector-class\">.should</span><span class=\"hljs-selector-class\">.have</span><span class=\"hljs-selector-class\">.property</span>(<span class=\"hljs-string\">'flavors'</span>)\n  <span class=\"hljs-selector-class\">.with</span><span class=\"hljs-selector-class\">.length</span>(<span class=\"hljs-number\">3</span>);\n</code></pre>\n</blockquote>\n"
     },
     {
-        "id": "84e3ec9edae621ac88ef5bfdcdbb09b2",
+        "id": "5c1f2a9c8dcdf93b3212f700bd2be5e1",
         "title": "mac上sourcetree每次提交都要输入密码解决",
         "category": "mac",
         "create_time": "2017-02-09 09:18:21",
-        "desc": "<p><img src=\"https://383514580.github.io/server/assets/1.png\" alt=\"image\"></p>\n"
+        "desc": ""
     },
     {
         "id": "bcfc65a71190dc2ff5a829132e762631",
