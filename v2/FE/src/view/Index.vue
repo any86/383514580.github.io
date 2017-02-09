@@ -1,6 +1,6 @@
 <template>
 
-    <scroll-view 
+    <scroll-view v-show="false"
         ref="scrollView"
         :pullable="true"
         @scrolly="getScrollY"
@@ -67,7 +67,6 @@ import MyCard from '../components/MyCard'
 import BackTop from '../components/BackTop'
 import List from '../components/List'
 import Spinner from '../components/Spinner'
-import immutable from 'immutable'
 
 export default {
     name: 'Index',
@@ -83,6 +82,13 @@ export default {
             topSpinnerText: '松开加载'
         };
     },
+    
+    mounted(){
+        this.$store.dispatch('getList').then(() => {
+            this.listLoading = false;
+            this.listData    = this.$store.state.list;
+        });
+    },
 
     computed: {
         list(){
@@ -91,17 +97,6 @@ export default {
                 (-1 != item.title.search(this.$route.query.keyword));
             });
         }
-    },
-
-    mounted(){
-        var obj = {a:1,b:2};
-        var abc = immutable.fromJS(obj);
-        console.log(abc.get('a'));
-
-        this.$store.dispatch('getList').then(() => {
-            this.listLoading = false;
-            this.listData    = this.$store.state.list;
-        });
     },
 
     methods: {
