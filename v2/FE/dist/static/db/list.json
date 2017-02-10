@@ -1,0 +1,128 @@
+[
+    {
+        "id": "94422ed4f1d36b6f449437d434734dd8",
+        "title": "chai的3种断言风格",
+        "category": "js/css",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": "<blockquote>\n<p>should</p>\n<pre><code class=\"lang-javascript\"><span class=\"hljs-selector-tag\">chai</span><span class=\"hljs-selector-class\">.should</span>();\n<span class=\"hljs-selector-tag\">foo</span><span class=\"hljs-selector-class\">.should</span><span class=\"hljs-selector-class\">.be</span><span class=\"hljs-selector-class\">.a</span>(<span class=\"hljs-string\">'string'</span>);\n<span class=\"hljs-selector-tag\">foo</span><span class=\"hljs-selector-class\">.should</span><span class=\"hljs-selector-class\">.equal</span>(<span class=\"hljs-string\">'bar'</span>);\n<span class=\"hljs-selector-tag\">foo</span><span class=\"hljs-selector-class\">.should</span><span class=\"hljs-selector-class\">.have</span><span class=\"hljs-selector-class\">.length</span>(<span class=\"hljs-number\">3</span>);\n<span class=\"hljs-selector-tag\">tea</span><span class=\"hljs-selector-class\">.should</span><span class=\"hljs-selector-class\">.have</span><span class=\"hljs-selector-class\">.property</span>(<span class=\"hljs-string\">'flavors'</span>)\n  <span class=\"hljs-selector-class\">.with</span><span class=\"hljs-selector-class\">.length</span>(<span class=\"hljs-number\">3</span>);\n</code></pre>\n</blockquote>\n"
+    },
+    {
+        "id": "eae9444a5b5029981903cbe856bb2b5d",
+        "title": "node删除非空文件夹",
+        "category": "nodejs",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": "<pre><code class=\"lang-javascript\">function rmdirSync2(<span class=\"hljs-keyword\">dir</span>) {\n    files = fs.readdirSync(<span class=\"hljs-keyword\">dir</span>);\n    files.<span class=\"hljs-keyword\">forEach</span>(<span class=\"hljs-keyword\">file</span>=&gt;{\n        <span class=\"hljs-keyword\">if</span>(fs.statSync(<span class=\"hljs-keyword\">dir</span> + <span class=\"hljs-keyword\">file</span>).isDirectory()){\n            <span class=\"hljs-comment\">// 文件夹</span>\n            rmdirSync2(<span class=\"hljs-keyword\">dir</span> + <span class=\"hljs-keyword\">file</span> + '/');\n        } <span class=\"hljs-keyword\">else</span> {\n            <span class=\"hljs-comment\">// 文件</span>\n            fs.unlinkSync(<span class=\"hljs-keyword\">dir</span> + <span class=\"hljs-keyword\">file</span>);\n        }\n    });\n    fs.rmdirSync(<span class=\"hljs-keyword\">dir</span>);\n}\nrmdirSync2(DESC_DIR);\n</code></pre>\n"
+    },
+    {
+        "id": "c4508e64bcaec5abc24e9b978c9ef588",
+        "title": "vuex的简单使用",
+        "category": "js/css",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": "<p>可以使用vue-cli开发项目, 本文的例子都是基于他来写的, 但是如果只是了解概念那就无所谓了, 后续有时间我会写一个不依赖vue-cli的小例子.</p>\n"
+    },
+    {
+        "id": "4ca79fb8d9a7d2051840c955ab86c679",
+        "title": "vue和jq的一些类比",
+        "category": "js/css",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": "<p>jq:</p>\n<pre><code class=\"lang-html\"><span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">ul</span> <span class=\"hljs-attr\">class</span>=<span class=\"hljs-string\">\"tab-head\"</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">li</span> <span class=\"hljs-attr\">data-i</span>=<span class=\"hljs-string\">\"0\"</span>&gt;</span>切换到1<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">li</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">li</span> <span class=\"hljs-attr\">data-i</span>=<span class=\"hljs-string\">\"1\"</span>&gt;</span>切换到2<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">li</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">li</span> <span class=\"hljs-attr\">data-i</span>=<span class=\"hljs-string\">\"2\"</span>&gt;</span>切换到3<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">li</span>&gt;</span>\n<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">ul</span>&gt;</span>\n\n<span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">ul</span> <span class=\"hljs-attr\">class</span>=<span class=\"hljs-string\">\"tab-body\"</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">li</span>&gt;</span>内容1<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">li</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">li</span>&gt;</span>内容2<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">li</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">li</span>&gt;</span>内容3<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">li</span>&gt;</span>\n<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">ul</span>&gt;</span>\n</code></pre>\n<pre><code class=\"lang-javascript\"><span class=\"hljs-comment\">// 简单写下逻辑, 勿直接用于实际项目</span>\n$(<span class=\"hljs-string\">'.tab-head'</span>).on(<span class=\"hljs-string\">'click'</span>, <span class=\"hljs-string\">'li'</span>, <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\"></span>)</span>{\n  <span class=\"hljs-keyword\">var</span> i = $(<span class=\"hljs-keyword\">this</span>).data(<span class=\"hljs-string\">'i'</span>);\n  <span class=\"hljs-keyword\">var</span> children = $(<span class=\"hljs-string\">'.tab-body'</span>).children(<span class=\"hljs-string\">'li'</span>);\n  children.forEach(<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\">j</span>)</span>{\n    <span class=\"hljs-keyword\">if</span>(j == i) children[j].css({<span class=\"hljs-string\">'display'</span>: <span class=\"hljs-string\">'block'</span>});\n    <span class=\"hljs-keyword\">else</span> children[j].css({<span class=\"hljs-string\">'display'</span>: <span class=\"hljs-string\">'none'</span>});\n  })\n});\n</code></pre>\n<p>vue:</p>\n<pre><code class=\"lang-html\"><span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">ul</span> <span class=\"hljs-attr\">class</span>=<span class=\"hljs-string\">\"tab-head\"</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">li</span> @<span class=\"hljs-attr\">click</span>=<span class=\"hljs-string\">\"change(0)\"</span>&gt;</span>切换到1<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">li</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">li</span> @<span class=\"hljs-attr\">click</span>=<span class=\"hljs-string\">\"change(1)\"</span>&gt;</span>切换到2<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">li</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">li</span> @<span class=\"hljs-attr\">click</span>=<span class=\"hljs-string\">\"change(2)\"</span>&gt;</span>切换到3<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">li</span>&gt;</span>\n<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">ul</span>&gt;</span>\n\n<span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">ul</span> <span class=\"hljs-attr\">class</span>=<span class=\"hljs-string\">\"tab-body\"</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">li</span> <span class=\"hljs-attr\">v-show</span>=<span class=\"hljs-string\">\"i==0\"</span>&gt;</span>内容1<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">li</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">li</span> <span class=\"hljs-attr\">v-show</span>=<span class=\"hljs-string\">\"i==1\"</span>&gt;</span>内容2<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">li</span>&gt;</span>\n  <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">li</span> <span class=\"hljs-attr\">v-show</span>=<span class=\"hljs-string\">\"i==2\"</span>&gt;</span>内容3<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">li</span>&gt;</span>\n<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">ul</span>&gt;</span>\n</code></pre>\n<pre><code class=\"lang-javascript\"><span class=\"hljs-selector-tag\">new</span> <span class=\"hljs-selector-tag\">Vue</span>({\n  <span class=\"hljs-attribute\">data</span>: {i: <span class=\"hljs-number\">0</span>},\n  <span class=\"hljs-selector-tag\">methods</span>: {\n    <span class=\"hljs-attribute\">change</span>: <span class=\"hljs-built_in\">function</span>(j){\n      this.i = j\n    }\n  }\n})\n</code></pre>\n"
+    },
+    {
+        "id": "d348a8ce6effdc5556edc1cd74c68151",
+        "title": "webpack入门",
+        "category": "js/css",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": "<ol>\n<li>无论是多页面开发还是单页开发;   </li>\n<li>也不管是基于jq还是基于vue/react等开发;   </li>\n<li>所有的前端页面都可以使用webpack开发;</li>\n</ol>\n"
+    },
+    {
+        "id": "d84e069114697c211ed201c4ebc2903c",
+        "title": "滚动条控制",
+        "category": "js/css",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": "<p>读取：</p>\n<pre><code class=\"lang-javascript\"><span class=\"hljs-comment\">// IE &gt; 8，以及其他现代浏览器</span>\n<span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-built_in\">window</span>.pageXOffset); \n<span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-built_in\">window</span>.pageYOffset);\n\n<span class=\"hljs-comment\">// IE &lt;= 8</span>\n<span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-built_in\">document</span>.body.scrollLeft); \n<span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-built_in\">document</span>.body.scrollTop);\n</code></pre>\n<p>设置:</p>\n<pre><code class=\"lang-javascript\"><span class=\"hljs-built_in\">window</span>.<span class=\"hljs-keyword\">scroll</span>(x, y);\n</code></pre>\n"
+    },
+    {
+        "id": "49de27756823a9cfe90026eb2a314237",
+        "title": "事件捕获和事件冒泡",
+        "category": "js/css",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": "<p>click mouseout 等等</p>\n"
+    },
+    {
+        "id": "5a395ad28564563cdab1f8faf876dd97",
+        "title": "写个自定义vue的指令",
+        "category": "js/css",
+        "create_time": "2016-03-01 12:12:21",
+        "desc": "<p>指令就是封装dom操作的函数, 只是调用方式和原生的函数的不同. </p>\n"
+    },
+    {
+        "id": "071c71a8f96b513e85f3753aedbc24ee",
+        "title": "函数的作用域 ",
+        "category": "js/css",
+        "create_time": "2016-05-24 12:12:21",
+        "desc": "<pre><code class=\"lang-javascript\"><span class=\"hljs-keyword\">var</span> num = <span class=\"hljs-number\">0</span>;\n<span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> <span class=\"hljs-title\">add</span>(<span class=\"hljs-params\"></span>)</span>{\n    <span class=\"hljs-keyword\">var</span> num = <span class=\"hljs-number\">0</span>;\n    <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> <span class=\"hljs-title\">add2</span>(<span class=\"hljs-params\"></span>)</span>{\n        num++;\n    }\n    <span class=\"hljs-built_in\">console</span>.log(num); <span class=\"hljs-comment\">// 1</span>\n}\n<span class=\"hljs-built_in\">console</span>.log(num); <span class=\"hljs-comment\">// 0;</span>\n</code></pre>\n"
+    },
+    {
+        "id": "44fda88a6aee5f5689ccef516d3274ac",
+        "title": "判断是否为空",
+        "category": "js/css",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": "<pre><code class=\"lang-javascript```\">  <span class=\"hljs-keyword\">var</span> isEmpty = <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span></span>(obj) {\n    <span class=\"hljs-keyword\">if</span> (obj == <span class=\"hljs-literal\">null</span>) <span class=\"hljs-keyword\">return</span> <span class=\"hljs-literal\">true</span>;\n    <span class=\"hljs-keyword\">if</span> (<span class=\"hljs-literal\">_</span>.isArray(obj) || <span class=\"hljs-literal\">_</span>.isString(obj)) <span class=\"hljs-keyword\">return</span> obj.length === <span class=\"hljs-number\">0</span>;\n    <span class=\"hljs-keyword\">for</span> (<span class=\"hljs-keyword\">var</span> key <span class=\"hljs-keyword\">in</span> obj) <span class=\"hljs-keyword\">if</span> (obj.hasOwnProperty(key)) <span class=\"hljs-keyword\">return</span> <span class=\"hljs-literal\">false</span>;\n    <span class=\"hljs-keyword\">return</span> <span class=\"hljs-literal\">true</span>;\n  };\n</code></pre>\n<p>代码来自underscre.js</p>\n"
+    },
+    {
+        "id": "1ab6b48e610047b514fba5528eebad0e",
+        "title": "内存回收",
+        "category": "js/css",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": "<pre><code class=\"lang-javascript```\"><span class=\"hljs-comment\">// IE中, 不建议用</span>\n<span class=\"hljs-built_in\">window</span>.CollectGarbage();\n</code></pre>\n<p>别高兴的太早,实际上大部分浏览器的回收机制都是自动的,你还真没办法这样手动回收, 请继续往下看.</p>\n"
+    },
+    {
+        "id": "877c63e3795a52e457eee62f2082ae87",
+        "title": "设置yarn和npm的代理到taobao",
+        "category": "js/css",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": "<p>yarn</p>\n<pre><code class=\"lang-Javascript\">yarn config <span class=\"hljs-keyword\">set</span> registry <span class=\"hljs-comment\">https:</span>//<span class=\"hljs-comment\">registry.npm.taobao.org</span>\n</code></pre>\n<p>npm</p>\n<pre><code class=\"lang-Javascript\">npm config <span class=\"hljs-keyword\">set</span> registry <span class=\"hljs-comment\">https:</span>//<span class=\"hljs-comment\">registry.npm.taobao.org</span>\n</code></pre>\n"
+    },
+    {
+        "id": "39107718f6d86ea2dc3ce6cd63409d6d",
+        "title": "小于IE8实现背景透明,文字不透明",
+        "category": "css",
+        "create_time": "2015-11-24 12:12:21",
+        "desc": "<p><code>css</code>\ndiv{filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr=</p>\n"
+    },
+    {
+        "id": "d6d12defd20f508c7fb138b75df4efd3",
+        "title": "快速明白js原型",
+        "category": "js/css",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": "<p>原型就像是爸爸的工具箱, 想用什么不用自己买, 直接拿来用, 省钱(js中就是省内存), 嘿嘿.</p>\n<pre><code class=\"lang-javascript```\"><span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span> <span class=\"hljs-title\">ParentBox</span><span class=\"hljs-params\">()</span></span>{\n    <span class=\"hljs-comment\">// 爸爸函数</span>\n    <span class=\"hljs-keyword\">this</span>.using = <span class=\"hljs-string\">''</span>;\n}\n<span class=\"hljs-comment\">// 锤子</span>\nParentBox.prototype.hammer = <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span></span>{\n    <span class=\"hljs-keyword\">this</span>.using = <span class=\"hljs-string\">'hammer'</span>;\n}\n<span class=\"hljs-comment\">// 笔</span>\nParentBox.prototype.pen = <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span><span class=\"hljs-params\">()</span></span>{\n    <span class=\"hljs-keyword\">this</span>.using = <span class=\"hljs-string\">'pen'</span>;\n}\n</code></pre>\n"
+    },
+    {
+        "id": "80de4f358ff773f60a8ec888d8cb0c95",
+        "title": "手机页面的适配应该怎么做?",
+        "category": "js/css",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": "<p>手机设备的分辨率不统一,要做到没个设备上的效果和设计图比例一致,就需要进行适配.</p>\n"
+    },
+    {
+        "id": "35ea0f336546bb3bb374e2f62826ac51",
+        "title": "浏览器缓存与头信息",
+        "category": "html",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": "<p>　　HTML的HTTP协议头信息中控制着页面在几个地方的缓存信息，包括浏览器端，中间缓存服务器端(如：squid等)，Web服务器端。本文讨论头信息 中带缓存控制信息的HTML页面(JSP/Servlet生成好出来的也是HTML页面)在中间缓存服务器中的缓存情况。</p>\n<pre><code>  HTTP协议中关于缓存的信息头关键字包括<span class=\"hljs-keyword\">Cache</span>-Control(HTTP1<span class=\"hljs-number\">.1</span>)，<span class=\"hljs-keyword\">Pragma</span>(HTTP1<span class=\"hljs-number\">.0</span>)，<span class=\"hljs-keyword\">last</span>-Modified，Expires等。\n\n  HTTP1<span class=\"hljs-number\">.0</span>中通过<span class=\"hljs-keyword\">Pragma</span> 控制页面缓存，可以设置：<span class=\"hljs-keyword\">Pragma</span>或<span class=\"hljs-keyword\">no</span>-<span class=\"hljs-keyword\">cache</span>。网上有非常多的文章说明如何控制不让浏览器或中间缓存服务器缓存页面，通常设置的值为<span class=\"hljs-keyword\">no</span>- <span class=\"hljs-keyword\">cache</span>，不过这个值不这么保险，通常还加上Expires置为<span class=\"hljs-number\">0</span>来达到目的。但是如我们刻意需要浏览器或缓存服务器缓存住我们的页面这个值则要设置为 <span class=\"hljs-keyword\">Pragma</span>。\n\n  HTTP1<span class=\"hljs-number\">.1</span>中启用<span class=\"hljs-keyword\">Cache</span>-Control 来控制页面的缓存与否，这里介绍几个常用的参数：\n</code></pre><p>no-cache，浏览器和缓存服务器都不应该缓存页面信息；\npublic，浏览器和缓存服务器都可以缓存页面信息；\nno-store，请求和响应的信息都不应该被存储在对方的磁盘系统中；\nmust-revalidate，对于客户机的每次请求，代理服务器必须想服务器验证缓存是否过时；\n       Last-Modified只页面的最后生成时间，GMT格式；</p>\n<pre><code>   Expires过时期限值，GMT格式，指浏览器或缓存服务器在该时间点后必须从真正的服务器中获取新的页面信息；\n\n   上面两个值在JSP中设置值为字符型的GMT格式，无法生效，设置<span class=\"hljs-keyword\">long</span>类型才生效；\n</code></pre>"
+    },
+    {
+        "id": "125c2fb3e91c0ef8b65077adb4bb38f9",
+        "title": "深入探究浏览器的窗口尺寸",
+        "category": "js/css",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": ""
+    },
+    {
+        "id": "877c63e3795a52e457eee62f2082ae87",
+        "title": "设置yarn和npm的代理到taobao",
+        "category": "js/css",
+        "create_time": "2016-12-24 12:12:21",
+        "desc": "<p>yarn</p>\n<pre><code class=\"lang-Javascript\">yarn config <span class=\"hljs-keyword\">set</span> registry <span class=\"hljs-comment\">https:</span>//<span class=\"hljs-comment\">registry.npm.taobao.org</span>\n</code></pre>\n<p>npm</p>\n<pre><code class=\"lang-Javascript\">npm config <span class=\"hljs-keyword\">set</span> registry <span class=\"hljs-comment\">https:</span>//<span class=\"hljs-comment\">registry.npm.taobao.org</span>\n</code></pre>\n"
+    }
+]

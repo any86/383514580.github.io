@@ -7,7 +7,15 @@ import Detail from './view/Detail'
 const routes = [
     { path: '/', component: Index },
     { path: '/index', component: Index, name: 'index' },
-    { path: '/detail/:id', component: Detail, name: 'detail' }
+    { path: '/detail/:id', component: Detail, name: 'detail' }, {
+        path: '/test',
+        component: resolve => {
+            require.ensure(['components/Test'], () => {
+                resolve(require('components/Test'))
+            })
+        },
+        name: 'test'
+    }
 ];
 // 初始化路由
 export default new VueRouter({
