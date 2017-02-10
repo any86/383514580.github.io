@@ -72,6 +72,8 @@ export default {
 </script>
 
 <style lang=scss>
+    img{display: block;width: 100%;}
+    
     header { overflow: hidden; font-size: 0.14rem; color: #444; max-width: 720px; padding: 0.15rem; margin: 0.15rem auto 0;
         >.btn-return { float: left; padding: 0.05rem 0.15rem; background: #ccc; color: #fff; border-radius: 4px; letter-spacing: 2px;}
         >.email{float: right;

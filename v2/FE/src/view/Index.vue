@@ -1,6 +1,6 @@
 <template>
 
-    <scroll-view v-show="false"
+    <scroll-view
         ref="scrollView"
         :pullable="true"
         @scrolly="getScrollY"
@@ -140,6 +140,7 @@ export default {
 /*列表项*/
 $font_color: #444;
 .listview {
+    img{display: block;width: 100%;}
     a,p{font-size: 0.14rem;}
     a:visited {
         text-decoration: none;
