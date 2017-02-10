@@ -100,5 +100,5 @@ export default {
 
     }
 
-    .btn-return-bottom{ background: #fff; border:1px solid #999; color: #999; border-radius: 4px; letter-spacing: 2px;margin: 0.15rem auto;display: block;text-align: center; width: 60%;height: 0.3rem;line-height: 0.3rem;}
+    .btn-return-bottom{ background: #fff; border:1px solid #999; color: #999; border-radius: 4px; letter-spacing: 2px;margin: 0.15rem auto;display: block;text-align: center; width: 2rem;height: 0.3rem;line-height: 0.3rem;}
 </style>
