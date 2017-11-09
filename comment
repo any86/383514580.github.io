@@ -1,0 +1,15 @@
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: location.href,
+  owner: '383514580',
+  repo: 'https://github.com/383514580/vue-book.git',
+  oauth: {
+    client_id: '8c568645511df05a0de8',
+    client_secret: '19eedc89be50af3708125a780c4f8b22f7a54a1d',
+  },
+})
+gitment.render('container')
+</script>
