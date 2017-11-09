@@ -1,15 +1,28 @@
-<div id="container"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-var gitment = new Gitment({
-  id: location.href,
-  owner: '383514580',
-  repo: 'vue-book',
-  oauth: {
-    client_id: 'b6378da41be83e51b176',
-    client_secret: 'd6acec6621295679dfe8c86dcae10619fa005c75',
-  },
-})
-gitment.render('container')
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue book comment</title>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: location.href,
+            owner: '383514580',
+            repo: 'vue-book',
+            oauth: {
+                client_id: 'b6378da41be83e51b176',
+                client_secret: 'd6acec6621295679dfe8c86dcae10619fa005c75',
+            },
+        })
+        gitment.render('container')
+    </script>
+</head>
+
+<body>
+    <div id="container"></div>
+</body>
+
+</html>
