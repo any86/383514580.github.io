@@ -14,7 +14,7 @@
     <div id="container"></div>
     <script>
         var gitment = new Gitment({
-            title: location.href,
+            title: decodeURIComponent(location.search.replace('?title=', '')),
             id: location.href,
             owner: '383514580',
             repo: 'vue-book',
