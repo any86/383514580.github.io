@@ -1,35 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>水印</title>
-	<script type="text/javascript" src="watermark.js"></script>
-	<style type="text/css">
-	*{margin: 0;padding: 0;}
-	</style>
-</head>
-<body>
-	<canvas id="canvas" width="600" height="600"></canvas>
-	<script type="text/javascript">
-	var canvas = document.getElementById('canvas');
-	var ctx=canvas.getContext("2d");
-
-	ctx.fillStyle="#69c";
-	ctx.fillRect(0,0,300,600);
-
-	ctx.globalCompositeOperation="source-over";
-	ctx.fillStyle="#fc0";
-	ctx.fillRect(50,50,200,200);
-
-	ctx.font="36px Arial";
-	ctx.fillStyle="#444";
-	ctx.fillText("Hello World!",0,200);
-
-	var img = canvas.toDataURL("image/png");
-	console.log(img)
-	document.onclick = function(){
-		window.open(img);
-	}
-	
-	</script>
-</body>
-</html>
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: location.href,
+  owner: '383514580',
+  repo: 'https://github.com/383514580/vue-book.git',
+  oauth: {
+    client_id: '8c568645511df05a0de8',
+    client_secret: '19eedc89be50af3708125a780c4f8b22f7a54a1d',
+  },
+})
+gitment.render('container')
+</script>
