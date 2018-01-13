@@ -1,0 +1,15 @@
+@import './variables.scss';
+@import './mixin.scss';
+// @import "./font.scss";
+@import './reset.scss';
+@import './animate.scss';
+@import './helpers.scss';
+[v-cloak] {
+    display: none;
+}
+html {
+    font-size: 16px;
+}
+body {
+    font-size: 16px;
+}
