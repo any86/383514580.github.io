@@ -1,8 +1,8 @@
 <template>
-  <main class="container">
-      <v-side/>
-    <router-view/>
-  </main>
+    <main class="container flex">
+        <v-side/>
+        <router-view/>
+    </main>
 </template>
 
 <script>
