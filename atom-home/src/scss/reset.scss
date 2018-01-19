@@ -113,30 +113,32 @@ button {
     font-size: $big;
 }
 
-// ::-webkit-scrollbar {
-//     background: #ccc;
-//     width: 4px;
-//     height: 4px;
-// }
-// ::-webkit-scrollbar-thumb {
-//     background: #f10;
-// }
-// ::-moz-scrollbar {
-//     background: #fff;
-//     width: 0;
-//     height: 0;
-// }
-// ::-moz-scrollbar-thumb {
-//     background: #fff;
-// }
-// ::-ms-scrollbar {
-//     background: #fff;
-//     width: 0;
-//     height: 0;
-// }
-// ::-ms-scrollbar-thumb {
-//     background: #fff;
-// }
+::-webkit-scrollbar {
+    background: rgba(0,0,0,0);
+    width: 2px;
+    height: 1px;
+}
+::-webkit-scrollbar-thumb {
+    background: #eee;
+}
+
+
+::-moz-scrollbar {
+    background: #fff;
+    width: 0;
+    height: 0;
+}
+::-moz-scrollbar-thumb {
+    background: #fff;
+}
+::-ms-scrollbar {
+    background: #fff;
+    width: 0;
+    height: 0;
+}
+::-ms-scrollbar-thumb {
+    background: #fff;
+}
 [v-cloak] {
     display: none;
 }
@@ -146,6 +148,8 @@ header {
 footer {
     width: 100%;
 }
+
+code{display: block;}
 
 table {
     width: 100%;

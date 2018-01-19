@@ -8,6 +8,9 @@ import Atom from 'vue-atom-ui'
 Vue.use(Atom);
 Vue.config.productionTip = false
 
+
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

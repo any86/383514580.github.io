@@ -1,7 +1,9 @@
 <template>
     <main class="container flex">
         <v-side/>
-        <router-view/>
+        <main class="flex-item">
+            <router-view/>
+        </main>
     </main>
 </template>
 
