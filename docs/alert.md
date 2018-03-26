@@ -1,8 +1,16 @@
 ## Alert
 
-### 简单使用
+### 使用
+
+在任意组件内部可通过this.$alert方法调用
 ``` javascript
-this.$alert('hello world');
+{
+    methods: {
+        clickHandle(){
+            this.$alert('hello world');
+        }
+    }
+}
 ```
 
 
