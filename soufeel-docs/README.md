@@ -6,6 +6,8 @@ https://gitee.com/WuXianShiYeBu/shop-moble.git
 * dev/master分支
 
 # 目录说明
+
+```
 ├── README.md
 ├── api
 ├── app.html
@@ -28,6 +30,6 @@ https://gitee.com/WuXianShiYeBu/shop-moble.git
 ├── store
 ├── upload.js
 └── utils
-
+```
 
 
