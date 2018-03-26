@@ -1,0 +1,9 @@
+### Alert
+``` javascript
+this.$alert();
+```
+
+
+
+
+ 
