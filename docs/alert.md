@@ -1,6 +1,8 @@
 ### Alert
+
+#### 简单使用
 ``` javascript
-this.$alert();
+this.$alert('hello world');
 ```
 
 
